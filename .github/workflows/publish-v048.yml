@@ -19,6 +19,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo "Publishing Smart Files v0.48 (50)"
           curl --fail --location --retry 3 \
             'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-5570-81f7-b943-d31adbeb84b1/raw?se=2026-08-31T23%3A54%3A29Z&sp=r&sv=2026-02-06&sr=b&scid=e266b15a-9c0f-55b5-8ced-bac1067b7c49&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-31T21%3A50%3A23Z&ske=2026-09-01T21%3A50%3A23Z&sks=b&skv=2026-02-06&sig=MnPPbeeELqqXd61CmRrjgSmPY380%2BfHwOWVF8Dms5bk%3D' \
             --output /tmp/v048.zip
