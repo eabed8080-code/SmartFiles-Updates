@@ -1,6 +1,6 @@
 {
-  "versionName": "0.49",
-  "versionCode": 51,
+  "versionName": "0.50",
+  "versionCode": 52,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Files V0.49 adds a new offline Converter tab for length, weight, volume, area, temperature, storage and internet-speed conversions."
+  "releaseNotes": "Smart Files V0.50 adds a lightweight 2D mascot that moves between controls and reacts to search, indexing, photos and update actions."
 }
