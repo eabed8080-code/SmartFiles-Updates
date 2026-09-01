@@ -1,6 +1,6 @@
 {
-  "versionName": "0.58",
-  "versionCode": 60,
+  "versionName": "0.59",
+  "versionCode": 61,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Life V0.58 makes the File Types and Document Types icons slightly larger, pulls their labels closer to the icons, and enlarges the bottom navigation icons while tightening the icon-to-label spacing."
+  "releaseNotes": "Smart Life V0.59 matches the File Manager reference more closely: File Types icons are larger with the labels pulled tightly underneath, Document Types remove extra icon padding and move labels upward, and bottom navigation icons are larger with almost no visual gap to their labels."
 }
