@@ -1,6 +1,6 @@
 {
-  "versionName": "0.56",
-  "versionCode": 58,
+  "versionName": "0.57",
+  "versionCode": 59,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Life V0.56 tightens spacing across the main screens, moves Settings to the right side of the header, removes the half-empty Documents and Converter grid rows, replaces Converter text symbols with consistent graphical icons, and compacts Search, Quick Access, cards and navigation so the interface uses screen space more efficiently."
+  "releaseNotes": "Smart Life V0.57 rebuilds the interface around the File Manager reference: large meaning-first file icons, a flatter shortcut-style File Types layout, a cleaner search area with Quick Access removed, clearer Document Types without the oversized enclosing card, colorful Converter category icons, softer card shadows, and Settings moved from the header into the bottom navigation as its own tab."
 }
