@@ -1,6 +1,6 @@
 {
-  "versionName": "0.62",
-  "versionCode": 64,
+  "versionName": "0.63",
+  "versionCode": 65,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Life V0.62 adds a compact Internal Storage Usage card at the top of Find > File Types. It shows the device storage used out of total capacity, the percentage full, a visual usage bar, and the remaining free space, using live storage values from the phone."
+  "releaseNotes": "Smart Life V0.63 compacts Find > File Types into only two horizontal rows so the Search area moves higher on screen. All File Type icons now use the same invisible visual bounding box and normalized artwork size, keeping the icons aligned and visually consistent without showing any square or frame."
 }
