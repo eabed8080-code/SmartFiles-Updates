@@ -1,0 +1,51 @@
+name: Publish Smart Life v0.53
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v053.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed v0.53 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-2928-81f7-b69a-a312710c8f96/raw?se=2026-09-01T15%3A44%3A54Z&sp=r&sv=2026-02-06&sr=b&scid=c184c3e2-b545-5127-af20-a027e9880dab&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-01T14%3A11%3A01Z&ske=2026-09-02T14%3A11%3A01Z&sks=b&skv=2026-02-06&sig=/yuxjEUUeKwbpAR7SMNzHzrgQHJki9ljMnK88E78grU%3D' -o /tmp/v053-artifact.zip
+          rm -rf /tmp/v053
+          mkdir -p /tmp/v053
+          unzip -q /tmp/v053-artifact.zip -d /tmp/v053
+          test -f /tmp/v053/dist/Smart-Life.apk
+          cp /tmp/v053/dist/Smart-Life.apk Smart-Files.apk
+          sha256sum Smart-Files.apk
+
+      - name: Update feed
+        shell: bash
+        run: |
+          cat > latest.json <<'EOF'
+          {
+            "versionName": "0.53",
+            "versionCode": 55,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
+            "releaseNotes": "Smart Life V0.53 renames the app to Smart Life, adds a new dimensional launcher icon, and moves the smaller Settings button to the upper-left while keeping Night Mode and About in Settings."
+          }
+          EOF
+
+      - name: Publish update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Files.apk latest.json
+          git commit -m 'Publish Smart Life v0.53' || true
+          git push
