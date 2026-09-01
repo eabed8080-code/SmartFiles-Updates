@@ -1,6 +1,6 @@
 {
-  "versionName": "0.60",
-  "versionCode": 62,
+  "versionName": "0.61",
+  "versionCode": 63,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Life V0.60 adds automatic PDF viewing for Word, Excel, and PowerPoint from Open, shows indexed file totals under Find file-type icons, and simplifies Documents to Scan New Document plus Saved Documents."
+  "releaseNotes": "Smart Life V0.61 expands Find File Types with Audio, compressed ZIP/archive files, APK files, and an Apps storage-size summary. Audio, ZIP/archive, and APK are searchable; ZIP/archive and APK show count plus total size; Apps shows installed app package size only. The PDF shortcut icon is also replaced with a clearer PDF-style icon, and all new types use meaning-first icons."
 }
