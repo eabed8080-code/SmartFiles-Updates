@@ -1,6 +1,6 @@
 {
-  "versionName": "0.59",
-  "versionCode": 61,
+  "versionName": "0.60",
+  "versionCode": 62,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Life V0.59 matches the File Manager reference more closely: File Types icons are larger with the labels pulled tightly underneath, Document Types remove extra icon padding and move labels upward, and bottom navigation icons are larger with almost no visual gap to their labels."
+  "releaseNotes": "Smart Life V0.60 adds automatic PDF viewing for Word, Excel, and PowerPoint from Open, shows indexed file totals under Find file-type icons, and simplifies Documents to Scan New Document plus Saved Documents."
 }
