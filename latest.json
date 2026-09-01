@@ -1,6 +1,6 @@
 {
-  "versionName": "0.61",
-  "versionCode": 63,
+  "versionName": "0.62",
+  "versionCode": 64,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Life V0.61 expands Find File Types with Audio, compressed ZIP/archive files, APK files, and an Apps storage-size summary. Audio, ZIP/archive, and APK are searchable; ZIP/archive and APK show count plus total size; Apps shows installed app package size only. The PDF shortcut icon is also replaced with a clearer PDF-style icon, and all new types use meaning-first icons."
+  "releaseNotes": "Smart Life V0.62 adds a compact Internal Storage Usage card at the top of Find > File Types. It shows the device storage used out of total capacity, the percentage full, a visual usage bar, and the remaining free space, using live storage values from the phone."
 }
