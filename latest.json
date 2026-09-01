@@ -1,6 +1,6 @@
 {
-  "versionName": "0.51",
-  "versionCode": 53,
+  "versionName": "0.52",
+  "versionCode": 54,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Files V0.51 adds 50-result search pages with Previous/Next, Stop Search and auto-cancel, removes the duplicate file-type chip, keeps PowerPoint fully visible, and upgrades the mascot to a lightweight human 2D character."
+  "releaseNotes": "Smart Files V0.52 refreshes the app theme, adds a Documents dashboard with file-type icons, counts and sizes, and adds Settings with Night Mode and About Smart Files."
 }
