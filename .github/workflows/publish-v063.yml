@@ -1,0 +1,52 @@
+name: Publish Smart Life v0.63
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v063.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed v0.63 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-3804-81f7-99f4-3cb02e4e9d79/raw?se=2026-09-01T23%3A50%3A38Z&sp=r&sv=2026-02-06&sr=b&scid=701f716b-e78c-574f-9aa9-e7b8c6f07141&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-01T21%3A26%3A28Z&ske=2026-09-02T21%3A26%3A28Z&sks=b&skv=2026-02-06&sig=wJLg08Nd%2BqP8q/RkjXhpXZ7hFLZ40yB/7AemG0v23Vg%3D' -o /tmp/v063-artifact.zip
+          rm -rf /tmp/v063
+          mkdir -p /tmp/v063
+          unzip -q /tmp/v063-artifact.zip -d /tmp/v063
+          test -f /tmp/v063/dist/Smart-Life.apk
+          cp /tmp/v063/dist/Smart-Life.apk Smart-Files.apk
+          echo '4381c960bab9cedfd3423da954e4348578d3eded4cf1aeb54e232252aa00f424  Smart-Files.apk' | sha256sum -c -
+
+      - name: Update feed
+        shell: bash
+        run: |
+          cat > latest.json <<'EOF'
+          {
+            "versionName": "0.63",
+            "versionCode": 65,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
+            "releaseNotes": "Smart Life V0.63 compacts Find > File Types into only two horizontal rows so the Search area moves higher on screen. All File Type icons now use the same invisible visual bounding box and normalized artwork size, keeping the icons aligned and visually consistent without showing any square or frame."
+          }
+          EOF
+
+      - name: Publish update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Files.apk latest.json
+          git commit -m 'Publish Smart Life v0.63' || true
+          git pull --rebase origin main
+          git push
