@@ -1,0 +1,52 @@
+name: Publish Smart Life v0.60
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v060.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed v0.60 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-8548-81f7-89da-4f9a5be4f10c/raw?se=2026-09-01T22%3A34%3A31Z&sp=r&sv=2026-02-06&sr=b&scid=b5fbf35a-d2af-5820-9613-79045f80ea9d&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-01T21%3A00%3A36Z&ske=2026-09-02T21%3A00%3A36Z&sks=b&skv=2026-02-06&sig=vbOxPmrGyqGVF01uP/eQnq5dFHeyZcdQ%2B0/cgT1aejI%3D' -o /tmp/v060-artifact.zip
+          rm -rf /tmp/v060
+          mkdir -p /tmp/v060
+          unzip -q /tmp/v060-artifact.zip -d /tmp/v060
+          test -f /tmp/v060/dist/Smart-Life.apk
+          cp /tmp/v060/dist/Smart-Life.apk Smart-Files.apk
+          echo '31c6f2d72c275144304956279ae9506f54b353cf1166a4c69e3d0210345e21ea  Smart-Files.apk' | sha256sum -c -
+
+      - name: Update feed
+        shell: bash
+        run: |
+          cat > latest.json <<'EOF'
+          {
+            "versionName": "0.60",
+            "versionCode": 62,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
+            "releaseNotes": "Smart Life V0.60 adds automatic PDF viewing for Word, Excel, and PowerPoint from Open, shows indexed file totals under Find file-type icons, and simplifies Documents to Scan New Document plus Saved Documents."
+          }
+          EOF
+
+      - name: Publish update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Files.apk latest.json
+          git commit -m 'Publish Smart Life v0.60' || true
+          git pull --rebase origin main
+          git push
