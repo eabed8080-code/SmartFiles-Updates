@@ -1,6 +1,6 @@
 {
-  "versionName": "0.53",
-  "versionCode": 55,
+  "versionName": "0.54",
+  "versionCode": 56,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Life V0.53 renames the app to Smart Life, adds a new dimensional launcher icon, and moves the smaller Settings button to the upper-left while keeping Night Mode and About in Settings."
+  "releaseNotes": "Smart Life V0.54 introduces the new Smart Life visual identity: deep navy blue styling, a redesigned dimensional launcher icon, bottom navigation, a cleaner Quick Search area, and real Quick Access shortcuts for Documents, Photos, Converter and Updates. Existing search, documents, photos, converter and update functions remain intact."
 }
