@@ -1,0 +1,52 @@
+name: Publish Smart Life v0.58
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v058.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed v0.58 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-c9d0-81f5-a2f9-8881ae4daf75/raw?se=2026-09-01T21%3A12%3A40Z&sp=r&sv=2026-02-06&sr=b&scid=7dde9973-e5bc-5389-85f1-2040669a36be&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-01T19%3A39%3A38Z&ske=2026-09-02T19%3A39%3A38Z&sks=b&skv=2026-02-06&sig=xEMVwsLgk/AaFyQTb7suSJxUw8Ylyz349nkH3Hg74Dw%3D' -o /tmp/v058-artifact.zip
+          rm -rf /tmp/v058
+          mkdir -p /tmp/v058
+          unzip -q /tmp/v058-artifact.zip -d /tmp/v058
+          test -f /tmp/v058/dist/Smart-Life.apk
+          cp /tmp/v058/dist/Smart-Life.apk Smart-Files.apk
+          echo 'd06f37574002ee1d67f37a58ac1f050a997675f84f3389cbf2a504a80159a71d  Smart-Files.apk' | sha256sum -c -
+
+      - name: Update feed
+        shell: bash
+        run: |
+          cat > latest.json <<'EOF'
+          {
+            "versionName": "0.58",
+            "versionCode": 60,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
+            "releaseNotes": "Smart Life V0.58 makes the File Types and Document Types icons slightly larger, pulls their labels closer to the icons, and enlarges the bottom navigation icons while tightening the icon-to-label spacing."
+          }
+          EOF
+
+      - name: Publish update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Files.apk latest.json
+          git commit -m 'Publish Smart Life v0.58' || true
+          git pull --rebase origin main
+          git push
