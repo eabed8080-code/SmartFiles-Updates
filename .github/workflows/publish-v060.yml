@@ -20,7 +20,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-8548-81f7-89da-4f9a5be4f10c/raw?se=2026-09-01T22%3A34%3A31Z&sp=r&sv=2026-02-06&sr=b&scid=b5fbf35a-d2af-5820-9613-79045f80ea9d&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-01T21%3A00%3A36Z&ske=2026-09-02T21%3A00%3A36Z&sks=b&skv=2026-02-06&sig=vbOxPmrGyqGVF01uP/eQnq5dFHeyZcdQ%2B0/cgT1aejI%3D' -o /tmp/v060-artifact.zip
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-6808-81f7-81a1-b9cb7b96fe4e/raw?se=2026-09-01T22%3A44%3A12Z&sp=r&sv=2026-02-06&sr=b&scid=5f8294a6-bf4b-5680-95b3-8c904e1b309c&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-01T22%3A20%3A07Z&ske=2026-09-02T22%3A20%3A07Z&sks=b&skv=2026-02-06&sig=ei0nZ0tvYt5uhJiwmHe8P573fYOYh6r6cMgkiy%2BygJk%3D' -o /tmp/v060-artifact.zip
           rm -rf /tmp/v060
           mkdir -p /tmp/v060
           unzip -q /tmp/v060-artifact.zip -d /tmp/v060
