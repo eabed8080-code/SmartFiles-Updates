@@ -1,6 +1,6 @@
 {
-  "versionName": "0.52",
-  "versionCode": 54,
+  "versionName": "0.53",
+  "versionCode": 55,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Files V0.52 refreshes the app theme, adds a Documents dashboard with file-type icons, counts and sizes, and adds Settings with Night Mode and About Smart Files."
+  "releaseNotes": "Smart Life V0.53 renames the app to Smart Life, adds a new dimensional launcher icon, and moves the smaller Settings button to the upper-left while keeping Night Mode and About in Settings."
 }
