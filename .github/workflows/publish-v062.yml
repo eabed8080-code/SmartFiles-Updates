@@ -1,0 +1,52 @@
+name: Publish Smart Life v0.62
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v062.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed v0.62 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-0610-81f7-8a91-c1b522a320b9/raw?se=2026-09-01T23%3A39%3A45Z&sp=r&sv=2026-02-06&sr=b&scid=95c0829d-81df-512a-a3ee-00e6244e4d98&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-01T22%3A17%3A56Z&ske=2026-09-02T22%3A17%3A56Z&sks=b&skv=2026-02-06&sig=RI%2B3bMnla0yO5QGxBvZlqRGb2Pa2mXsmVCrmhNoSAF0%3D' -o /tmp/v062-artifact.zip
+          rm -rf /tmp/v062
+          mkdir -p /tmp/v062
+          unzip -q /tmp/v062-artifact.zip -d /tmp/v062
+          test -f /tmp/v062/dist/Smart-Life.apk
+          cp /tmp/v062/dist/Smart-Life.apk Smart-Files.apk
+          echo '1aee1b09c5e2fb00a13ee3dced933559933abff441bc363b0022ba692224d68b  Smart-Files.apk' | sha256sum -c -
+
+      - name: Update feed
+        shell: bash
+        run: |
+          cat > latest.json <<'EOF'
+          {
+            "versionName": "0.62",
+            "versionCode": 64,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
+            "releaseNotes": "Smart Life V0.62 adds a compact Internal Storage Usage card at the top of Find > File Types. It shows the device storage used out of total capacity, the percentage full, a visual usage bar, and the remaining free space, using live storage values from the phone."
+          }
+          EOF
+
+      - name: Publish update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Files.apk latest.json
+          git commit -m 'Publish Smart Life v0.62' || true
+          git pull --rebase origin main
+          git push
