@@ -1,0 +1,51 @@
+name: Publish Smart Life Flutter Test v0.2.6
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-flutter-v0026.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Flutter artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-fd34-81f7-9c91-64deb22d98f7/raw?se=2026-09-03T00%3A04%3A30Z&sp=r&sv=2026-02-06&sr=b&scid=46f792fb-fb37-5aac-bc51-aaa628ce13dd&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-02T18%3A50%3A28Z&ske=2026-09-03T18%3A50%3A28Z&sks=b&skv=2026-02-06&sig=ygRCgYHXT2BPdah9bjhFhshRFXzGViCxhkKbo1RBa3c%3D' -o /tmp/flutter-v0026.zip
+          rm -rf /tmp/flutter-v0026
+          mkdir -p /tmp/flutter-v0026
+          unzip -q /tmp/flutter-v0026.zip -d /tmp/flutter-v0026
+          test -f /tmp/flutter-v0026/Smart-Life-Flutter-Test.apk
+          cp /tmp/flutter-v0026/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+
+      - name: Update Flutter feed
+        shell: bash
+        run: |
+          cat > flutter-latest.json <<'EOF'
+          {
+            "versionName": "0.2.6",
+            "versionCode": 8,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Fixes persistent file indexing, restores scanner flow, connects all main tabs, and refreshes the Flutter interface and theme."
+          }
+          EOF
+
+      - name: Publish Flutter update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life Flutter Test v0.2.6' || true
+          git pull --rebase origin main
+          git push
