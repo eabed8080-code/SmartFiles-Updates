@@ -1,0 +1,6 @@
+{
+  "versionName": "0.2.2",
+  "versionCode": 4,
+  "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+  "releaseNotes": "Flutter phone-update test: Check for Update, Download & Install, Android install-source permission handling, and direct Package Installer launch."
+}
