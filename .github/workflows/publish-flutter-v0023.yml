@@ -1,0 +1,52 @@
+name: Publish Smart Life Flutter Test v0.2.3
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-flutter-v0023.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Flutter artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-7b60-81f7-b916-a6103cbbb3a5/raw?se=2026-09-02T22%3A43%3A22Z&sp=r&sv=2026-02-06&sr=b&scid=1879d93c-f33b-52c8-b2f5-5c7efdda0c00&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-02T10%3A31%3A12Z&ske=2026-09-03T10%3A31%3A12Z&sks=b&skv=2026-02-06&sig=GsQtieBi8/szQFiQ%2BiCNtOWYDKG631MgK7FHhl4nv9k%3D' -o /tmp/flutter-v0023.zip
+          rm -rf /tmp/flutter-v0023
+          mkdir -p /tmp/flutter-v0023
+          unzip -q /tmp/flutter-v0023.zip -d /tmp/flutter-v0023
+          test -f /tmp/flutter-v0023/Smart-Life-Flutter-Test.apk
+          cp /tmp/flutter-v0023/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          echo '5a239264435d581b74f245456eca7d366e5f7f5de71247a5318b2ce46842d6dc  Smart-Life-Flutter-Test.apk' | sha256sum -c -
+
+      - name: Update Flutter feed
+        shell: bash
+        run: |
+          cat > flutter-latest.json <<'EOF'
+          {
+            "versionName": "0.2.3",
+            "versionCode": 5,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "In-app update test from 0.2.2 to 0.2.3 using Check for Update, Download, and Android Package Installer."
+          }
+          EOF
+
+      - name: Publish Flutter update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life Flutter Test v0.2.3' || true
+          git pull --rebase origin main
+          git push
