@@ -1,6 +1,6 @@
 {
-  "versionName": "0.63",
-  "versionCode": 65,
+  "versionName": "0.64",
+  "versionCode": 66,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Life V0.63 compacts Find > File Types into only two horizontal rows so the Search area moves higher on screen. All File Type icons now use the same invisible visual bounding box and normalized artwork size, keeping the icons aligned and visually consistent without showing any square or frame."
+  "releaseNotes": "Smart Life V0.64 refreshes the in-app branding with a cleaner layered 3D Smart Life icon in the header and replaces the Settings tab icon with a colorful Android-style gear. The Settings icon keeps its own colors instead of being forced into the normal navigation tint, while the rest of the navigation icons keep the existing active/inactive color behavior."
 }
