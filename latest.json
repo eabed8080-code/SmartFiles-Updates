@@ -1,6 +1,6 @@
 {
-  "versionName": "0.64",
-  "versionCode": 66,
+  "versionName": "0.65",
+  "versionCode": 67,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Files.apk",
-  "releaseNotes": "Smart Life V0.64 refreshes the in-app branding with a cleaner layered 3D Smart Life icon in the header and replaces the Settings tab icon with a colorful Android-style gear. The Settings icon keeps its own colors instead of being forced into the normal navigation tint, while the rest of the navigation icons keep the existing active/inactive color behavior."
+  "releaseNotes": "Smart Life V0.65 fixes Install Update opening Android's Open with chooser. Smart Life now discovers and launches the system Package Installer directly, with a safe Android-compatible fallback, so update installation behaves like before instead of offering unrelated apps such as file managers or other APK handlers."
 }
