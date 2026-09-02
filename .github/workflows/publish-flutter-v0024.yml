@@ -1,0 +1,51 @@
+name: Publish Smart Life Flutter Test v0.2.4
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-flutter-v0024.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Flutter artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-88a0-820c-942f-acac12ae514f/raw?se=2026-09-02T23%3A06%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=a83aefdf-1d1b-5697-8cee-492607ed9d4b&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-02T12%3A08%3A03Z&ske=2026-09-03T12%3A08%3A03Z&sks=b&skv=2026-02-06&sig=xba5Da73KweDlUo/xQqweGJdUnGHzHngRV2OHAeyj0c%3D' -o /tmp/flutter-v0024.zip
+          rm -rf /tmp/flutter-v0024
+          mkdir -p /tmp/flutter-v0024
+          unzip -q /tmp/flutter-v0024.zip -d /tmp/flutter-v0024
+          test -f /tmp/flutter-v0024/Smart-Life-Flutter-Test.apk
+          cp /tmp/flutter-v0024/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+
+      - name: Update Flutter feed
+        shell: bash
+        run: |
+          cat > flutter-latest.json <<'EOF'
+          {
+            "versionName": "0.2.4",
+            "versionCode": 6,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Flutter Docs page rebuilt with Scan New Document, saved documents, preview, share, rename, and delete."
+          }
+          EOF
+
+      - name: Publish Flutter update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life Flutter Test v0.2.4' || true
+          git pull --rebase origin main
+          git push
