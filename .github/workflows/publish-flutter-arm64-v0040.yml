@@ -1,0 +1,56 @@
+name: Publish Smart Life ARM64 v0.4.0
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-arm64-v0040.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed ARM64 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-96e4-81f7-b6c6-ad3c9ff3d92f/raw?se=2026-09-03T18%3A17%3A08Z&sp=r&sv=2026-02-06&sr=b&scid=fb97e3ef-29e9-5692-a3a4-d508e28e39dc&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-02T21%3A26%3A29Z&ske=2026-09-03T21%3A26%3A29Z&sks=b&skv=2026-02-06&sig=oncOw2RleLIzSChMUfGW2qBcim/cl6UOhXsg/nkmql8%3D' -o /tmp/flutter-arm64.zip
+          rm -rf /tmp/flutter-arm64
+          mkdir -p /tmp/flutter-arm64
+          unzip -q /tmp/flutter-arm64.zip -d /tmp/flutter-arm64
+          test -f /tmp/flutter-arm64/Smart-Life-Flutter-Test.apk
+          test "$(stat -c%s /tmp/flutter-arm64/Smart-Life-Flutter-Test.apk)" -lt 100000000
+          cp /tmp/flutter-arm64/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          ls -lh Smart-Life-Flutter-Test.apk
+
+      - name: Update Flutter feed for current updater
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.4.0",
+            "versionCode": 22,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "New offline document scanner engine using document_scan/OpenCV. ARM64 update package for Smart Life, with live edge detection, perspective correction, automatic crop, local JPEG processing, and front/back card combining."
+          }
+          JSON
+
+      - name: Publish raw updater APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life ARM64 v0.4.0 raw updater APK' || true
+          git pull --rebase origin main
+          git push origin main
