@@ -1,6 +1,6 @@
 {
-  "versionName": "0.3.5",
-  "versionCode": 17,
+  "versionName": "0.3.6",
+  "versionCode": 18,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Scanner root fix: Smart Life now launches Google ML Kit Document Scanner through the native Android scanner activity again, matching the old working flow. Front/back ID scans are also combined into one clean A4-proportioned image instead of two oversized PDF pages."
+  "releaseNotes": "Scanner launch fix: Smart Life now opens Google ML Kit Document Scanner through Android's modern Activity Result flow. The scanner also reports the real ML Kit error code if Google Play services still refuses to start, so any remaining device-specific failure can be identified directly."
 }
