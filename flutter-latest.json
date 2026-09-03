@@ -1,6 +1,6 @@
 {
-  "versionName": "0.3.8",
-  "versionCode": 20,
+  "versionName": "0.3.9",
+  "versionCode": 21,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Scanner compatibility fix: the Google ML Kit scanner now uses the original native Activity launch path, Android target SDK 34/min SDK 26 to match the working native Smart Life build, and explicit Google Play services + ML Kit document_ui manifest metadata for the Flutter package."
+  "releaseNotes": "Scanner solution 1: the working old Smart Files scanner path is embedded as native Java Activity com.filesearch.app.SmartFilesActivity inside the Flutter APK. Flutter only launches it and receives the JPEG result. The scanner uses the original request code and startIntentSenderForResult flow, plain android.app.Application behavior, target SDK 34/min SDK 26, and removes experimental ML Kit metadata from earlier attempts."
 }
