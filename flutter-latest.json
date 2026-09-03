@@ -1,6 +1,6 @@
 {
-  "versionName": "0.2.9",
-  "versionCode": 11,
+  "versionName": "0.3.0",
+  "versionCode": 12,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Removes All and Apps from File Types and lifts search, restores Google smart document scanning, combines ID front and back on one clean A4 white page, fixes HEIC/HEIF photo preview, opens modern Word/Excel/PowerPoint files through local PDF conversion, and replaces Night Mode with color Themes."
+  "releaseNotes": "Fixes Google document scanner launching, applies selected color themes across the whole app, shows PowerPoint fully, enlarges and colors the bottom navigation, adds subtle tap animations, and removes the File Types selection border."
 }
