@@ -1,6 +1,6 @@
 {
-  "versionName": "0.3.3",
-  "versionCode": 15,
+  "versionName": "0.3.4",
+  "versionCode": 16,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Fixes a manifest mismatch found after the real Google scanner error was exposed: restores CAMERA declaration and camera feature from the older working app, and preloads the ML Kit document_ui module through Google Play services before first scan. Scanner errors also include the top native stack frames if Google still rejects initialization."
+  "releaseNotes": "Scanner reliability fix: Google ML Kit remains the preferred scanner, but if Google Play services fails while creating the scanner client, Smart Life now automatically opens its own local Camera2 document scanner instead of showing the NullPointerException error. The fallback reuses the proven native Smart Life camera and local document cleanup code and keeps scans on the phone."
 }
