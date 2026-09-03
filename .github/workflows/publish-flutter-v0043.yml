@@ -1,0 +1,57 @@
+name: Publish Smart Life v0.4.3
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0043.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Flutter artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprwestcentralus.oaiusercontent.com/files/00000000-e11c-81fb-b2b6-a9ff765531f3/raw?se=2026-09-03T20%3A00%3A12Z&sp=r&sv=2026-02-06&sr=b&scid=34e39602-a1c1-50b2-9b14-0565af02716a&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A30%3A59Z&ske=2026-09-04T19%3A30%3A59Z&sks=b&skv=2026-02-06&sig=i6AmdVy0dQuqdYd4yOUcnRyxwDPceCegMahI20j4TIY%3D' -o /tmp/flutter-v043.zip
+          rm -rf /tmp/flutter-v043
+          mkdir -p /tmp/flutter-v043
+          unzip -q /tmp/flutter-v043.zip -d /tmp/flutter-v043
+          test -f /tmp/flutter-v043/Smart-Life-Flutter-Test.apk
+          cp /tmp/flutter-v043/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          SIZE="$(stat -c%s Smart-Life-Flutter-Test.apk)"
+          echo "APK size: $SIZE bytes"
+          test "$SIZE" -lt 100000000
+
+      - name: Update Flutter feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.4.3",
+            "versionCode": 25,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Scanner update: ID Card, Driver License and Bank Card now require Front then Back. After the front is accepted Smart Life prompts you to turn the card over and scan the back. Both sides are combined on one white A4-proportioned image using the old Smart Life layout, front above back at a balanced size. The OpenCV scanner now also includes Manual and Auto capture modes, with Auto capture enabled by default after stable document-edge detection."
+          }
+          JSON
+
+      - name: Publish Flutter update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life Flutter v0.4.3 scanner update' || true
+          git pull --rebase origin main
+          git push origin main
