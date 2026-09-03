@@ -1,6 +1,6 @@
 {
-  "versionName": "0.3.2",
-  "versionCode": 14,
+  "versionName": "0.3.3",
+  "versionCode": 15,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Restores Google document scanner launching directly from Smart Life MainActivity using the same native IntentSender flow as the older working app. If Google Play services still rejects startup, the app now shows the real Google error type and message instead of a generic scanner error."
+  "releaseNotes": "Fixes a manifest mismatch found after the real Google scanner error was exposed: restores CAMERA declaration and camera feature from the older working app, and preloads the ML Kit document_ui module through Google Play services before first scan. Scanner errors also include the top native stack frames if Google still rejects initialization."
 }
