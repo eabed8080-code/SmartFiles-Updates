@@ -12,8 +12,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     env:
-      APK_ARTIFACT_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-a96c-81f7-a3cc-b42859b5283c/raw?se=2026-09-03T22%3A29%3A54Z&sp=r&sv=2026-02-06&sr=b&scid=5021e60e-7a69-559d-bd14-263ba3e63213&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A28%3A54Z&ske=2026-09-04T19%3A28%3A54Z&sks=b&skv=2026-02-06&sig=zj2Et2WxWbV8%2BrYFji24t1SFHM8yf5aJ%2Bej94Wv7WwQ%3D'
-      PC_ARTIFACT_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-edb4-81f7-b5b4-510e0d67cc05/raw?se=2026-09-03T22%3A30%3A00Z&sp=r&sv=2026-02-06&sr=b&scid=4b5f20bb-3a04-5af5-8f78-8f7668628e8f&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A37%3A26Z&ske=2026-09-04T19%3A37%3A26Z&sks=b&skv=2026-02-06&sig=Y1BIxdFD5C8itnanIlKzsoM5L5wWPBbOI1htdUA2VMY%3D'
+      APK_ARTIFACT_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-2ac0-81f7-bba0-7d0f8b32df00/raw?se=2026-09-03T22%3A54%3A10Z&sp=r&sv=2026-02-06&sr=b&scid=f36fc271-4d4f-5eba-9e42-1238df024637&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A24%3A37Z&ske=2026-09-04T19%3A24%3A37Z&sks=b&skv=2026-02-06&sig=5Xz4eYPV%2BZjIjz2fkYnD6rlDtxffxt9WdDS1Mjo9qQU%3D'
+      PC_ARTIFACT_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-96d8-81f7-8354-181f84c305c9/raw?se=2026-09-03T22%3A54%3A16Z&sp=r&sv=2026-02-06&sr=b&scid=e87d0ae7-bde9-539f-9be9-6efdfbc6d5ee&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A26%3A39Z&ske=2026-09-04T19%3A26%3A39Z&sks=b&skv=2026-02-06&sig=4rGhtxUUPgXjcPv8TiVv22iiQrb0Pu42KPlvWVfPFGc%3D'
     steps:
       - name: Checkout updates repo
         uses: actions/checkout@v4
@@ -40,9 +40,9 @@ jobs:
           cat > flutter-latest.json <<'JSON'
           {
             "versionName": "0.4.5",
-            "versionCode": 27,
+            "versionCode": 2027,
             "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-            "releaseNotes": "PC to phone transfer phase 2: keep Smart Life open on the phone, then use Send file to phone from Smart Life PC Receiver. Received files are saved in Downloads/Smart Life. Phone and computer must be on the same local network."
+            "releaseNotes": "PC to phone transfer phase 2: keep Smart Life open on the phone, then use the PC Receiver to browse or drag and drop files and send them to the phone. Received files are saved in Downloads/Smart Life. Phone and computer must be on the same local network."
           }
           JSON
 
@@ -52,5 +52,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Smart-Life-Flutter-Test.apk Smart-Life-PC-Receiver.zip flutter-latest.json
-          git commit -m "Publish Smart Life v0.4.5 PC to phone"
+          git commit -m "Publish Smart Life v0.4.5 build 2027"
           git push
