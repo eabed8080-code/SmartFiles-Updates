@@ -1,0 +1,51 @@
+name: Publish Smart Life Flutter Test v0.2.7
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-flutter-v0027.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Flutter artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-9624-81f7-82d4-37cabc7d4437/raw?se=2026-09-03T00%3A54%3A07Z&sp=r&sv=2026-02-06&sr=b&scid=02626b93-1cf0-5fab-8f91-7079675ae205&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-02T10%3A31%3A12Z&ske=2026-09-03T10%3A31%3A12Z&sks=b&skv=2026-02-06&sig=C1ixtAyUhUGpvCRULAhHo4L/owMqtn8YUkaL1JSDJPU%3D' -o /tmp/flutter-v0027.zip
+          rm -rf /tmp/flutter-v0027
+          mkdir -p /tmp/flutter-v0027
+          unzip -q /tmp/flutter-v0027.zip -d /tmp/flutter-v0027
+          test -f /tmp/flutter-v0027/Smart-Life-Flutter-Test.apk
+          cp /tmp/flutter-v0027/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+
+      - name: Update Flutter feed
+        shell: bash
+        run: |
+          cat > flutter-latest.json <<'EOF'
+          {
+            "versionName": "0.2.7",
+            "versionCode": 9,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Fixes the Photos page freeze with paged photo loading, reuses the saved file index, and enlarges the Smart Type icons on the first page."
+          }
+          EOF
+
+      - name: Publish Flutter update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life Flutter Test v0.2.7' || true
+          git pull --rebase origin main
+          git push
