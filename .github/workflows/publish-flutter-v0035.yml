@@ -1,0 +1,54 @@
+name: Publish Smart Life v0.3.5
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0035.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Flutter artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-7390-81f7-b665-98efb4271861/raw?se=2026-09-03T14%3A57%3A35Z&sp=r&sv=2026-02-06&sr=b&scid=7d66f248-9ffb-5afe-8896-21465bf642dc&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-02T21%3A32%3A54Z&ske=2026-09-03T21%3A32%3A54Z&sks=b&skv=2026-02-06&sig=JyXuhudGfBiFzxzluFoccqP5bhrmkT6N4VpEaoLtSPg%3D' -o /tmp/flutter-v0035.zip
+          rm -rf /tmp/flutter-v0035
+          mkdir -p /tmp/flutter-v0035
+          unzip -q /tmp/flutter-v0035.zip -d /tmp/flutter-v0035
+          test -f /tmp/flutter-v0035/Smart-Life-Flutter-Test.apk
+          cp /tmp/flutter-v0035/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+
+      - name: Update Flutter feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.3.5",
+            "versionCode": 17,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Scanner root fix: Smart Life now launches Google ML Kit Document Scanner through the native Android scanner activity again, matching the old working flow. Front/back ID scans are also combined into one clean A4-proportioned image instead of two oversized PDF pages."
+          }
+          JSON
+
+      - name: Publish Flutter update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life Flutter v0.3.5' || true
+          git pull --rebase origin main
+          git push origin main
