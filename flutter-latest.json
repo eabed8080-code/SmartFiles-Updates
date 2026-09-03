@@ -1,6 +1,6 @@
 {
-  "versionName": "0.3.9",
-  "versionCode": 21,
-  "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Scanner solution 1: the working old Smart Files scanner path is embedded as native Java Activity com.filesearch.app.SmartFilesActivity inside the Flutter APK. Flutter only launches it and receives the JPEG result. The scanner uses the original request code and startIntentSenderForResult flow, plain android.app.Application behavior, target SDK 34/min SDK 26, and removes experimental ML Kit metadata from earlier attempts."
+  "versionName": "0.4.0",
+  "versionCode": 22,
+  "apkUrl": "https://github.com/eabed8080-code/SmartFiles-Updates/releases/download/flutter-v0.4.0/Smart-Life-Flutter-Test.apk",
+  "releaseNotes": "New offline document scanner engine. Docs now uses the Flutter camera with document_scan/OpenCV for live document-edge detection, automatic perspective correction and crop, local JPEG processing, and front/back card combining. The Docs scan path no longer calls Google Document Scanner or depends on its Google Play Services scanner UI."
 }
