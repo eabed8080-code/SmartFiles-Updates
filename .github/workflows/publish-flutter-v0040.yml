@@ -14,6 +14,9 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_TAG: flutter-v0.4.0
     steps:
       - name: Checkout update channel
         uses: actions/checkout@v4
@@ -22,12 +25,25 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL 'https://sdmntprpolandcentral.oaiusercontent.com/files/00000000-f340-820a-80a4-22b95561fa09/raw?se=2026-09-03T18%3A02%3A35Z&sp=r&sv=2026-02-06&sr=b&scid=853f61cb-0257-52f5-9999-6d6bcd8581cf&skoid=1d6acb5b-b3f4-43ec-a5ec-b05c4a7708c8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T16%3A28%3A09Z&ske=2026-09-04T16%3A28%3A09Z&sks=b&skv=2026-02-06&sig=i51kMWqVykqePCB6cMj5yvH1v8HWFme9LvgKBv/kH8Q%3D' -o /tmp/flutter-v040.zip
+          curl -fL 'https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-4c88-8210-8b4c-f870fc991c16/raw?se=2026-09-03T18%3A05%3A01Z&sp=r&sv=2026-02-06&sr=b&scid=9192c6b3-22ff-5c6f-9527-885b1ee2f7af&skoid=1d6acb5b-b3f4-43ec-a5ec-b05c4a7708c8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T09%3A31%3A56Z&ske=2026-09-04T09%3A31%3A56Z&sks=b&skv=2026-02-06&sig=FfRhBlAa4AI14GInukMhWU/l16Hm3ooGxCox6eCaA1U%3D' -o /tmp/flutter-v040.zip
           rm -rf /tmp/flutter-v040
           mkdir -p /tmp/flutter-v040
           unzip -q /tmp/flutter-v040.zip -d /tmp/flutter-v040
           test -f /tmp/flutter-v040/Smart-Life-Flutter-Test.apk
-          cp /tmp/flutter-v040/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          ls -lh /tmp/flutter-v040/Smart-Life-Flutter-Test.apk
+
+      - name: Publish APK release asset
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" /tmp/flutter-v040/Smart-Life-Flutter-Test.apk --clobber
+          else
+            gh release create "$RELEASE_TAG" /tmp/flutter-v040/Smart-Life-Flutter-Test.apk \
+              --target main \
+              --title 'Smart Life Flutter v0.4.0' \
+              --notes 'Offline OpenCV document scanner build.'
+          fi
 
       - name: Update Flutter feed
         shell: bash
@@ -37,18 +53,18 @@ jobs:
           {
             "versionName": "0.4.0",
             "versionCode": 22,
-            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "apkUrl": "https://github.com/eabed8080-code/SmartFiles-Updates/releases/download/flutter-v0.4.0/Smart-Life-Flutter-Test.apk",
             "releaseNotes": "New offline document scanner engine. Docs now uses the Flutter camera with document_scan/OpenCV for live document-edge detection, automatic perspective correction and crop, local JPEG processing, and front/back card combining. The Docs scan path no longer calls Google Document Scanner or depends on its Google Play Services scanner UI."
           }
           JSON
 
-      - name: Publish Flutter update
+      - name: Publish Flutter feed
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'Smart Life Update Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add Smart-Life-Flutter-Test.apk flutter-latest.json
-          git commit -m 'Publish Smart Life Flutter v0.4.0 OpenCV scanner' || true
+          git add flutter-latest.json
+          git commit -m 'Publish Smart Life Flutter v0.4.0 OpenCV scanner feed' || true
           git pull --rebase origin main
           git push origin main
