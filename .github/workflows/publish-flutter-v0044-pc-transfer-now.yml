@@ -1,0 +1,62 @@
+name: Publish Smart Life v0.4.4 PC Transfer Now
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0044-pc-transfer-now.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Flutter APK artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-3b10-81f5-af8c-cfaec7fc9e3b/raw?se=2026-09-03T21%3A52%3A42Z&sp=r&sv=2026-02-06&sr=b&scid=4fdbe825-9555-59a8-a187-1abddd633523&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A37%3A12Z&ske=2026-09-04T19%3A37%3A12Z&sks=b&skv=2026-02-06&sig=/no7qt%2B4DssA4MApmQlSmt0mdnYym1MX/rE6040b%2BpQ%3D' -o /tmp/flutter-v044.zip
+          rm -rf /tmp/flutter-v044
+          mkdir -p /tmp/flutter-v044
+          unzip -q /tmp/flutter-v044.zip -d /tmp/flutter-v044
+          test -f /tmp/flutter-v044/Smart-Life-Flutter-Test.apk
+          cp /tmp/flutter-v044/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          test "$(stat -c%s Smart-Life-Flutter-Test.apk)" -lt 100000000
+
+      - name: Download Windows receiver package
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-3938-81f7-ae32-8335a6ebfa19/raw?se=2026-09-03T21%3A52%3A51Z&sp=r&sv=2026-02-06&sr=b&scid=7622ec55-f5fa-5c72-9861-972b28e9c76d&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A35%3A14Z&ske=2026-09-04T19%3A35%3A14Z&sks=b&skv=2026-02-06&sig=bGSEhVdfvPQ/b1g%2BDJM7MGitX6QVuK8NOVVSdhQRhRI%3D' -o Smart-Life-PC-Receiver.zip
+          test "$(stat -c%s Smart-Life-PC-Receiver.zip)" -lt 100000000
+
+      - name: Update Flutter feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.4.4",
+            "versionCode": 26,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Phone to PC transfer phase 1: Connect to PC in Settings and Send to PC in Android Share for images and PDFs. Phone and Windows computer must be on the same Wi-Fi."
+          }
+          JSON
+
+      - name: Publish phone update and PC receiver package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk Smart-Life-PC-Receiver.zip flutter-latest.json
+          git commit -m 'Publish Smart Life v0.4.4 phone to PC transfer' || true
+          git pull --rebase origin main
+          git push origin main
