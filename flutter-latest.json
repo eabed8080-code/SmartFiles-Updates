@@ -1,6 +1,6 @@
 {
-  "versionName": "0.4.4",
-  "versionCode": 26,
+  "versionName": "0.4.5",
+  "versionCode": 27,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Phone to PC transfer phase 1: Connect to PC in Settings and Send to PC in Android Share for images and PDFs. Phone and Windows computer must be on the same Wi-Fi."
+  "releaseNotes": "PC to phone transfer phase 2: keep Smart Life open on the phone, then use Send file to phone from Smart Life PC Receiver. Received files are saved in Downloads/Smart Life. Phone and computer must be on the same local network."
 }
