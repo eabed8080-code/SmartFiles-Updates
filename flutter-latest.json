@@ -1,6 +1,6 @@
 {
-  "versionName": "0.3.7",
-  "versionCode": 19,
+  "versionName": "0.3.8",
+  "versionCode": 20,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Scanner crash fix: Google ML Kit scanner now runs in a dedicated native Android process isolated from Flutter and initializes ML Kit before creating the scanner client. Diagnostics were also improved for any remaining device-specific failure."
+  "releaseNotes": "Scanner compatibility fix: the Google ML Kit scanner now uses the original native Activity launch path, Android target SDK 34/min SDK 26 to match the working native Smart Life build, and explicit Google Play services + ML Kit document_ui manifest metadata for the Flutter package."
 }
