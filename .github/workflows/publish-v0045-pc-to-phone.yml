@@ -1,0 +1,56 @@
+name: Publish Smart Life v0.4.5 PC to Phone
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v0045-pc-to-phone.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      APK_ARTIFACT_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-a96c-81f7-a3cc-b42859b5283c/raw?se=2026-09-03T22%3A29%3A54Z&sp=r&sv=2026-02-06&sr=b&scid=5021e60e-7a69-559d-bd14-263ba3e63213&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A28%3A54Z&ske=2026-09-04T19%3A28%3A54Z&sks=b&skv=2026-02-06&sig=zj2Et2WxWbV8%2BrYFji24t1SFHM8yf5aJ%2Bej94Wv7WwQ%3D'
+      PC_ARTIFACT_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-edb4-81f7-b5b4-510e0d67cc05/raw?se=2026-09-03T22%3A30%3A00Z&sp=r&sv=2026-02-06&sr=b&scid=4b5f20bb-3a04-5af5-8f78-8f7668628e8f&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A37%3A26Z&ske=2026-09-04T19%3A37%3A26Z&sks=b&skv=2026-02-06&sig=Y1BIxdFD5C8itnanIlKzsoM5L5wWPBbOI1htdUA2VMY%3D'
+    steps:
+      - name: Checkout updates repo
+        uses: actions/checkout@v4
+
+      - name: Download signed Flutter APK artifact
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 "$APK_ARTIFACT_URL" -o /tmp/flutter.zip
+          rm -rf /tmp/flutter
+          mkdir -p /tmp/flutter
+          unzip -q /tmp/flutter.zip -d /tmp/flutter
+          APK="$(find /tmp/flutter -type f -name '*.apk' -print -quit)"
+          test -n "$APK"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Download Windows receiver package
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 "$PC_ARTIFACT_URL" -o Smart-Life-PC-Receiver.zip
+          unzip -tq Smart-Life-PC-Receiver.zip >/dev/null
+
+      - name: Update Flutter feed
+        run: |
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.4.5",
+            "versionCode": 27,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "PC to phone transfer phase 2: keep Smart Life open on the phone, then use Send file to phone from Smart Life PC Receiver. Received files are saved in Downloads/Smart Life. Phone and computer must be on the same local network."
+          }
+          JSON
+
+      - name: Publish phone update and PC receiver package
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Smart-Life-Flutter-Test.apk Smart-Life-PC-Receiver.zip flutter-latest.json
+          git commit -m "Publish Smart Life v0.4.5 PC to phone"
+          git push
