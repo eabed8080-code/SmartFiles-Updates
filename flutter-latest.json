@@ -1,6 +1,6 @@
 {
-  "versionName": "0.4.3",
-  "versionCode": 25,
+  "versionName": "0.4.4",
+  "versionCode": 26,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Scanner update: ID Card, Driver License and Bank Card now require Front then Back. After the front is accepted Smart Life prompts you to turn the card over and scan the back. Both sides are combined on one white A4-proportioned image using the old Smart Life layout, front above back at a balanced size. The OpenCV scanner now also includes Manual and Auto capture modes, with Auto capture enabled by default after stable document-edge detection."
+  "releaseNotes": "Phone to PC transfer phase 1: Connect to PC in Settings and Send to PC in Android Share for images and PDFs. Phone and Windows computer must be on the same Wi-Fi."
 }
