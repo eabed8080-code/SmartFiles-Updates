@@ -1,6 +1,6 @@
 {
-  "versionName": "0.2.7",
-  "versionCode": 9,
+  "versionName": "0.2.8",
+  "versionCode": 10,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Fixes the Photos page freeze with paged photo loading, reuses the saved file index, and enlarges the Smart Type icons on the first page."
+  "releaseNotes": "Enlarges File Type icons and labels, adds a camera fallback for Scan, removes Photo Library folders, improves opening problem HEIC/HEIF photos, uses Smart Life branding, and moves Update under Settings."
 }
