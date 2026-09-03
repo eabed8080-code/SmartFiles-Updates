@@ -1,6 +1,6 @@
 {
   "versionName": "0.4.0",
   "versionCode": 22,
-  "apkUrl": "https://github.com/eabed8080-code/SmartFiles-Updates/releases/download/flutter-v0.4.0/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "New offline document scanner engine. Docs now uses the Flutter camera with document_scan/OpenCV for live document-edge detection, automatic perspective correction and crop, local JPEG processing, and front/back card combining. The Docs scan path no longer calls Google Document Scanner or depends on its Google Play Services scanner UI."
+  "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+  "releaseNotes": "New offline document scanner engine using document_scan/OpenCV. ARM64 update package for Smart Life, with live edge detection, perspective correction, automatic crop, local JPEG processing, and front/back card combining."
 }
