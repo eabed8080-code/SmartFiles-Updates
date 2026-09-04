@@ -1,6 +1,6 @@
 {
-  "versionName": "0.4.8",
-  "versionCode": 6030,
+  "versionName": "0.4.9",
+  "versionCode": 6031,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Document is now inside Documents. It adds My Categories with Personal, Business, School, Financial, Contracts and Other, lets you add/rename/delete categories, assign files without moving them in Android, add search results to a category, and save new scans directly to a category."
+  "releaseNotes": "Find now renames the real Android file while preserving its extension and Smart Document assignment, removes the redundant direct WhatsApp action in favor of Share, and uses a more compact Internal Storage card so File Types sits higher."
 }
