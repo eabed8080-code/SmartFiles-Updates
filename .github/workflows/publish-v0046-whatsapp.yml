@@ -22,7 +22,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-d158-81f5-8a23-4373c4c04beb/raw?se=2026-09-04T01%3A18%3A00Z&sp=r&sv=2026-02-06&sr=b&scid=347c0f65-538c-590e-940c-cd620d93c45b&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T23%3A48%3A33Z&ske=2026-09-04T23%3A48%3A33Z&sks=b&skv=2026-02-06&sig=tBgnPzv2NowHzawfe56RhltCy6vKf9w1E9SeUq2HMwY%3D' -o /tmp/smart-life-v0047.zip
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-163c-81f7-a46e-281863d3db28/raw?se=2026-09-04T02%3A07%3A23Z&sp=r&sv=2026-02-06&sr=b&scid=a1f54a77-b96b-5da7-8fdc-55c5b34e499e&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T01%3A43%3A20Z&ske=2026-09-05T01%3A43%3A20Z&sks=b&skv=2026-02-06&sig=qYnrnNp1Jz2YZBZj7JUoqLrVl%2BiP8HdsHqe9FVHQNqw%3D' -o /tmp/smart-life-v0047.zip
           rm -rf /tmp/smart-life-v0047
           mkdir -p /tmp/smart-life-v0047
           unzip -q /tmp/smart-life-v0047.zip -d /tmp/smart-life-v0047
@@ -38,9 +38,9 @@ jobs:
           cat > flutter-latest.json <<'JSON'
           {
             "versionName": "0.4.7",
-            "versionCode": 4029,
+            "versionCode": 6029,
             "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-            "releaseNotes": "WhatsApp recipient fix: the direct WhatsApp button now hands the selected file to WhatsApp's recipient picker so the file is ready to send to a person or group."
+            "releaseNotes": "WhatsApp recipient fix: the direct WhatsApp button now hands the selected file to WhatsApp's recipient picker so the file is ready to send to a person or group. This build also corrects the Android version-code packaging so in-app updates are detected correctly."
           }
           JSON
 
@@ -51,6 +51,6 @@ jobs:
           git config user.name 'Smart Life Update Bot'
           git config user.email 'actions@users.noreply.github.com'
           git add Smart-Life-Flutter-Test.apk flutter-latest.json
-          git commit -m 'Publish Smart Life v0.4.7 build 4029' || true
+          git commit -m 'Publish Smart Life v0.4.7 build 6029' || true
           git pull --rebase origin main
           git push origin main
