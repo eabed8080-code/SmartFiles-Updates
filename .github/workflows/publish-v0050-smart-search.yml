@@ -1,0 +1,56 @@
+name: Publish Smart Life v0.5.0 Smart Search
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-v0050-smart-search.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Smart Life v0.5.0 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-a55c-81f7-87ff-2ffb54c9a5bf/raw?se=2026-09-04T12%3A48%3A29Z&sp=r&sv=2026-02-06&sr=b&scid=20bd1cb2-6bc6-55b5-ac95-f518bb44a56f&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T01%3A49%3A33Z&ske=2026-09-05T01%3A49%3A33Z&sks=b&skv=2026-02-06&sig=dv46BzTAYvRolkNQY28j8fBTE5vNag4XbwFwCzckuMg%3D' -o /tmp/smart-life-v0050.zip
+          rm -rf /tmp/smart-life-v0050
+          mkdir -p /tmp/smart-life-v0050
+          unzip -q /tmp/smart-life-v0050.zip -d /tmp/smart-life-v0050
+          test -f /tmp/smart-life-v0050/Smart-Life-Flutter-Test.apk
+          test "$(sha256sum /tmp/smart-life-v0050/Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '7f56dff94c8d5b5af63ce7e1a63ffe308a351ff3c26d86e33e07fbbe6a3bdb36'
+          cp /tmp/smart-life-v0050/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          ls -lh Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.5.0",
+            "versionCode": 6032,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Smart Search now searches inside supported PDF and Office file contents using a local persistent index, and Rename can offer a short Smart Rename suggestion based on the file content while keeping the existing interface simple."
+          }
+          JSON
+
+      - name: Publish updater APK and feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.5.0 build 6032' || true
+          git pull --rebase origin main
+          git push origin main
