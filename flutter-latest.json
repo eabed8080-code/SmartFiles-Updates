@@ -1,6 +1,6 @@
 {
-  "versionName": "0.5.2",
-  "versionCode": 6034,
+  "versionName": "0.5.3",
+  "versionCode": 6035,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Photos now include Smart Media Cleanup with exact duplicate photos and videos, visually similar photos, potentially blurry photos, old screenshots, large photos, and large videos. Cleanup is review-first: nothing is preselected or deleted automatically, and Android asks for confirmation before selected media is moved to trash."
+  "releaseNotes": "Smart Media Cleanup review now opens photos and videos before deletion: tap an item to preview it, use the checkbox to select it for trash, and long-press for quick selection. Smart Life also replaces the default Flutter launcher icon with a custom 3D Smart Life icon."
 }
