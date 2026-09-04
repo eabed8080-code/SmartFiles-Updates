@@ -1,0 +1,57 @@
+name: Publish Smart Life v0.4.9 Find File Actions
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-v0049-find-file-actions.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Smart Life v0.4.9 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-9684-81f7-a49f-121da2e281c0/raw?se=2026-09-04T11%3A02%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=988c7217-67bf-5161-b5fe-45b73996d761&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T01%3A51%3A47Z&ske=2026-09-05T01%3A51%3A47Z&sks=b&skv=2026-02-06&sig=%2BaPb5qmAZY8G%2B8jqZU2bBZSpWwmhs/%2BKTpAdeAOAuhg%3D' -o /tmp/smart-life-v0049.zip
+          rm -rf /tmp/smart-life-v0049
+          mkdir -p /tmp/smart-life-v0049
+          unzip -q /tmp/smart-life-v0049.zip -d /tmp/smart-life-v0049
+          test -f /tmp/smart-life-v0049/Smart-Life-Flutter-Test.apk
+          test "$(stat -c%s /tmp/smart-life-v0049/Smart-Life-Flutter-Test.apk)" -lt 100000000
+          test "$(sha256sum /tmp/smart-life-v0049/Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '31b8e2b398d546f022692d547a15092fcec8375c7eeb272f4d124541935e0767'
+          cp /tmp/smart-life-v0049/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          ls -lh Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.4.9",
+            "versionCode": 6031,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Find now renames the real Android file while preserving its extension and Smart Document assignment, removes the redundant direct WhatsApp action in favor of Share, and uses a more compact Internal Storage card so File Types sits higher."
+          }
+          JSON
+
+      - name: Publish updater APK and feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.4.9 build 6031' || true
+          git pull --rebase origin main
+          git push origin main
