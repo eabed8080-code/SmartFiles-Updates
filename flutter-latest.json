@@ -1,6 +1,6 @@
 {
-  "versionName": "0.4.7",
-  "versionCode": 6029,
+  "versionName": "0.4.8",
+  "versionCode": 6030,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "WhatsApp recipient fix: the direct WhatsApp button now hands the selected file to WhatsApp's recipient picker so the file is ready to send to a person or group. This build also corrects the Android version-code packaging so in-app updates are detected correctly."
+  "releaseNotes": "Smart Document is now inside Documents. It adds My Categories with Personal, Business, School, Financial, Contracts and Other, lets you add/rename/delete categories, assign files without moving them in Android, add search results to a category, and save new scans directly to a category."
 }
