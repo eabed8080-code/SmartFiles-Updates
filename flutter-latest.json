@@ -1,6 +1,6 @@
 {
-  "versionName": "0.5.0",
-  "versionCode": 6032,
+  "versionName": "0.5.1",
+  "versionCode": 6033,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Search now searches inside supported PDF and Office file contents using a local persistent index, and Rename can offer a short Smart Rename suggestion based on the file content while keeping the existing interface simple."
+  "releaseNotes": "File Types now include Smart Groups for All, Today, Yesterday, This Week, Last Week, This Month, and Older. The date filter works with normal filename search and Smart Search content results."
 }
