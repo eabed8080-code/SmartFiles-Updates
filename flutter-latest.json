@@ -1,6 +1,6 @@
 {
   "versionName": "0.4.7",
-  "versionCode": 4029,
+  "versionCode": 6029,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "WhatsApp recipient fix: the direct WhatsApp button now hands the selected file to WhatsApp's recipient picker so the file is ready to send to a person or group."
+  "releaseNotes": "WhatsApp recipient fix: the direct WhatsApp button now hands the selected file to WhatsApp's recipient picker so the file is ready to send to a person or group. This build also corrects the Android version-code packaging so in-app updates are detected correctly."
 }
