@@ -1,6 +1,6 @@
 {
-  "versionName": "0.5.4",
-  "versionCode": 6036,
+  "versionName": "0.5.5",
+  "versionCode": 6037,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Converter rebuilt with Smart Convert, organized Documents and Media sections, and the existing Quick Converters kept in place. Adds local file conversions including Office to PDF, PDF to Word, Images to PDF, PDF to Images, and Video to Audio."
+  "releaseNotes": "Converter is back to quick everyday unit conversions only. File conversion is now handled from Find > File Types/Search results through the file actions menu, with Convert shown only for supported file types."
 }
