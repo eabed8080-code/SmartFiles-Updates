@@ -1,6 +1,6 @@
 {
-  "versionName": "0.4.9",
-  "versionCode": 6031,
+  "versionName": "0.5.0",
+  "versionCode": 6032,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Find now renames the real Android file while preserving its extension and Smart Document assignment, removes the redundant direct WhatsApp action in favor of Share, and uses a more compact Internal Storage card so File Types sits higher."
+  "releaseNotes": "Smart Search now searches inside supported PDF and Office file contents using a local persistent index, and Rename can offer a short Smart Rename suggestion based on the file content while keeping the existing interface simple."
 }
