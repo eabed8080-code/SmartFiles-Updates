@@ -1,6 +1,6 @@
 {
-  "versionName": "0.5.6",
-  "versionCode": 6038,
+  "versionName": "0.5.7",
+  "versionCode": 6039,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Converter stays as the normal quick unit converter. Find > File Types/Search results now use a three-dot File Options menu instead of the row of action buttons, with Open, Add to Category, Rename, Share, Convert when supported, and Details."
+  "releaseNotes": "Find removes the Internal Storage Usage card; ZIP and APK now show counts only. File Options no longer includes Open because tapping the file opens it. Long-press enables multi-select with batch Share and Add to Category. File-name Voice Search is available from the microphone. Settings > About shows the live installed version directly without a popup. PDF, Word, Excel and PowerPoint use refreshed 3D-style badges, and the Smart Life launcher icon is redesigned."
 }
