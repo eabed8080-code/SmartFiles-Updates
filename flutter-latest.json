@@ -1,6 +1,6 @@
 {
   "versionName": "0.4.6",
-  "versionCode": 2028,
+  "versionCode": 4028,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
   "releaseNotes": "WhatsApp sharing: Smart Life now adds a direct WhatsApp action to file search results so you can open WhatsApp with the selected file ready to send. Regular Share remains available. Supports WhatsApp and WhatsApp Business when installed."
 }
