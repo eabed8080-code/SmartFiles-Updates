@@ -1,0 +1,58 @@
+name: Publish Smart Life v0.5.1 Smart Groups
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-v0051-smart-groups.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Smart Life v0.5.1 APK artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-d0f4-81f5-bb1a-cb60cc0b4080/raw?se=2026-09-04T16%3A51%3A56Z&sp=r&sv=2026-02-06&sr=b&scid=1ff65c98-0cb4-5ee5-bfe9-4facca20e3a9&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T01%3A56%3A23Z&ske=2026-09-05T01%3A56%3A23Z&sks=b&skv=2026-02-06&sig=Vw5xT7%2BNBkJxrsm4eF66n3hFZExH40aKYTMMEWo1edY%3D' -o /tmp/smart-life-v0051.zip
+          test "$(sha256sum /tmp/smart-life-v0051.zip | awk '{print $1}')" = 'cc186d6a07da0fc43585393cd369c2d68af7d53c033ac4f1e52beb596d25da63'
+          rm -rf /tmp/smart-life-v0051
+          mkdir -p /tmp/smart-life-v0051
+          unzip -q /tmp/smart-life-v0051.zip -d /tmp/smart-life-v0051
+          test -f /tmp/smart-life-v0051/Smart-Life-Flutter-Test.apk
+          cp /tmp/smart-life-v0051/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          test "$(stat -c%s Smart-Life-Flutter-Test.apk)" -gt 1000000
+          sha256sum Smart-Life-Flutter-Test.apk
+          ls -lh Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.5.1",
+            "versionCode": 6033,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "File Types now include Smart Groups for All, Today, Yesterday, This Week, Last Week, This Month, and Older. The date filter works with normal filename search and Smart Search content results."
+          }
+          JSON
+
+      - name: Publish updater APK and feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.5.1 build 6033' || true
+          git pull --rebase origin main
+          git push origin main
