@@ -1,0 +1,48 @@
+name: Inspect current Smart Life APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/inspect-current-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Inspect APK archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f Smart-Life-Flutter-Test.apk
+          {
+            echo 'Current Smart Life APK contents'
+            echo '==============================='
+            echo
+            echo "APK size: $(stat -c%s Smart-Life-Flutter-Test.apk) bytes"
+            echo "SHA256: $(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')"
+            echo
+            echo 'Flutter-related entries:'
+            unzip -l Smart-Life-Flutter-Test.apk | grep -Ei 'flutter|kernel_blob|isolate_snapshot|libapp|assets/' || true
+            echo
+            echo 'Top-level archive entries:'
+            unzip -l Smart-Life-Flutter-Test.apk | head -n 300
+          } > current-apk-listing.txt
+
+      - name: Commit inspection result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Inspection Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add current-apk-listing.txt
+          git commit -m 'Inspect current Smart Life APK contents' || true
+          git pull --rebase origin main
+          git push origin main
