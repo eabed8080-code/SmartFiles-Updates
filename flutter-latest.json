@@ -1,6 +1,6 @@
 {
-  "versionName": "0.5.5",
-  "versionCode": 6037,
+  "versionName": "0.5.6",
+  "versionCode": 6038,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Converter is back to quick everyday unit conversions only. File conversion is now handled from Find > File Types/Search results through the file actions menu, with Convert shown only for supported file types."
+  "releaseNotes": "Converter stays as the normal quick unit converter. Find > File Types/Search results now use a three-dot File Options menu instead of the row of action buttons, with Open, Add to Category, Rename, Share, Convert when supported, and Details."
 }
