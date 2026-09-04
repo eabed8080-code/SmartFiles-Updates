@@ -1,0 +1,72 @@
+name: Publish Smart Life v0.5.3 Cleanup Preview and 3D Icon
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-v0053-cleanup-preview-icon.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Download signed Smart Life v0.5.3 APK artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-e020-81f7-999c-c2bd1a5b2298/raw?se=2026-09-04T18%3A36%3A01Z&sp=r&sv=2026-02-06&sr=b&scid=2f064269-b8f5-5cea-ad1b-972bbd14a601&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T00%3A49%3A07Z&ske=2026-09-05T00%3A49%3A07Z&sks=b&skv=2026-02-06&sig=Kwf3tnlxY2eYe1bQZuuKQHdG76CJOX5pBFobnGMnf0E%3D' -o /tmp/smart-life-v0053.zip
+          test "$(sha256sum /tmp/smart-life-v0053.zip | awk '{print $1}')" = 'de741307cec4531e35f2ecb24bbf2bd2e146f3b5062c81b2586f6ec18fa13721'
+          rm -rf /tmp/smart-life-v0053
+          mkdir -p /tmp/smart-life-v0053
+          unzip -q /tmp/smart-life-v0053.zip -d /tmp/smart-life-v0053
+          test -f /tmp/smart-life-v0053/Smart-Life-Flutter-Test.apk
+          cp /tmp/smart-life-v0053/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          test "$(stat -c%s Smart-Life-Flutter-Test.apk)" -gt 1000000
+
+      - name: Verify signed release metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          "$TOOLS/apksigner" verify --verbose Smart-Life-Flutter-Test.apk
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionCode='6035'"
+          echo "$BADGING" | grep -q "versionName='0.5.3'"
+          sha256sum Smart-Life-Flutter-Test.apk
+          ls -lh Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.5.3",
+            "versionCode": 6035,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Smart Media Cleanup review now opens photos and videos before deletion: tap an item to preview it, use the checkbox to select it for trash, and long-press for quick selection. Smart Life also replaces the default Flutter launcher icon with a custom 3D Smart Life icon."
+          }
+          JSON
+
+      - name: Publish updater APK and feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.5.3 build 6035' || true
+          git pull --rebase origin main
+          git push origin main
