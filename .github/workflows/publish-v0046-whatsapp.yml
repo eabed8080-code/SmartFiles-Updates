@@ -1,0 +1,56 @@
+name: Publish Smart Life v0.4.6 WhatsApp Sharing
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-v0046-whatsapp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Smart Life v0.4.6 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-89f4-81f7-b837-c7efdcfd051d/raw?se=2026-09-04T00%3A26%3A20Z&sp=r&sv=2026-02-06&sr=b&scid=0e2727c6-a0b1-5655-9dda-a7fa86029101&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-03T19%3A35%3A13Z&ske=2026-09-04T19%3A35%3A13Z&sks=b&skv=2026-02-06&sig=%2BwzR/cLqMS40VvawbVdynMXE417PiXK8CB44y4o5/Lk%3D' -o /tmp/smart-life-v0046.zip
+          rm -rf /tmp/smart-life-v0046
+          mkdir -p /tmp/smart-life-v0046
+          unzip -q /tmp/smart-life-v0046.zip -d /tmp/smart-life-v0046
+          test -f /tmp/smart-life-v0046/Smart-Life-Flutter-Test.apk
+          test "$(stat -c%s /tmp/smart-life-v0046/Smart-Life-Flutter-Test.apk)" -lt 100000000
+          cp /tmp/smart-life-v0046/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          ls -lh Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.4.6",
+            "versionCode": 2028,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "WhatsApp sharing: Smart Life now adds a direct WhatsApp action to file search results so you can open WhatsApp with the selected file ready to send. Regular Share remains available. Supports WhatsApp and WhatsApp Business when installed."
+          }
+          JSON
+
+      - name: Publish updater APK and feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.4.6 WhatsApp sharing' || true
+          git pull --rebase origin main
+          git push origin main
