@@ -1,4 +1,4 @@
-name: Publish Smart Life v0.5.6 Three Dot File Options
+name: Publish Smart Life v0.5.7 Batch Update
 
 on:
   push:
@@ -21,17 +21,17 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Download signed Smart Life v0.5.6 APK artifact
+      - name: Download signed Smart Life v0.5.7 APK artifact
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-ffa0-81f7-8925-0ec116767146/raw?se=2026-09-04T21%3A10%3A31Z&sp=r&sv=2026-02-06&sr=b&scid=bc9aa6bf-df3e-58ae-9eee-886870aca93c&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T20%3A28%3A44Z&ske=2026-09-05T20%3A28%3A44Z&sks=b&skv=2026-02-06&sig=p6oB1RlSBfvrSIqQ0Qq8ghYCNCJf0HvS4rNf5J47bvQ%3D' -o /tmp/smart-life-v0056.zip
-          test "$(sha256sum /tmp/smart-life-v0056.zip | awk '{print $1}')" = '4dc30d8d75c62648466efd15655e30b655510385b5c626f8201696f1482bac55'
-          rm -rf /tmp/smart-life-v0056
-          mkdir -p /tmp/smart-life-v0056
-          unzip -q /tmp/smart-life-v0056.zip -d /tmp/smart-life-v0056
-          test -f /tmp/smart-life-v0056/Smart-Life-Flutter-Test.apk
-          cp /tmp/smart-life-v0056/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-536c-81f7-a538-3935624711a7/raw?se=2026-09-04T22%3A52%3A52Z&sp=r&sv=2026-02-06&sr=b&scid=99e2fdae-f5fb-5019-9d80-bc1245bcf6e7&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T21%3A35%3A41Z&ske=2026-09-05T21%3A35%3A41Z&sks=b&skv=2026-02-06&sig=bzeVuim0U5u0qhtmptqdcKlOVY3IyPgVwaT3IkYXd5U%3D' -o /tmp/smart-life-v0057.zip
+          test "$(sha256sum /tmp/smart-life-v0057.zip | awk '{print $1}')" = '78ac9a6d86884a93f991132caa39aed9681c80a2f70a1ace9fe8aa9e35e4767b'
+          rm -rf /tmp/smart-life-v0057
+          mkdir -p /tmp/smart-life-v0057
+          unzip -q /tmp/smart-life-v0057.zip -d /tmp/smart-life-v0057
+          test -f /tmp/smart-life-v0057/Smart-Life-Flutter-Test.apk
+          cp /tmp/smart-life-v0057/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
           test "$(stat -c%s Smart-Life-Flutter-Test.apk)" -gt 1000000
 
       - name: Verify signed release metadata
@@ -42,8 +42,9 @@ jobs:
           "$TOOLS/apksigner" verify --verbose Smart-Life-Flutter-Test.apk
           BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
           echo "$BADGING"
-          echo "$BADGING" | grep -q "versionCode='6038'"
-          echo "$BADGING" | grep -q "versionName='0.5.6'"
+          echo "$BADGING" | grep -q "versionCode='6039'"
+          echo "$BADGING" | grep -q "versionName='0.5.7'"
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '66a70842094d60a4526a29577e1eabee815f94896f8096a954b8faddac7c8edb'
           sha256sum Smart-Life-Flutter-Test.apk
           ls -lh Smart-Life-Flutter-Test.apk
 
@@ -53,10 +54,10 @@ jobs:
           set -euo pipefail
           cat > flutter-latest.json <<'JSON'
           {
-            "versionName": "0.5.6",
-            "versionCode": 6038,
+            "versionName": "0.5.7",
+            "versionCode": 6039,
             "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-            "releaseNotes": "Converter stays as the normal quick unit converter. Find > File Types/Search results now use a three-dot File Options menu instead of the row of action buttons, with Open, Add to Category, Rename, Share, Convert when supported, and Details."
+            "releaseNotes": "Find removes the Internal Storage Usage card; ZIP and APK now show counts only. File Options no longer includes Open because tapping the file opens it. Long-press enables multi-select with batch Share and Add to Category. File-name Voice Search is available from the microphone. Settings > About shows the live installed version directly without a popup. PDF, Word, Excel and PowerPoint use refreshed 3D-style badges, and the Smart Life launcher icon is redesigned."
           }
           JSON
 
@@ -67,6 +68,6 @@ jobs:
           git config user.name 'Smart Life Update Bot'
           git config user.email 'actions@users.noreply.github.com'
           git add Smart-Life-Flutter-Test.apk flutter-latest.json
-          git commit -m 'Publish Smart Life v0.5.6 build 6038' || true
+          git commit -m 'Publish Smart Life v0.5.7 build 6039' || true
           git pull --rebase origin main
           git push origin main
