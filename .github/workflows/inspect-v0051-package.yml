@@ -1,0 +1,57 @@
+name: Inspect Smart Life v0.5.1 package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/inspect-v0051-package.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Recover package URL and inspect archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          PUBLISHER='.github/workflows/publish-v0051-smart-groups.yml'
+          test -f "$PUBLISHER"
+          URL=$(grep -oE 'https://sdmnt[^[:space:]'"'"']+' "$PUBLISHER" | head -n1)
+          test -n "$URL"
+          curl -fL "$URL" -o /tmp/v0051-package.zip
+          rm -rf /tmp/v0051-package && mkdir -p /tmp/v0051-package
+          unzip -q /tmp/v0051-package.zip -d /tmp/v0051-package
+          {
+            echo 'Smart Life v0.5.1 package contents'
+            echo '=================================='
+            echo
+            unzip -l /tmp/v0051-package.zip
+            echo
+            echo 'Extracted files:'
+            find /tmp/v0051-package -type f -printf '%P\t%s bytes\n' | sort
+          } > v0051-package-listing.txt
+
+          rm -rf recovered-v0051-package
+          if find /tmp/v0051-package -type f \( -name '*.dart' -o -name 'pubspec.yaml' -o -name 'pubspec.lock' -o -path '*/android/*' \) | grep -q .; then
+            mkdir -p recovered-v0051-package
+            cp -a /tmp/v0051-package/. recovered-v0051-package/
+          fi
+
+      - name: Commit inspection result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Inspection Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add v0051-package-listing.txt
+          if [ -d recovered-v0051-package ]; then git add recovered-v0051-package; fi
+          git commit -m 'Inspect Smart Life v0.5.1 package contents' || true
+          git pull --rebase origin main
+          git push origin main
