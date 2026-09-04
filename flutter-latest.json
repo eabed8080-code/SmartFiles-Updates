@@ -1,6 +1,6 @@
 {
-  "versionName": "0.5.1",
-  "versionCode": 6033,
+  "versionName": "0.5.2",
+  "versionCode": 6034,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "File Types now include Smart Groups for All, Today, Yesterday, This Week, Last Week, This Month, and Older. The date filter works with normal filename search and Smart Search content results."
+  "releaseNotes": "Photos now include Smart Media Cleanup with exact duplicate photos and videos, visually similar photos, potentially blurry photos, old screenshots, large photos, and large videos. Cleanup is review-first: nothing is preselected or deleted automatically, and Android asks for confirmation before selected media is moved to trash."
 }
