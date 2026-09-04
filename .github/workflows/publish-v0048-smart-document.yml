@@ -1,0 +1,56 @@
+name: Publish Smart Life v0.4.8 Smart Document
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-v0048-smart-document.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download signed Smart Life v0.4.8 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-39ac-81f5-8760-32f7a8a45483/raw?se=2026-09-04T04%3A38%3A54Z&sp=r&sv=2026-02-06&sr=b&scid=bfdbde93-9f94-5c9d-a920-b6cef07e4652&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T01%3A43%3A14Z&ske=2026-09-05T01%3A43%3A14Z&sks=b&skv=2026-02-06&sig=IgeNukNqyGwci0OfAot6TFMjgATQR/CtrnbNkKPDRJ0%3D' -o /tmp/smart-life-v0048.zip
+          rm -rf /tmp/smart-life-v0048
+          mkdir -p /tmp/smart-life-v0048
+          unzip -q /tmp/smart-life-v0048.zip -d /tmp/smart-life-v0048
+          test -f /tmp/smart-life-v0048/Smart-Life-Flutter-Test.apk
+          test "$(stat -c%s /tmp/smart-life-v0048/Smart-Life-Flutter-Test.apk)" -lt 100000000
+          cp /tmp/smart-life-v0048/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          ls -lh Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.4.8",
+            "versionCode": 6030,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Smart Document is now inside Documents. It adds My Categories with Personal, Business, School, Financial, Contracts and Other, lets you add/rename/delete categories, assign files without moving them in Android, add search results to a category, and save new scans directly to a category."
+          }
+          JSON
+
+      - name: Publish updater APK and feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.4.8 build 6030' || true
+          git pull --rebase origin main
+          git push origin main
