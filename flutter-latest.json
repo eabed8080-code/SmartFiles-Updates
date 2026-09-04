@@ -1,6 +1,6 @@
 {
-  "versionName": "0.5.3",
-  "versionCode": 6035,
+  "versionName": "0.5.4",
+  "versionCode": 6036,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Media Cleanup review now opens photos and videos before deletion: tap an item to preview it, use the checkbox to select it for trash, and long-press for quick selection. Smart Life also replaces the default Flutter launcher icon with a custom 3D Smart Life icon."
+  "releaseNotes": "Converter rebuilt with Smart Convert, organized Documents and Media sections, and the existing Quick Converters kept in place. Adds local file conversions including Office to PDF, PDF to Word, Images to PDF, PDF to Images, and Video to Audio."
 }
