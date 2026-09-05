@@ -10,7 +10,6 @@ on:
 
 permissions:
   contents: write
-  actions: read
 
 jobs:
   publish:
@@ -24,18 +23,13 @@ jobs:
       - name: Download and verify signed v0.7.3 artifact
         shell: bash
         env:
-          GH_TOKEN: ${{ github.token }}
+          SOURCE_URL: 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-917c-81f5-8ba4-6de8841c26fa/raw?se=2026-09-05T22%3A24%3A08Z&sp=r&sv=2026-02-06&sr=b&scid=f9d9d770-5a29-5f89-a0be-9d9beed30c87&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A20%3A13Z&ske=2026-09-05T23%3A20%3A13Z&sks=b&skv=2026-02-06&sig=9j%2BBfiPNUQoBPbI8W46yOZ4/%2B4EdT9iose0BJlEctB4%3D'
           EXPECTED_SHA256: 'a4ac9b039337f7a662a9c90a06c43806ce97710ea8297cf6ada4cb437e283c1a'
         run: |
           set -euo pipefail
           rm -rf incoming-v073
           mkdir incoming-v073
-          curl -fL --retry 3 --retry-delay 2 \
-            -H "Authorization: Bearer $GH_TOKEN" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            'https://api.github.com/repos/eabed8080-code/SmartFiles/actions/artifacts/9977749477/zip' \
-            -o incoming-v073/artifact.zip
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v073/artifact.zip
           unzip -q incoming-v073/artifact.zip -d incoming-v073/unpacked
           APK="$(find incoming-v073/unpacked -type f -name 'Smart-Life-v0.7.3-PDF-Staged-Index.apk' -print -quit)"
           test -n "$APK"
