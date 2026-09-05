@@ -1,6 +1,6 @@
 {
-  "versionName": "0.6.5",
-  "versionCode": 6047,
+  "versionName": "0.6.6",
+  "versionCode": 6048,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "New fast Smart Life opening motion: the real app starts immediately underneath a short 460 ms visual layer with the Smart Life mark and file-type badges, then fades directly into Find. No video asset and no artificial startup wait were added. Based on the stable v0.6.4 runtime."
+  "releaseNotes": "Opening motion visibility update: animation increased to 1.8 seconds, file-type badges enlarged from 52 to 68 pixels, the center Smart Life mark enlarged, badge spread widened, and fade delayed so the motion is clearly visible. The real Find page still starts underneath the visual layer with no artificial startup wait."
 }
