@@ -1,6 +1,6 @@
 {
-  "versionName": "0.6.4",
-  "versionCode": 6046,
+  "versionName": "0.6.5",
+  "versionCode": 6047,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Update refresh fix. Check for Update and APK downloads now bypass GitHub/CDN cache so Smart Life always sees the newest published version. Based on the stable v0.6.3 runtime; Quick Transfer phone changes remain disabled."
+  "releaseNotes": "New fast Smart Life opening motion: the real app starts immediately underneath a short 460 ms visual layer with the Smart Life mark and file-type badges, then fades directly into Find. No video asset and no artificial startup wait were added. Based on the stable v0.6.4 runtime."
 }
