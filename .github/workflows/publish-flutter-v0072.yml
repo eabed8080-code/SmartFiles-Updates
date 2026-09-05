@@ -1,0 +1,78 @@
+name: Publish Smart Life v0.7.2 OCR Engine Guard
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0072.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.7.2 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-7fb8-81f7-bcc6-fdfc96c87d2e/raw?se=2026-09-05T21%3A50%3A12Z&sp=r&sv=2026-02-06&sr=b&scid=6b50dd01-578c-50da-a2ac-e3c295be457d&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A20%3A14Z&ske=2026-09-05T23%3A20%3A14Z&sks=b&skv=2026-02-06&sig=gktpC/acMH0KnhTsqxYL5gJShT8jwrnBPaSeq%2BCnI/0%3D'
+          EXPECTED_SHA256: '0e573a62b71335b07905bb60fde2c03c56e692bb27a64d52b6364029abbed720'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v072
+          mkdir incoming-v072
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v072/artifact.zip
+          unzip -q incoming-v072/artifact.zip -d incoming-v072/unpacked
+          APK="$(find incoming-v072/unpacked -type f -name 'Smart-Life-v0.7.2-OCR-Engine-Guard.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Write v0.7.2 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.7.2",
+            "versionCode": 6054,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Smart Search OCR startup fix: the ML Kit text recognizer is now created safely on Android's main thread before indexing enters its worker thread. OCR-engine initialization and shutdown are guarded so an internal Android/ML Kit null-reference error cannot crash the first batch or expose an obfuscated system message. Index progress now refreshes from the persisted database after every 20-file batch instead of assuming a full batch completed. If the OCR engine becomes unavailable, indexing pauses safely without marking pending files complete, and Resume retries them. Existing Smart Search Index Settings, persistent checkpoints, document-image filtering, PDF/Screenshot/scan priority, voice search and opening motion are preserved."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.7.2 (6054)'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"versionName": "0.7.2"' flutter-latest.json
+          grep -q '"versionCode": 6054' flutter-latest.json
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '0e573a62b71335b07905bb60fde2c03c56e692bb27a64d52b6364029abbed720'
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.7.2"' /tmp/published-latest.json
+          grep -q '"versionCode": 6054' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '0e573a62b71335b07905bb60fde2c03c56e692bb27a64d52b6364029abbed720'
+          echo 'Smart Life v0.7.2 update channel verified remotely.'
