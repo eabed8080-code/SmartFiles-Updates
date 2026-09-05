@@ -1,6 +1,6 @@
 {
-  "versionName": "0.6.3",
-  "versionCode": 6045,
+  "versionName": "0.6.4",
+  "versionCode": 6046,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Stable restore based on the known-good Smart Life v0.6.0 runtime. This release restores normal app startup after the Quick Transfer startup issue. Quick Transfer phone changes are not enabled in this stable build."
+  "releaseNotes": "Update refresh fix. Check for Update and APK downloads now bypass GitHub/CDN cache so Smart Life always sees the newest published version. Based on the stable v0.6.3 runtime; Quick Transfer phone changes remain disabled."
 }
