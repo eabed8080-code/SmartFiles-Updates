@@ -1,0 +1,78 @@
+name: Publish Smart Life v0.7.1 Smart Search Index Settings
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0071.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.7.1 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-050c-81fd-bc0b-87e33920a2aa/raw?se=2026-09-05T21%3A29%3A47Z&sp=r&sv=2026-02-06&sr=b&scid=9c7f9456-dc14-5831-9803-1f275d3ab527&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-05T21%3A23%3A09Z&ske=2026-09-06T21%3A23%3A09Z&sks=b&skv=2026-02-06&sig=Xpv4s3EJ2f63rPQgDYwRsIpUFe0tkJjhbwBHuDFDeg0%3D'
+          EXPECTED_SHA256: 'e5d9ac85cb6d20b7e129f43798a540dd6d6ccfd248980643e83ac3dd941690fb'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v071
+          mkdir incoming-v071
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v071/artifact.zip
+          unzip -q incoming-v071/artifact.zip -d incoming-v071/unpacked
+          APK="$(find incoming-v071/unpacked -type f -name 'Smart-Life-v0.7.1-Smart-Search-Index-Settings.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Write v0.7.1 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.7.1",
+            "versionCode": 6053,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Smart Search Index is now managed from Settings with exact Indexed X of Y progress, Ready/Indexing/Paused status, last-updated time, Resume Indexing and a confirmed Rebuild Index action. Completed Image/PDF file versions are persisted in the local index, so interrupted indexing resumes from the files still pending instead of starting over. Find now searches the saved index immediately and no longer owns or waits for the OCR indexing process. Existing document-image filtering, Screenshot/scan/PDF priority, voice search and opening motion are preserved."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.7.1 (6053)'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"versionName": "0.7.1"' flutter-latest.json
+          grep -q '"versionCode": 6053' flutter-latest.json
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = 'e5d9ac85cb6d20b7e129f43798a540dd6d6ccfd248980643e83ac3dd941690fb'
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.7.1"' /tmp/published-latest.json
+          grep -q '"versionCode": 6053' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = 'e5d9ac85cb6d20b7e129f43798a540dd6d6ccfd248980643e83ac3dd941690fb'
+          echo 'Smart Life v0.7.1 update channel verified remotely.'
