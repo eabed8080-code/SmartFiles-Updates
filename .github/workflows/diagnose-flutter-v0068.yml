@@ -58,12 +58,11 @@ jobs:
             fi
           done
 
-          for f in e61.java d61.java km1.java km0.java; do
+          for f in om1.java nm1.java tm3.java ej3.java os1.java su0.java tu0.java uu0.java e61.java d61.java km1.java km0.java; do
             src="/tmp/v068-decompiled/sources/p000/$f"
             [ -f "$src" ] && cp "$src" diagnostics/v068-smart-search/sources/selected/ || true
           done
 
-          # Copy any obfuscated classes that directly reference Smart Search/OCR strings/APIs.
           grep -RlE 'indexSmartContent|searchSmartContent|content_index|TextRecognition|getClient\(|InputImage|smart_content|WhatsApp|Screenshot|screen.?shot' \
             /tmp/v068-decompiled/sources/p000 2>/dev/null | head -100 > /tmp/matches.txt || true
           while IFS= read -r src; do
@@ -94,6 +93,6 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add diagnostics/v068-smart-search
           git diff --cached --quiet && exit 0
-          git commit -m 'Expand v0.6.8 Smart Search implementation diagnostics'
+          git commit -m 'Capture Smart Search worker classes from v0.6.8'
           git pull --rebase origin main
           git push origin HEAD:main
