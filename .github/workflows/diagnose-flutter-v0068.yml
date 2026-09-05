@@ -1,0 +1,107 @@
+name: Diagnose Smart Life v0.6.8 Smart Search
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/diagnose-flutter-v0068.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify current v0.6.8 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f Smart-Life-Flutter-Test.apk
+          sha256sum Smart-Life-Flutter-Test.apk | tee /tmp/apk-sha.txt
+          grep -q '^a8f2ebd9ce602af4fe0f4cc8518f01dc80f6686ce1d8bcd75f0616e5cec8778b ' /tmp/apk-sha.txt
+
+      - name: Download JADX
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --retry-delay 2 \
+            https://github.com/skylot/jadx/releases/download/v1.5.2/jadx-1.5.2.zip \
+            -o /tmp/jadx.zip
+          rm -rf /tmp/jadx
+          mkdir -p /tmp/jadx
+          unzip -q /tmp/jadx.zip -d /tmp/jadx
+          /tmp/jadx/bin/jadx --version
+
+      - name: Decompile current APK native bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/v068-decompiled
+          /tmp/jadx/bin/jadx --deobf --show-bad-code --no-res \
+            -d /tmp/v068-decompiled Smart-Life-Flutter-Test.apk
+
+      - name: Collect Smart Search implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf diagnostics/v068-smart-search
+          mkdir -p diagnostics/v068-smart-search/sources
+
+          if [ -d /tmp/v068-decompiled/sources/com/example/smart_life ]; then
+            cp -R /tmp/v068-decompiled/sources/com/example/smart_life \
+              diagnostics/v068-smart-search/sources/com_example_smart_life
+          fi
+          if [ -d /tmp/v068-decompiled/sources/com/filesearch/app ]; then
+            cp -R /tmp/v068-decompiled/sources/com/filesearch/app \
+              diagnostics/v068-smart-search/sources/com_filesearch_app
+          fi
+
+          {
+            echo 'Smart Life v0.6.8 Smart Search diagnostic report'
+            echo '================================================'
+            echo
+            echo 'APK SHA256:'
+            cat /tmp/apk-sha.txt
+            echo
+            echo 'Relevant class files:'
+            find /tmp/v068-decompiled/sources -type f \
+              | grep -E '/(com/example/smart_life|com/filesearch/app)/' \
+              | sort || true
+            echo
+            echo 'OCR / content-index references:'
+            grep -RInE \
+              'indexSmartContent|searchSmartContent|content_index|TextRecognition|TextRecognizer|InputImage|ocr|OCR|recognize|pdf|PDF|WhatsApp|Screenshot|screen.?shot|image/' \
+              /tmp/v068-decompiled/sources/com/example/smart_life \
+              /tmp/v068-decompiled/sources/com/filesearch/app 2>/dev/null || true
+            echo
+            echo 'ML Kit OCR classes present anywhere in DEX decompile:'
+            find /tmp/v068-decompiled/sources -type f \
+              | grep -E 'mlkit.*text|TextRecognizer|TextRecognition' \
+              | head -200 || true
+          } > diagnostics/v068-smart-search/report.txt
+
+          # Keep diagnostics compact and text-only.
+          find diagnostics/v068-smart-search -type f -size +500k -delete
+
+      - name: Publish diagnostic sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add diagnostics/v068-smart-search
+          if git diff --cached --quiet; then
+            echo 'No diagnostic changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Capture v0.6.8 Smart Search implementation diagnostics'
+          git pull --rebase origin main
+          git push origin HEAD:main
