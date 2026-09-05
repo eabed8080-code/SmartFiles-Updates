@@ -1,0 +1,5 @@
+{
+  "versionName": "0.5.0",
+  "setupUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-PC-Receiver-Setup.exe",
+  "releaseNotes": "Quick Transfer PC Receiver runs in the background, starts with Windows, keeps phone-bound files in Pending, supports drag & drop, and stores received phone files in Smart Life Inbox."
+}
