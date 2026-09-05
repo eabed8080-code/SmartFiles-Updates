@@ -20,8 +20,13 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Inspect APK archive and opening motion clues
+      - name: Inspect APK launcher class and signing readiness
         shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         run: |
           set -euo pipefail
           APK='Smart-Life-Flutter-Test.apk'
@@ -32,32 +37,36 @@ jobs:
           TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
 
           {
-            echo 'Current Smart Life APK deep inspection'
-            echo '======================================'
+            echo 'Smart Life launcher / signing inspection'
+            echo '========================================'
             echo
-            echo "APK size: $(stat -c%s "$APK") bytes"
-            echo "SHA256: $(sha256sum "$APK" | awk '{print $1}')"
+            echo "APK SHA256: $(sha256sum "$APK" | awk '{print $1}')"
+            echo "Badging: $("$TOOLS/aapt" dump badging "$APK" | head -n 1)"
             echo
-            echo 'Package badging:'
-            "$TOOLS/aapt" dump badging "$APK" | head -n 20 || true
+            echo 'Signing secret readiness (values are NOT printed):'
+            for v in KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_PASSWORD KEY_ALIAS; do
+              if [ -n "${!v:-}" ]; then echo "$v=SET"; else echo "$v=UNSET"; fi
+            done
             echo
-            echo 'Manifest activity/service clues:'
-            "$TOOLS/aapt" dump xmltree "$APK" AndroidManifest.xml | grep -E 'E: (activity|service)|A: android:name|A: android:theme|A: android:exported' | head -n 220 || true
+            echo 'MainActivity dex declaration:'
+            found=0
+            for dex in /tmp/smartlife-apk/classes*.dex; do
+              if "$TOOLS/dexdump" -d "$dex" 2>/dev/null | grep -q 'Class descriptor.*Lcom/example/smart_life/MainActivity;'; then
+                found=1
+                "$TOOLS/dexdump" -d "$dex" 2>/dev/null | awk '
+                  /Class descriptor.*Lcom\/example\/smart_life\/MainActivity;/ {p=1}
+                  p {print}
+                  p && /source_file_idx/ {exit}
+                ' | head -n 450
+                echo "MainActivityDex=$(basename "$dex")"
+                break
+              fi
+            done
+            echo "MainActivityFound=$found"
             echo
-            echo 'Flutter asset names:'
-            find /tmp/smartlife-apk/assets -maxdepth 4 -type f 2>/dev/null | sed 's#^/tmp/smartlife-apk/##' | grep -Ei 'flutter|asset|manifest|kernel|snapshot|icon|splash|opening' | head -n 300 || true
-            echo
-            echo 'DEX strings relevant to startup/opening motion:'
-            find /tmp/smartlife-apk -maxdepth 1 -type f -name 'classes*.dex' -print0 | xargs -0 -r strings -a | grep -Ei 'Smart Life|opening|motion|splash|PDF|DOC|IMG|VID|ZIP|460|Duration|Animation' | head -n 500 || true
-            echo
-            echo 'Flutter AOT strings relevant to opening motion:'
-            if [ -f /tmp/smartlife-apk/lib/arm64-v8a/libapp.so ]; then
-              strings -a /tmp/smartlife-apk/lib/arm64-v8a/libapp.so | grep -Ei 'Smart Life|opening|motion|splash|PDF|DOC|IMG|VID|ZIP|460|Duration|Animation' | head -n 800 || true
-            fi
-            echo
-            echo 'Native library list:'
-            find /tmp/smartlife-apk/lib -maxdepth 2 -type f 2>/dev/null | sed 's#^/tmp/smartlife-apk/##' | sort || true
-          } > current-apk-deep-inspection.txt
+            echo 'Relevant class names in DEX:'
+            find /tmp/smartlife-apk -maxdepth 1 -type f -name 'classes*.dex' -print0 | xargs -0 -r strings -a | grep -E 'com/example/smart_life/(MainActivity|PcShareActivity|TaskReminderReceiver)|Opening|Splash' | sort -u | head -n 200 || true
+          } > current-launcher-inspection.txt
 
       - name: Commit inspection result
         shell: bash
@@ -65,7 +74,7 @@ jobs:
           set -euo pipefail
           git config user.name 'Smart Life Inspection Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add current-apk-deep-inspection.txt
-          git commit -m 'Inspect Smart Life opening motion internals' || true
+          git add current-launcher-inspection.txt
+          git commit -m 'Inspect Smart Life launcher and signing readiness' || true
           git pull --rebase origin main
           git push origin main
