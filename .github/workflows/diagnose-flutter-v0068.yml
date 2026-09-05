@@ -43,10 +43,11 @@ jobs:
       - name: Decompile current APK native bridge
         shell: bash
         run: |
-          set -euo pipefail
+          set -u
           rm -rf /tmp/v068-decompiled
           /tmp/jadx/bin/jadx --deobf --show-bad-code --no-res \
-            -d /tmp/v068-decompiled Smart-Life-Flutter-Test.apk
+            -d /tmp/v068-decompiled Smart-Life-Flutter-Test.apk || true
+          test -d /tmp/v068-decompiled/sources
 
       - name: Collect Smart Search implementation
         shell: bash
