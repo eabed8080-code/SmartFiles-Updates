@@ -1,6 +1,6 @@
 {
-  "versionName": "0.7.2",
-  "versionCode": 6054,
+  "versionName": "0.7.3",
+  "versionCode": 6055,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Search OCR startup fix: the ML Kit text recognizer is now created safely on Android's main thread before indexing enters its worker thread. OCR-engine initialization and shutdown are guarded so an internal Android/ML Kit null-reference error cannot crash the first batch or expose an obfuscated system message. Index progress now refreshes from the persisted database after every 20-file batch instead of assuming a full batch completed. If the OCR engine becomes unavailable, indexing pauses safely without marking pending files complete, and Resume retries them. Existing Smart Search Index Settings, persistent checkpoints, document-image filtering, PDF/Screenshot/scan priority, voice search and opening motion are preserved."
+  "releaseNotes": "Smart Search is temporarily narrowed to PDF only so the large image library cannot interfere with indexing. PDF indexing now runs in two stages: Stage 1 reads searchable PDF text without OCR in batches of 10; Stage 2 OCRs only scanned/image PDFs one at a time to reduce memory pressure. Progress is persisted and shown as Indexed X of Y PDFs. The content index is rebuilt cleanly for this PDF-only phase, and images are intentionally not indexed while PDF indexing is validated. Existing Smart Search Index Settings, Resume/Rebuild controls, voice search and opening motion are preserved."
 }
