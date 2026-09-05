@@ -24,6 +24,7 @@ public class SmartFilesActivity extends Activity {
     /* renamed from: a */
     public static final /* synthetic */ int f1431a = 0;
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* renamed from: a */
     public static String m838a(String str, Throwable th) {
         StackTraceElement stackTraceElement;
@@ -58,12 +59,15 @@ public class SmartFilesActivity extends Activity {
         return "Google document scanner " + str + " failed: " + message + str2;
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* renamed from: b */
     public final void m839b(String str) {
         setResult(1, new Intent().putExtra("smart_life_scan_error", str));
         finish();
     }
 
+    /* JADX DEBUG: Another duplicated slice has different insns count: {[GOTO]}, finally: {[GOTO, INVOKE, MOVE_EXCEPTION, INVOKE, MOVE_EXCEPTION] complete} */
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.app.Activity
     public final void onActivityResult(int i, int i2, Intent intent) {
         super.onActivityResult(i, i2, intent);
@@ -119,6 +123,7 @@ public class SmartFilesActivity extends Activity {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.app.Activity
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);

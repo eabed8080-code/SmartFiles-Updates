@@ -4,19 +4,76 @@ Smart Life v0.6.8 Smart Search diagnostic report
 APK SHA256:
 a8f2ebd9ce602af4fe0f4cc8518f01dc80f6686ce1d8bcd75f0616e5cec8778b  Smart-Life-Flutter-Test.apk
 
-Relevant class files:
-/tmp/v068-decompiled/sources/com/example/smart_life/MainActivity.java
-/tmp/v068-decompiled/sources/com/example/smart_life/PcShareActivity.java
-/tmp/v068-decompiled/sources/com/example/smart_life/SmartLifeScannerActivity.java
-/tmp/v068-decompiled/sources/com/example/smart_life/TaskBootReceiver.java
-/tmp/v068-decompiled/sources/com/example/smart_life/TaskReminderReceiver.java
-/tmp/v068-decompiled/sources/com/filesearch/app/SmartFilesActivity.java
+Direct matching source files:
+/tmp/v068-decompiled/sources/p000/om1.java
+/tmp/v068-decompiled/sources/p000/tm3.java
+/tmp/v068-decompiled/sources/p000/sm1.java
+/tmp/v068-decompiled/sources/p000/C0811vh.java
+/tmp/v068-decompiled/sources/p000/nm1.java
 
-OCR / content-index references:
-/tmp/v068-decompiled/sources/com/example/smart_life/MainActivity.java:641:                if (file.isFile() && (za0.m5409a(file).equalsIgnoreCase("pdf") || za0.m5409a(file).equalsIgnoreCase("jpg") || za0.m5409a(file).equalsIgnoreCase("jpeg"))) {
-
-ML Kit OCR classes present anywhere in DEX decompile:
-/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java
-/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/internal/TextRegistrar.java
-/tmp/v068-decompiled/sources/com/google/android/gms/dynamite/descriptors/com/google/mlkit/dynamite/text/common/ModuleDescriptor.java
-/tmp/v068-decompiled/sources/com/google/android/gms/dynamite/descriptors/com/google/mlkit/dynamite/text/latin/ModuleDescriptor.java
+All Smart Search / OCR references:
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java:16:public class BundledTextRecognizerCreator extends bg2 {
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java:18:    public BundledTextRecognizerCreator() {
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java:19:        super("com.google.mlkit.vision.text.aidls.ITextRecognizerCreator");
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java:23:    /* JADX DEBUG: Method merged with bridge method: newTextRecognizer(Lol0;)Lzf2; */
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java:25:    public u32 newTextRecognizer(ol0 ol0Var) throws RemoteException {
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java:26:        throw new RemoteException("Please use newTextRecognizerWithOptions instead.");
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java:30:    /* JADX DEBUG: Method merged with bridge method: newTextRecognizerWithOptions(Lol0;Lhg2;)Lzf2; */
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java:32:    public u32 newTextRecognizerWithOptions(ol0 ol0Var, hg2 hg2Var) {
+/tmp/v068-decompiled/sources/com/example/smart_life/MainActivity.java:1036:            java.lang.String r2 = "indexSmartContent"
+/tmp/v068-decompiled/sources/com/example/smart_life/MainActivity.java:1370:            java.lang.String r2 = "searchSmartContent"
+/tmp/v068-decompiled/sources/com/example/smart_life/MainActivity.java:1893:            java.lang.String r2 = "shareToWhatsApp"
+/tmp/v068-decompiled/sources/com/example/smart_life/MainActivity.java:2055:            java.lang.String r1 = "WhatsApp is not installed on this phone."
+/tmp/v068-decompiled/sources/com/example/smart_life/MainActivity.java:2079:            java.lang.String r0 = "Could not share this file to WhatsApp."
+/tmp/v068-decompiled/sources/p000/b11.java:598:                    str = "image/jpeg";
+/tmp/v068-decompiled/sources/p000/b11.java:645:                    str = "image/png";
+/tmp/v068-decompiled/sources/p000/j83.java:24:            IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.google.android.gms.vision.text.internal.client.INativeTextRecognizer");
+/tmp/v068-decompiled/sources/p000/j83.java:25:            h53Var = iInterfaceQueryLocalInterface instanceof h53 ? (h53) iInterfaceQueryLocalInterface : new h53(strongBinder, "com.google.android.gms.vision.text.internal.client.INativeTextRecognizer", 2);
+/tmp/v068-decompiled/sources/p000/qb2.java:46:        return "VkpTextRecognizerOptions{configLabel=" + this.f8052a + ", modelDir=" + this.f8053b + ", languageHint=" + this.f8054c + ", enableLowLatencyInBackground=" + this.f8055d + "}";
+/tmp/v068-decompiled/sources/p000/p04.java:22:            IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.google.mlkit.vision.text.aidls.ITextRecognizer");
+/tmp/v068-decompiled/sources/p000/p04.java:43:            IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.google.mlkit.vision.text.aidls.ITextRecognizer");
+/tmp/v068-decompiled/sources/p000/om1.java:55:        if (lowerCase.contains("screenshot")) {
+/tmp/v068-decompiled/sources/p000/om1.java:716:        writableDatabase.delete("content_index", "extension NOT IN ('pdf','jpg','jpeg','png','webp','heic','heif')", null);
+/tmp/v068-decompiled/sources/p000/om1.java:760:                            Cursor cursorQuery = writableDatabase.query("content_index", new String[]{"modified_ms", "size_bytes"}, "path=?", new String[]{strM3404l}, null, null, null, "1");
+/tmp/v068-decompiled/sources/p000/om1.java:795:                                            writableDatabase.insertWithOnConflict("content_index", null, contentValues, 5);
+/tmp/v068-decompiled/sources/p000/om1.java:824:                        writableDatabase.delete("content_index", "path=?", new String[]{strM3404l});
+/tmp/v068-decompiled/sources/p000/om1.java:879:        Cursor cursorQuery = writableDatabase.query("content_index", new String[]{"extension", "content", "suggestion"}, "path=?", new String[]{str}, null, null, null, "1");
+/tmp/v068-decompiled/sources/p000/om1.java:889:                writableDatabase.insertWithOnConflict("content_index", null, contentValues, 5);
+/tmp/v068-decompiled/sources/p000/om1.java:890:                writableDatabase.delete("content_index", "path=?", new String[]{str});
+/tmp/v068-decompiled/sources/p000/om1.java:937:        Cursor cursorQuery = new nm1(context.getApplicationContext()).getReadableDatabase().query("content_index", new String[]{"path"}, sb.toString(), (String[]) arrayList2.toArray(new String[0]), null, null, "modified_ms DESC", Integer.toString(5000));
+/tmp/v068-decompiled/sources/p000/om1.java:967:                    Cursor cursorQuery = new nm1(context.getApplicationContext()).getReadableDatabase().query("content_index", new String[]{"modified_ms", "size_bytes", "suggestion"}, "path=?", new String[]{file.getAbsolutePath()}, null, null, null, "1");
+/tmp/v068-decompiled/sources/p000/om1.java:993:                            writableDatabase.insertWithOnConflict("content_index", null, contentValues, 5);
+/tmp/v068-decompiled/sources/p000/yr1.java:354:            IBinder iBinderM1749b = g50.m1743c(context, g50.f3112b, "com.google.android.gms.vision.dynamite").m1749b("com.google.android.gms.vision.text.ChimeraNativeTextRecognizerCreator");
+/tmp/v068-decompiled/sources/p000/yr1.java:359:                IInterface iInterfaceQueryLocalInterface = iBinderM1749b.queryLocalInterface("com.google.android.gms.vision.text.internal.client.INativeTextRecognizerCreator");
+/tmp/v068-decompiled/sources/p000/yr1.java:360:                j83Var = iInterfaceQueryLocalInterface instanceof je3 ? (je3) iInterfaceQueryLocalInterface : new j83(iBinderM1749b, "com.google.android.gms.vision.text.internal.client.INativeTextRecognizerCreator", 2);
+/tmp/v068-decompiled/sources/p000/jx0.java:66:                return "image/jpeg";
+/tmp/v068-decompiled/sources/p000/tm3.java:41:                return bj3.m508b(new nx0(3, "InputImage width and height should be at least 32!"));
+/tmp/v068-decompiled/sources/p000/u32.java:43:        super("com.google.mlkit.vision.text.aidls.ITextRecognizer");
+/tmp/v068-decompiled/sources/p000/rc0.java:147:                IBinder iBinderM1749b = g50.m1743c(context, im3Var, str).m1749b("com.google.mlkit.vision.text.bundled.common.BundledTextRecognizerCreator");
+/tmp/v068-decompiled/sources/p000/rc0.java:150:                    IInterface iInterfaceQueryLocalInterface = iBinderM1749b.queryLocalInterface("com.google.mlkit.vision.text.aidls.ITextRecognizerCreator");
+/tmp/v068-decompiled/sources/p000/rc0.java:151:                    p04Var = iInterfaceQueryLocalInterface instanceof r04 ? (r04) iInterfaceQueryLocalInterface : new p04(iBinderM1749b, "com.google.mlkit.vision.text.aidls.ITextRecognizerCreator", 2);
+/tmp/v068-decompiled/sources/p000/rc0.java:160:                IBinder iBinderM1749b2 = g50.m1743c(context, qx0Var, str).m1749b("com.google.android.gms.vision.text.mlkit.TextRecognizerCreator");
+/tmp/v068-decompiled/sources/p000/rc0.java:163:                    IInterface iInterfaceQueryLocalInterface2 = iBinderM1749b2.queryLocalInterface("com.google.mlkit.vision.text.aidls.ITextRecognizerCreator");
+/tmp/v068-decompiled/sources/p000/rc0.java:164:                    p04Var = iInterfaceQueryLocalInterface2 instanceof r04 ? (r04) iInterfaceQueryLocalInterface2 : new p04(iBinderM1749b2, "com.google.mlkit.vision.text.aidls.ITextRecognizerCreator", 2);
+/tmp/v068-decompiled/sources/p000/sm1.java:535:            if (cp1.m876f(lowerCase, "screenshot", false)) {
+/tmp/v068-decompiled/sources/p000/sm1.java:573:        p51[] p51VarArr = {new p51("duplicatePhotos", arrayListM4275f), new p51("oldScreenshots", arrayList10), new p51("largePhotos", arrayList2), new p51("duplicateVideos", arrayListM4275f2), new p51("largeVideos", arrayList4), new p51("duplicateSavingsBytes", Long.valueOf(jM4273c)), new p51("reviewCount", Integer.valueOf(linkedHashSet.size())), new p51("photoCount", Integer.valueOf(arrayList8.size())), new p51("videoCount", Integer.valueOf(arrayList9.size()))};
+/tmp/v068-decompiled/sources/p000/sm1.java:780:                if (!cp1.m876f(lowerCase, "screenshot", false) && qm1Var4.f8213g >= 640 && qm1Var4.f8214h >= 480 && rm1Var3.f8660c < 8.5d) {
+/tmp/v068-decompiled/sources/p000/C0811vh.java:312:        r9.f5695l.queueInputImage(r12);
+/tmp/v068-decompiled/sources/p000/nm1.java:13:        super(context, "smart_content_index.db", (SQLiteDatabase.CursorFactory) null, 2);
+/tmp/v068-decompiled/sources/p000/nm1.java:19:        sQLiteDatabase.execSQL("CREATE TABLE content_index (path TEXT PRIMARY KEY,modified_ms INTEGER NOT NULL,size_bytes INTEGER NOT NULL,extension TEXT NOT NULL,content TEXT NOT NULL,suggestion TEXT NOT NULL DEFAULT '')");
+/tmp/v068-decompiled/sources/p000/nm1.java:20:        sQLiteDatabase.execSQL("CREATE INDEX content_modified_idx ON content_index(modified_ms)");
+/tmp/v068-decompiled/sources/p000/nm1.java:26:        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS content_index");
+/tmp/v068-decompiled/sources/p000/o04.java:10:        super(iBinder, "com.google.mlkit.vision.text.aidls.ITextRecognizer", 2);
+/tmp/v068-decompiled/sources/p000/bg2.java:16:        IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.google.mlkit.vision.text.aidls.ITextRecognizerCreator");
+/tmp/v068-decompiled/sources/p000/bg2.java:27:            IInterface iInterfaceNewTextRecognizer = newTextRecognizer(ol0VarM5529f);
+/tmp/v068-decompiled/sources/p000/bg2.java:29:            if (iInterfaceNewTextRecognizer == null) {
+/tmp/v068-decompiled/sources/p000/bg2.java:33:            parcel2.writeStrongBinder(((j92) iInterfaceNewTextRecognizer).asBinder());
+/tmp/v068-decompiled/sources/p000/bg2.java:44:        IInterface iInterfaceNewTextRecognizerWithOptions = newTextRecognizerWithOptions(ol0VarM5529f2, hg2VarCreateFromParcel);
+/tmp/v068-decompiled/sources/p000/bg2.java:46:        if (iInterfaceNewTextRecognizerWithOptions == null) {
+/tmp/v068-decompiled/sources/p000/bg2.java:50:        parcel2.writeStrongBinder(((j92) iInterfaceNewTextRecognizerWithOptions).asBinder());
+/tmp/v068-decompiled/sources/p000/cg2.java:8:    zf2 newTextRecognizer(ol0 ol0Var);
+/tmp/v068-decompiled/sources/p000/cg2.java:10:    zf2 newTextRecognizerWithOptions(ol0 ol0Var, hg2 hg2Var);
+/tmp/v068-decompiled/sources/androidx/camera/core/ImageProcessingUtil.java:177:            Image imageDequeueInputImage = imageWriter.dequeueInputImage();
+/tmp/v068-decompiled/sources/androidx/camera/core/ImageProcessingUtil.java:178:            if (imageDequeueInputImage == null) {
+/tmp/v068-decompiled/sources/androidx/camera/core/ImageProcessingUtil.java:182:                if (nativeRotateYUV(bn0Var.mo561d()[0].mo264c(), iMo262a, bn0Var.mo561d()[1].mo264c(), iMo262a2, bn0Var.mo561d()[2].mo264c(), iMo262a3, iMo263b, imageDequeueInputImage.getPlanes()[0].getBuffer(), imageDequeueInputImage.getPlanes()[0].getRowStride(), imageDequeueInputImage.getPlanes()[0].getPixelStride(), imageDequeueInputImage.getPlanes()[1].getBuffer(), imageDequeueInputImage.getPlanes()[1].getRowStride(), imageDequeueInputImage.getPlanes()[1].getPixelStride(), imageDequeueInputImage.getPlanes()[2].getBuffer(), imageDequeueInputImage.getPlanes()[2].getRowStride(), imageDequeueInputImage.getPlanes()[2].getPixelStride(), byteBuffer, byteBuffer2, byteBuffer3, width, height, i) == 0) {
+/tmp/v068-decompiled/sources/androidx/camera/core/ImageProcessingUtil.java:183:                    imageWriter.queueInputImage(imageDequeueInputImage);

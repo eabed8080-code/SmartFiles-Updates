@@ -47,6 +47,9 @@ public final class PcShareActivity extends Activity {
     /* renamed from: a */
     public final fr1 f1430a = new fr1(new C0046b3(10, this));
 
+    /* JADX DEBUG: Another duplicated slice has different insns count: {[]}, finally: {[THROW, INVOKE, MOVE_EXCEPTION, THROW, MOVE_EXCEPTION] complete} */
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+    /* JADX DEBUG: Finally have unexpected throw blocks count: 2, expect 1 */
     /* JADX WARN: Removed duplicated region for block: B:37:0x00cb A[Catch: all -> 0x00b6, TryCatch #2 {all -> 0x00b6, blocks: (B:3:0x005c, B:7:0x006e, B:15:0x0082, B:17:0x0088, B:22:0x00b2, B:33:0x00c2, B:38:0x00e1, B:39:0x00e6, B:37:0x00cb, B:29:0x00bb, B:30:0x00be, B:49:0x00f2, B:50:0x00f5, B:47:0x00f0, B:4:0x0061, B:6:0x006b, B:45:0x00ec, B:46:0x00ef), top: B:57:0x005c, inners: #0, #3 }] */
     /* renamed from: c */
     /*
@@ -117,6 +120,7 @@ public final class PcShareActivity extends Activity {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     /* renamed from: a */
     public final void m836a(Intent intent) {
         String action = intent.getAction();
@@ -166,6 +170,9 @@ public final class PcShareActivity extends Activity {
         }
     }
 
+    /* JADX DEBUG: Another duplicated slice has different insns count: {[]}, finally: {[THROW, INVOKE, MOVE_EXCEPTION, THROW, MOVE_EXCEPTION] complete} */
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
+    /* JADX DEBUG: Finally have unexpected throw blocks count: 2, expect 1 */
     /* JADX WARN: Removed duplicated region for block: B:15:0x002a  */
     /* JADX WARN: Removed duplicated region for block: B:26:0x0040  */
     /* JADX WARN: Removed duplicated region for block: B:30:0x0048  */
@@ -366,6 +373,7 @@ public final class PcShareActivity extends Activity {
         }
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.app.Activity
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -374,6 +382,7 @@ public final class PcShareActivity extends Activity {
         m836a(intent);
     }
 
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.app.Activity
     public final void onNewIntent(Intent intent) {
         super.onNewIntent(intent);

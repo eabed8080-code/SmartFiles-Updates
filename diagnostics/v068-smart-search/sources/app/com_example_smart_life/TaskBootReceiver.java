@@ -12,6 +12,7 @@ import p000.yi3;
 /* compiled from: r8-map-id-3bb661786d9cf04bdd4db94c51e681f9f2d4a8de231340567142ca45c28020b0 */
 /* loaded from: classes.dex */
 public final class TaskBootReceiver extends BroadcastReceiver {
+    /* JADX DEBUG: Don't trust debug lines info. Lines numbers was adjusted: min line is 1 */
     @Override // android.content.BroadcastReceiver
     public final void onReceive(Context context, Intent intent) {
         Context context2;
