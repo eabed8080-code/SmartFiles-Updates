@@ -1,0 +1,78 @@
+name: Publish Smart Life v0.7.0 Document Image Index
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0070.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.7.0 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntpreastus.oaiusercontent.com/files/00000000-04c0-81f9-910c-f619708c9c8d/raw?se=2026-09-05T20%3A40%3A35Z&sp=r&sv=2026-02-06&sr=b&scid=caadb005-75ed-55a6-b5d8-02b01b767b96&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-05T00%3A57%3A55Z&ske=2026-09-06T00%3A57%3A55Z&sks=b&skv=2026-02-06&sig=Uqq/ATXil9iXzZtTPFD4eLz8ZbzULs1pKImHDvFrboU%3D'
+          EXPECTED_SHA256: '35f9783603b570b09fc8b62766d7684cf381559920a3b7c81dc16939425f5c14'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v070
+          mkdir incoming-v070
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v070/artifact.zip
+          unzip -q incoming-v070/artifact.zip -d incoming-v070/unpacked
+          APK="$(find incoming-v070/unpacked -type f -name 'Smart-Life-v0.7.0-Document-Image-Index.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Write v0.7.0 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.7.0",
+            "versionCode": 6052,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Smart Search document-image indexing: the first run now prepares a persistent local content index instead of doing a heavy OCR sweep when you search. PDFs, Smart Life scans and Screenshots are prioritized. Ordinary Camera, WhatsApp and Downloads images get a lightweight text/document probe first, and only likely IDs, invoices, receipts or document-like images receive full OCR. Normal photos such as people, cars, homes and decor are skipped. Progress is shown during the initial preparation, and unchanged files reuse the saved index on later runs."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.7.0 (6052)'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"versionName": "0.7.0"' flutter-latest.json
+          grep -q '"versionCode": 6052' flutter-latest.json
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '35f9783603b570b09fc8b62766d7684cf381559920a3b7c81dc16939425f5c14'
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.7.0"' /tmp/published-latest.json
+          grep -q '"versionCode": 6052' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '35f9783603b570b09fc8b62766d7684cf381559920a3b7c81dc16939425f5c14'
+          echo 'Smart Life v0.7.0 update channel verified remotely.'
