@@ -1,6 +1,6 @@
 {
-  "versionName": "0.7.4",
-  "versionCode": 6056,
+  "versionName": "0.7.5",
+  "versionCode": 6057,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "PDF Stage 1 reliability test: Smart Search is still limited to PDFs only and now checks exactly one PDF at a time with OCR completely disabled. Searchable PDF text is saved immediately. Scanned/image PDFs are checkpointed for the next OCR stage without attempting OCR yet. Malformed, encrypted, or unreadable PDFs are isolated per file and cannot stop the remaining PDFs. The Stage 1 progress runs through the full PDF list, reports searchable/scanned/failed counts, and uses a fresh local PDF index. Images remain excluded while the PDF pipeline is validated."
+  "releaseNotes": "PDF Smart Search now adds Google Document AI Enterprise OCR for scanned/image PDFs while searchable PDFs remain local. Google OCR runs one PDF at a time and saves returned Arabic/English text into the local Smart Search Index for later local searches. Google OCR requires one-time Document AI project, processor and service-account setup inside Smart Search Index; credentials are encrypted on-device with Android Keystore. Images outside PDFs remain excluded in this version."
 }
