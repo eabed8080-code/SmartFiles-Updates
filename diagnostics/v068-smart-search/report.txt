@@ -1,0 +1,22 @@
+Smart Life v0.6.8 Smart Search diagnostic report
+================================================
+
+APK SHA256:
+a8f2ebd9ce602af4fe0f4cc8518f01dc80f6686ce1d8bcd75f0616e5cec8778b  Smart-Life-Flutter-Test.apk
+
+Relevant class files:
+/tmp/v068-decompiled/sources/com/example/smart_life/MainActivity.java
+/tmp/v068-decompiled/sources/com/example/smart_life/PcShareActivity.java
+/tmp/v068-decompiled/sources/com/example/smart_life/SmartLifeScannerActivity.java
+/tmp/v068-decompiled/sources/com/example/smart_life/TaskBootReceiver.java
+/tmp/v068-decompiled/sources/com/example/smart_life/TaskReminderReceiver.java
+/tmp/v068-decompiled/sources/com/filesearch/app/SmartFilesActivity.java
+
+OCR / content-index references:
+/tmp/v068-decompiled/sources/com/example/smart_life/MainActivity.java:641:                if (file.isFile() && (za0.m5409a(file).equalsIgnoreCase("pdf") || za0.m5409a(file).equalsIgnoreCase("jpg") || za0.m5409a(file).equalsIgnoreCase("jpeg"))) {
+
+ML Kit OCR classes present anywhere in DEX decompile:
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/bundled/common/BundledTextRecognizerCreator.java
+/tmp/v068-decompiled/sources/com/google/mlkit/vision/text/internal/TextRegistrar.java
+/tmp/v068-decompiled/sources/com/google/android/gms/dynamite/descriptors/com/google/mlkit/dynamite/text/common/ModuleDescriptor.java
+/tmp/v068-decompiled/sources/com/google/android/gms/dynamite/descriptors/com/google/mlkit/dynamite/text/latin/ModuleDescriptor.java
