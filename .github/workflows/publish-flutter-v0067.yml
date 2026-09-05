@@ -1,0 +1,72 @@
+name: Publish Smart Life v0.6.7 Compact Layout
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0067.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.6.7 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-8c7c-81f7-9665-c32d63ca9586/raw?se=2026-09-05T17%3A37%3A28Z&sp=r&sv=2026-02-06&sr=b&scid=aad52e28-42f0-5374-8c26-6def3f386ca9&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A19%3A18Z&ske=2026-09-05T23%3A19%3A18Z&sks=b&skv=2026-02-06&sig=QimsC5IjSuLH/COqfw54iSW2gmnFfSRfzMt1V9SqBY8%3D'
+          EXPECTED_SHA256: '5ea4273af070310a5b3ed07d6373d4ffc16226869652598b2fe863deec6805a6'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v067
+          mkdir incoming-v067
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v067/artifact.zip
+          unzip -q incoming-v067/artifact.zip -d incoming-v067/unpacked
+          APK="$(find incoming-v067/unpacked -type f -name 'Smart-Life-v0.6.7-Compact-Layout.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Write v0.6.7 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.6.7",
+            "versionCode": 6049,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Compact layout update: reduced extra spacing in File Types while preserving the current 3D icon size, tightened Converter spacing, and removed the duplicate Converter body title. The v0.6.6 opening motion remains unchanged."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.6.7 (6049)'
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"versionName": "0.6.7"' flutter-latest.json
+          grep -q '"versionCode": 6049' flutter-latest.json
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '5ea4273af070310a5b3ed07d6373d4ffc16226869652598b2fe863deec6805a6'
+          echo 'Smart Life v0.6.7 update channel verified.'
