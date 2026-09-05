@@ -1,4 +1,4 @@
-name: Publish Smart Life v0.6.3 Stable Restore
+name: Publish Smart Life v0.6.4 Update Refresh
 
 on:
   push:
@@ -21,17 +21,17 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Download signed Smart Life v0.6.3 APK artifact
+      - name: Download signed Smart Life v0.6.4 APK artifact
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-72d8-81f7-9f64-db46d7916cdc/raw?se=2026-09-05T06%3A01%3A02Z&sp=r&sv=2026-02-06&sr=b&scid=6476e71e-1833-5b64-b2e9-0f49be7ae743&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A15%3A38Z&ske=2026-09-05T23%3A15%3A38Z&sks=b&skv=2026-02-06&sig=D2GHfrNW0vVXs4eGmCRxvtsbT355Yo7gInHmHAZh59U%3D' -o /tmp/smart-life-v0063.zip
-          test "$(sha256sum /tmp/smart-life-v0063.zip | awk '{print $1}')" = 'bdeed70e1bf03fdfd439cfb1610706b33e32a3597501b083292147ad22992d58'
-          rm -rf /tmp/smart-life-v0063
-          mkdir -p /tmp/smart-life-v0063
-          unzip -q /tmp/smart-life-v0063.zip -d /tmp/smart-life-v0063
-          test -f /tmp/smart-life-v0063/Smart-Life-v0.6.3-Restore.apk
-          cp /tmp/smart-life-v0063/Smart-Life-v0.6.3-Restore.apk Smart-Life-Flutter-Test.apk
+          curl -fL 'https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-7410-820c-99b7-4bdb9cd7f704/raw?se=2026-09-05T06%3A35%3A35Z&sp=r&sv=2026-02-06&sr=b&scid=f8f6f3f6-0091-5b92-ae46-3981c53261c7&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A26%3A19Z&ske=2026-09-05T23%3A26%3A19Z&sks=b&skv=2026-02-06&sig=LKHU3gj3YRyqlwVIS%2BXEmWkh7lj6rI2SzT08bCEuYZM%3D' -o /tmp/smart-life-v0064.zip
+          test "$(sha256sum /tmp/smart-life-v0064.zip | awk '{print $1}')" = '1367b5481fd25fa86317d82b7558e00e16fe5693902735785887ec383813eed4'
+          rm -rf /tmp/smart-life-v0064
+          mkdir -p /tmp/smart-life-v0064
+          unzip -q /tmp/smart-life-v0064.zip -d /tmp/smart-life-v0064
+          test -f /tmp/smart-life-v0064/Smart-Life-v0.6.4-Update-Refresh.apk
+          cp /tmp/smart-life-v0064/Smart-Life-v0.6.4-Update-Refresh.apk Smart-Life-Flutter-Test.apk
           test "$(stat -c%s Smart-Life-Flutter-Test.apk)" -gt 1000000
 
       - name: Verify signed Android release metadata
@@ -42,9 +42,9 @@ jobs:
           "$TOOLS/apksigner" verify --verbose Smart-Life-Flutter-Test.apk
           BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
           echo "$BADGING"
-          echo "$BADGING" | grep -q "versionCode='6045'"
-          echo "$BADGING" | grep -q "versionName='0.6.3'"
-          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '6b7014914be7a5831e970784e56649f32cc15c4ba958e217354a8dc6ae1300b6'
+          echo "$BADGING" | grep -q "versionCode='6046'"
+          echo "$BADGING" | grep -q "versionName='0.6.4'"
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '6b25321502a5d202b8a29e91fc0162fd01ba454e019ac0c63aab041444cea55f'
           sha256sum Smart-Life-Flutter-Test.apk
           ls -lh Smart-Life-Flutter-Test.apk
 
@@ -55,34 +55,26 @@ jobs:
           test -f Smart-Life-PC-Receiver-Setup.exe
           test "$(stat -c%s Smart-Life-PC-Receiver-Setup.exe)" -gt 1000000
 
-      - name: Update Smart Life feeds
+      - name: Update Smart Life feed
         shell: bash
         run: |
           set -euo pipefail
           cat > flutter-latest.json <<'JSON'
           {
-            "versionName": "0.6.3",
-            "versionCode": 6045,
+            "versionName": "0.6.4",
+            "versionCode": 6046,
             "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-            "releaseNotes": "Stable restore based on the known-good Smart Life v0.6.0 runtime. This release restores normal app startup after the Quick Transfer startup issue. Quick Transfer phone changes are not enabled in this stable build."
+            "releaseNotes": "Update refresh fix. Check for Update and APK downloads now bypass GitHub/CDN cache so Smart Life always sees the newest published version. Based on the stable v0.6.3 runtime; Quick Transfer phone changes remain disabled."
           }
           JSON
 
-          cat > pc-latest.json <<'JSON'
-          {
-            "versionName": "0.5.0",
-            "setupUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-PC-Receiver-Setup.exe",
-            "releaseNotes": "Quick Transfer PC Receiver runs in the background, starts with Windows, keeps phone-bound files in Pending, supports drag & drop, and stores received phone files in Smart Life Inbox."
-          }
-          JSON
-
-      - name: Publish Smart Life v0.6.3 stable restore
+      - name: Publish Smart Life v0.6.4 update refresh
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'Smart Life Update Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add Smart-Life-Flutter-Test.apk flutter-latest.json pc-latest.json
-          git commit -m 'Publish Smart Life v0.6.3 build 6045 stable restore' || true
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.6.4 build 6046 update refresh' || true
           git pull --rebase origin main
           git push origin main
