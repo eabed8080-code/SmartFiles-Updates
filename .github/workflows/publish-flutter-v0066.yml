@@ -1,0 +1,67 @@
+name: Publish Smart Life v0.6.6 Longer Opening Motion
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-flutter-v0066.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download verified signed v0.6.6 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --retry-delay 2 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-8d54-81fd-ba6e-ba92deec0af6/raw?se=2026-09-05T16%3A22%3A42Z&sp=r&sv=2026-02-06&sr=b&scid=6254d9e1-29db-5aa1-9503-27f754c0e619&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-05T06%3A03%3A11Z&ske=2026-09-06T06%3A03%3A11Z&sks=b&skv=2026-02-06&sig=PR3Il4mPZHGEB5KzWrCaorJkC4rLpK9%2BqXu/cNYBmRg%3D' -o /tmp/v066-opening-artifact.zip
+          rm -rf /tmp/v066-opening
+          mkdir -p /tmp/v066-opening
+          unzip -q /tmp/v066-opening-artifact.zip -d /tmp/v066-opening
+          test -f /tmp/v066-opening/Smart-Life-v0.6.6-Longer-Opening-Motion.apk
+          echo '50012e99fd36c24491690e9d69b072d229b92e7b1f3c77f3c2fcfea6c30c126a  /tmp/v066-opening/Smart-Life-v0.6.6-Longer-Opening-Motion.apk' | sha256sum -c -
+          cp /tmp/v066-opening/Smart-Life-v0.6.6-Longer-Opening-Motion.apk Smart-Life-Flutter-Test.apk
+
+      - name: Verify published APK metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "package: name='com.filesearch.smartlifefluttertest'"
+          echo "$BADGING" | grep -q "versionCode='6048'"
+          echo "$BADGING" | grep -q "versionName='0.6.6'"
+          "$TOOLS/apksigner" verify --verbose --print-certs Smart-Life-Flutter-Test.apk
+          CERT_SHA256="$("$TOOLS/apksigner" verify --print-certs Smart-Life-Flutter-Test.apk | sed -n 's/^Signer #1 certificate SHA-256 digest: //p' | head -n 1)"
+          test "$CERT_SHA256" = 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          sha256sum Smart-Life-Flutter-Test.apk
+
+      - name: Update Flutter feed
+        shell: bash
+        run: |
+          cat > flutter-latest.json <<'EOF'
+          {
+            "versionName": "0.6.6",
+            "versionCode": 6048,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Opening motion visibility update: animation increased to 1.8 seconds, file-type badges enlarged from 52 to 68 pixels, the center Smart Life mark enlarged, badge spread widened, and fade delayed so the motion is clearly visible. The real Find page still starts underneath the visual layer with no artificial startup wait."
+          }
+          EOF
+
+      - name: Publish v0.6.6 update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.6.6 longer opening motion' || true
+          git pull --rebase origin main
+          git push origin main
