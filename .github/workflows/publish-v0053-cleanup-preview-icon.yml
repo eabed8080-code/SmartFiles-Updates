@@ -1,4 +1,4 @@
-name: Publish Smart Life v0.6.1 Quick Transfer
+name: Publish Smart Life v0.6.2 Startup Hotfix
 
 on:
   push:
@@ -21,17 +21,17 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Download signed Smart Life v0.6.1 APK artifact
+      - name: Download signed Smart Life v0.6.2 APK artifact
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-fd44-81fd-aefc-0e1b89f6ac8f/raw?se=2026-09-05T03%3A45%3A50Z&sp=r&sv=2026-02-06&sr=b&scid=92600395-7f15-5b17-b860-aa0c4d6b8f64&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A14%3A07Z&ske=2026-09-05T23%3A14%3A07Z&sks=b&skv=2026-02-06&sig=YG/KpbVkG7jopVYsCpWS8u8jCYczjUzWKi2nOjKDpDk%3D' -o /tmp/smart-life-v0061.zip
-          test "$(sha256sum /tmp/smart-life-v0061.zip | awk '{print $1}')" = 'c81be4bc65dc4b48bd8075f6def1a812959984ade32183d6e287f2ed658d25c9'
-          rm -rf /tmp/smart-life-v0061
-          mkdir -p /tmp/smart-life-v0061
-          unzip -q /tmp/smart-life-v0061.zip -d /tmp/smart-life-v0061
-          test -f /tmp/smart-life-v0061/Smart-Life-v0.6.1-Quick-Transfer.apk
-          cp /tmp/smart-life-v0061/Smart-Life-v0.6.1-Quick-Transfer.apk Smart-Life-Flutter-Test.apk
+          curl -fL 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-158c-81f5-8edf-07413b3341a3/raw?se=2026-09-05T04%3A07%3A56Z&sp=r&sv=2026-02-06&sr=b&scid=945122d4-e68a-5eef-a94b-ec088f1acb01&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A13%3A27Z&ske=2026-09-05T23%3A13%3A27Z&sks=b&skv=2026-02-06&sig=sunu6w5JafdtZN6vgAjw5r2vzC1hLuWAmiMtWQhQ5i4%3D' -o /tmp/smart-life-v0062.zip
+          test "$(sha256sum /tmp/smart-life-v0062.zip | awk '{print $1}')" = 'fc9de1bc95a23e8cc22f3b68e2e202f190710c9cd1c3680e9dd58a4a3c1233fb'
+          rm -rf /tmp/smart-life-v0062
+          mkdir -p /tmp/smart-life-v0062
+          unzip -q /tmp/smart-life-v0062.zip -d /tmp/smart-life-v0062
+          test -f /tmp/smart-life-v0062/Smart-Life-v0.6.2-Hotfix.apk
+          cp /tmp/smart-life-v0062/Smart-Life-v0.6.2-Hotfix.apk Smart-Life-Flutter-Test.apk
           test "$(stat -c%s Smart-Life-Flutter-Test.apk)" -gt 1000000
 
       - name: Verify signed Android release metadata
@@ -42,27 +42,18 @@ jobs:
           "$TOOLS/apksigner" verify --verbose Smart-Life-Flutter-Test.apk
           BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
           echo "$BADGING"
-          echo "$BADGING" | grep -q "versionCode='6043'"
-          echo "$BADGING" | grep -q "versionName='0.6.1'"
-          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '1669cd355bd7832f09376111645e086dbf048353742413774d32e4d1717f485d'
+          echo "$BADGING" | grep -q "versionCode='6044'"
+          echo "$BADGING" | grep -q "versionName='0.6.2'"
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '1c7e13986323c9d448240364822f681b5f4cb7700ad91d3603f9280576ca87de'
           sha256sum Smart-Life-Flutter-Test.apk
           ls -lh Smart-Life-Flutter-Test.apk
 
-      - name: Download Smart Life PC Receiver Quick Transfer setup
+      - name: Keep Smart Life PC Receiver setup
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-76a4-81f7-8512-c8452fdf0cc1/raw?se=2026-09-05T03%3A46%3A24Z&sp=r&sv=2026-02-06&sr=b&scid=845b6dcb-1e71-5c0e-9999-c0b616731973&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A28%3A43Z&ske=2026-09-05T23%3A28%3A43Z&sks=b&skv=2026-02-06&sig=77CyW6G4zgVCbXtEC5T0VIYWf%2BqXx2G8I4gPe/uEvU0%3D' -o /tmp/smart-life-pc-v050.zip
-          test "$(sha256sum /tmp/smart-life-pc-v050.zip | awk '{print $1}')" = '199ba11fb32b808a9f764b936beeeb9ae4551538641c5ec612aabbcbe1725b26'
-          rm -rf /tmp/smart-life-pc-v050
-          mkdir -p /tmp/smart-life-pc-v050
-          unzip -q /tmp/smart-life-pc-v050.zip -d /tmp/smart-life-pc-v050
-          SETUP='/tmp/smart-life-pc-v050/installer_output/Smart-Life-PC-Receiver-Setup-v0.5.0.exe'
-          test -f "$SETUP"
-          test "$(sha256sum "$SETUP" | awk '{print $1}')" = '344bf7b2e134dffc137df287701c7c4d633fe99dbda66cee681d18e31e7af996'
-          cp "$SETUP" Smart-Life-PC-Receiver-Setup.exe
+          test -f Smart-Life-PC-Receiver-Setup.exe
           test "$(stat -c%s Smart-Life-PC-Receiver-Setup.exe)" -gt 1000000
-          test "$(stat -c%s Smart-Life-PC-Receiver-Setup.exe)" -lt 100000000
 
       - name: Update Smart Life feeds
         shell: bash
@@ -70,10 +61,10 @@ jobs:
           set -euo pipefail
           cat > flutter-latest.json <<'JSON'
           {
-            "versionName": "0.6.1",
-            "versionCode": 6043,
+            "versionName": "0.6.2",
+            "versionCode": 6044,
             "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-            "releaseNotes": "Quick Transfer adds phone ↔ PC file transfer on the same Wi-Fi. Android Share can send files to Smart Life; unavailable-PC transfers stay in Pending and retry automatically. PC drag & drop sends files to the phone, received files are saved to Downloads/Smart Life and Android Share opens for WhatsApp or another app. Existing v0.6.0 features remain unchanged."
+            "releaseNotes": "Startup hotfix after v0.6.1. Quick Transfer no longer starts background retry/network work during normal Smart Life launch. The phone receiver starts only after a PC connection is configured, and all Quick Transfer startup work is isolated so it cannot prevent Smart Life from opening. Quick Transfer features remain available."
           }
           JSON
 
@@ -85,13 +76,13 @@ jobs:
           }
           JSON
 
-      - name: Publish Android and Windows Quick Transfer
+      - name: Publish Smart Life v0.6.2 hotfix
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'Smart Life Update Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add Smart-Life-Flutter-Test.apk flutter-latest.json Smart-Life-PC-Receiver-Setup.exe pc-latest.json
-          git commit -m 'Publish Smart Life v0.6.1 build 6043 and PC Quick Transfer setup' || true
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json pc-latest.json
+          git commit -m 'Publish Smart Life v0.6.2 build 6044 startup hotfix' || true
           git pull --rebase origin main
           git push origin main
