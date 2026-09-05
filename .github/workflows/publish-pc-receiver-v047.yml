@@ -1,0 +1,62 @@
+name: Publish Smart Life PC Receiver v0.4.7
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-pc-receiver-v047.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download verified Windows receiver artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-35d0-81f7-b37f-a733122a4a5c/raw?se=2026-09-05T15%3A00%3A58Z&sp=r&sv=2026-02-06&sr=b&scid=772a73c8-a12d-559b-ab3d-d46f695a84e0&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A13%3A29Z&ske=2026-09-05T23%3A13%3A29Z&sks=b&skv=2026-02-06&sig=LyQi0uqoMwaZcX7sUFHjyXaZVwUKOm6j07EZO4ur0Uc%3D' -o /tmp/pc-v047.zip
+          test "$(sha256sum /tmp/pc-v047.zip | awk '{print $1}')" = 'fba5aacc13f9f9f079986377b3390888d4d46fc141b50c43b7bca849f8b46fe7'
+          rm -rf /tmp/pc-v047
+          mkdir -p /tmp/pc-v047
+          unzip -q /tmp/pc-v047.zip -d /tmp/pc-v047
+          EXE='/tmp/pc-v047/bin/Release/net8.0-windows/win-x64/publish/SmartLifeReceiver.exe'
+          SETUP='/tmp/pc-v047/installer_output/Smart-Life-PC-Receiver-Setup-v0.4.7.exe'
+          test -f "$EXE"
+          test -f "$SETUP"
+          test "$(sha256sum "$EXE" | awk '{print $1}')" = '813c8d672569e785b6d396930258148ed42b7c13c87659271846ace1578408ae'
+          test "$(sha256sum "$SETUP" | awk '{print $1}')" = '762160238cb90c5e000b220384f5d33de93c4df65ee67aeb51376a10b9d67582'
+          cp "$EXE" SmartLifeReceiver.exe
+          cp "$SETUP" Smart-Life-PC-Receiver-Setup-v0.4.7.exe
+          cp "$SETUP" Smart-Life-PC-Receiver-Setup.exe
+
+      - name: Update PC receiver feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > pc-receiver-latest.json <<'JSON'
+          {
+            "version": "0.4.7",
+            "installerUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-PC-Receiver-Setup.exe",
+            "sha256": "762160238cb90c5e000b220384f5d33de93c4df65ee67aeb51376a10b9d67582",
+            "releaseNotes": "Persistent PC-to-phone Pending queue, automatic delivery when Smart Life opens on the phone, background tray receiver after the window closes, start-with-Windows registration, and Windows desktop notifications for files received from the phone. Local LAN only; no cloud required."
+          }
+          JSON
+
+      - name: Publish PC receiver v0.4.7
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add SmartLifeReceiver.exe Smart-Life-PC-Receiver-Setup-v0.4.7.exe Smart-Life-PC-Receiver-Setup.exe pc-receiver-latest.json
+          git commit -m 'Publish Smart Life PC Receiver v0.4.7' || true
+          git pull --rebase origin main
+          git push origin main
