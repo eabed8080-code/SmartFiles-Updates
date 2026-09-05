@@ -1,6 +1,6 @@
 {
-  "versionName": "0.6.7",
-  "versionCode": 6049,
+  "versionName": "0.6.8",
+  "versionCode": 6050,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Compact layout update: reduced extra spacing in File Types while preserving the current 3D icon size, tightened Converter spacing, and removed the duplicate Converter body title. The v0.6.6 opening motion remains unchanged."
+  "releaseNotes": "Smart Search update: the existing search box now automatically searches inside Images and PDFs. Images use local on-device OCR, WhatsApp Images and Screenshots are indexed first, scanned/image PDFs get OCR fallback, and filename results remain available while the local index is preparing. Existing voice search, compact File Types, Converter cleanup, and opening motion are preserved."
 }
