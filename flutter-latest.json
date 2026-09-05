@@ -1,6 +1,6 @@
 {
-  "versionName": "0.5.9",
-  "versionCode": 6041,
+  "versionName": "0.6.0",
+  "versionCode": 6042,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Today adds a Home reminder card with Life Inbox, Today and Upcoming tasks. Add reminders by typing or voice, understand common Arabic and English dates such as tomorrow, after two weeks, next weekdays and numeric dates, optionally schedule Android notifications for a chosen time, and keep reminders after reboot. File Options also removes the unnecessary Details action."
+  "releaseNotes": "Today voice reminders now let you choose العربية or English before recording. Smart Life remembers your last language choice and sends that language directly to Android speech recognition so Arabic is no longer interpreted as English. Existing Today, Life Inbox, date parsing and reminder notifications stay unchanged."
 }
