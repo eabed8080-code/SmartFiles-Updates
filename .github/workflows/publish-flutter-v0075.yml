@@ -1,0 +1,78 @@
+name: Publish Smart Life v0.7.5 Google PDF OCR
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0075.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.7.5 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-6244-81f5-90b9-074c37062326/raw?se=2026-09-05T23%3A32%3A21Z&sp=r&sv=2026-02-06&sr=b&scid=87b52b97-9a16-5112-8cb6-da2505efbce8&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-05T22%3A18%3A40Z&ske=2026-09-06T22%3A18%3A40Z&sks=b&skv=2026-02-06&sig=7P9MX7Cu4X2gX3tX2InVqbu0ulwWxEX4YXD1veyvrMM%3D'
+          EXPECTED_SHA256: 'f5319889590616858ca8f57c5605bfefc42c1f5e29ef925f4489d542b8484187'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v075
+          mkdir incoming-v075
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v075/artifact.zip
+          unzip -q incoming-v075/artifact.zip -d incoming-v075/unpacked
+          APK="$(find incoming-v075/unpacked -type f -name 'Smart-Life-v0.7.5-Google-PDF-OCR.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Write v0.7.5 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.7.5",
+            "versionCode": 6057,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "PDF Smart Search now adds Google Document AI Enterprise OCR for scanned/image PDFs while searchable PDFs remain local. Google OCR runs one PDF at a time and saves returned Arabic/English text into the local Smart Search Index for later local searches. Google OCR requires one-time Document AI project, processor and service-account setup inside Smart Search Index; credentials are encrypted on-device with Android Keystore. Images outside PDFs remain excluded in this version."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.7.5 (6057)'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"versionName": "0.7.5"' flutter-latest.json
+          grep -q '"versionCode": 6057' flutter-latest.json
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = 'f5319889590616858ca8f57c5605bfefc42c1f5e29ef925f4489d542b8484187'
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.7.5"' /tmp/published-latest.json
+          grep -q '"versionCode": 6057' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = 'f5319889590616858ca8f57c5605bfefc42c1f5e29ef925f4489d542b8484187'
+          echo 'Smart Life v0.7.5 update channel verified remotely.'
