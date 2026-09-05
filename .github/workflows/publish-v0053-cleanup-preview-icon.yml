@@ -1,4 +1,4 @@
-name: Publish Smart Life v0.5.8 Smart File Types
+name: Publish Smart Life v0.5.9 Today
 
 on:
   push:
@@ -21,17 +21,17 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Download signed Smart Life v0.5.8 APK artifact
+      - name: Download signed Smart Life v0.5.9 APK artifact
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-3620-81f5-b43e-65ee0912f014/raw?se=2026-09-04T23%3A46%3A42Z&sp=r&sv=2026-02-06&sr=b&scid=4b1ff665-95b4-5715-91c6-487c639f93c5&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A16%3A14Z&ske=2026-09-05T23%3A16%3A14Z&sks=b&skv=2026-02-06&sig=IOmy2/OcKWa5OVPmioPwfDK0SOyEa4FBqIbwclxMeSY%3D' -o /tmp/smart-life-v0058.zip
-          test "$(sha256sum /tmp/smart-life-v0058.zip | awk '{print $1}')" = 'd89cb3b74be754706f1b0986df3a370c6e7ee6793fabce9731d701e65ebd9e2e'
-          rm -rf /tmp/smart-life-v0058
-          mkdir -p /tmp/smart-life-v0058
-          unzip -q /tmp/smart-life-v0058.zip -d /tmp/smart-life-v0058
-          test -f /tmp/smart-life-v0058/Smart-Life-Flutter-Test.apk
-          cp /tmp/smart-life-v0058/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
+          curl -fL 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-ccdc-81f5-96bc-821a179c4ea1/raw?se=2026-09-05T00%3A41%3A20Z&sp=r&sv=2026-02-06&sr=b&scid=5faa0fcf-13e4-59fb-841d-1f2f39169a4e&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A12%3A47Z&ske=2026-09-05T23%3A12%3A47Z&sks=b&skv=2026-02-06&sig=WHxzJp7pmWQXlOxywEtuE7l4MxrwOZHLy40a1emQyR0%3D' -o /tmp/smart-life-v0059.zip
+          test "$(sha256sum /tmp/smart-life-v0059.zip | awk '{print $1}')" = 'b63ecfb1e6d17d3030d9a551685c64e35658d679d664601497e3eea4ec7596c4'
+          rm -rf /tmp/smart-life-v0059
+          mkdir -p /tmp/smart-life-v0059
+          unzip -q /tmp/smart-life-v0059.zip -d /tmp/smart-life-v0059
+          test -f /tmp/smart-life-v0059/Smart-Life-Flutter-Test.apk
+          cp /tmp/smart-life-v0059/Smart-Life-Flutter-Test.apk Smart-Life-Flutter-Test.apk
           test "$(stat -c%s Smart-Life-Flutter-Test.apk)" -gt 1000000
 
       - name: Verify signed release metadata
@@ -42,9 +42,9 @@ jobs:
           "$TOOLS/apksigner" verify --verbose Smart-Life-Flutter-Test.apk
           BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
           echo "$BADGING"
-          echo "$BADGING" | grep -q "versionCode='6040'"
-          echo "$BADGING" | grep -q "versionName='0.5.8'"
-          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '38b082b71149ffd5af26d4826b11f4a816b62d5c9c34bccfafcd9e5e223ec24b'
+          echo "$BADGING" | grep -q "versionCode='6041'"
+          echo "$BADGING" | grep -q "versionName='0.5.9'"
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '8381dae7740d83c3c0176357bce878f7eaa70d35e0de9406edb9a6729f694606'
           sha256sum Smart-Life-Flutter-Test.apk
           ls -lh Smart-Life-Flutter-Test.apk
 
@@ -54,10 +54,10 @@ jobs:
           set -euo pipefail
           cat > flutter-latest.json <<'JSON'
           {
-            "versionName": "0.5.8",
-            "versionCode": 6040,
+            "versionName": "0.5.9",
+            "versionCode": 6041,
             "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-            "releaseNotes": "File Types adds persistent Favorites/Pin with favorite files pinned above other results, a Large Files smart filter with type-aware size thresholds, and a Smart Summary showing file count, total size, largest file, and newest activity. Favorites remain saved across app restarts and follow a file when it is renamed."
+            "releaseNotes": "Today adds a Home reminder card with Life Inbox, Today and Upcoming tasks. Add reminders by typing or voice, understand common Arabic and English dates such as tomorrow, after two weeks, next weekdays and numeric dates, optionally schedule Android notifications for a chosen time, and keep reminders after reboot. File Options also removes the unnecessary Details action."
           }
           JSON
 
@@ -68,6 +68,6 @@ jobs:
           git config user.name 'Smart Life Update Bot'
           git config user.email 'actions@users.noreply.github.com'
           git add Smart-Life-Flutter-Test.apk flutter-latest.json
-          git commit -m 'Publish Smart Life v0.5.8 build 6040' || true
+          git commit -m 'Publish Smart Life v0.5.9 build 6041' || true
           git pull --rebase origin main
           git push origin main
