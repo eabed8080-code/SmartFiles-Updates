@@ -1,0 +1,1234 @@
+Current Smart Life APK deep inspection
+======================================
+
+APK size: 53241868 bytes
+SHA256: 2c4b0caf289a8fcb25b5b24a8d1eb8eb06d5475de98ab528b57e06bd1edc5c57
+
+Package badging:
+package: name='com.filesearch.smartlifefluttertest' versionCode='6047' versionName='0.6.5' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+sdkVersion:'26'
+targetSdkVersion:'34'
+uses-permission: name='android.permission.CAMERA'
+uses-permission: name='android.permission.INTERNET'
+uses-permission: name='android.permission.WRITE_EXTERNAL_STORAGE' maxSdkVersion='28'
+uses-permission: name='android.permission.REQUEST_INSTALL_PACKAGES'
+uses-permission: name='android.permission.MANAGE_EXTERNAL_STORAGE'
+uses-permission: name='android.permission.READ_EXTERNAL_STORAGE' maxSdkVersion='32'
+uses-permission: name='android.permission.READ_MEDIA_IMAGES'
+uses-permission: name='android.permission.READ_MEDIA_VIDEO'
+uses-permission: name='android.permission.READ_MEDIA_AUDIO'
+uses-permission: name='android.permission.POST_NOTIFICATIONS'
+uses-permission: name='android.permission.RECEIVE_BOOT_COMPLETED'
+uses-permission: name='android.permission.RECORD_AUDIO'
+uses-permission: name='com.filesearch.smartlifefluttertest.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+application-label:'Smart Life'
+application-label-af:'Smart Life'
+application-label-am:'Smart Life'
+
+Manifest activity/service clues:
+      A: android:name(0x01010003)="android.permission.CAMERA" (Raw: "android.permission.CAMERA")
+      A: android:name(0x01010003)="android.permission.INTERNET" (Raw: "android.permission.INTERNET")
+      A: android:name(0x01010003)="android.permission.WRITE_EXTERNAL_STORAGE" (Raw: "android.permission.WRITE_EXTERNAL_STORAGE")
+      A: android:name(0x01010003)="android.permission.REQUEST_INSTALL_PACKAGES" (Raw: "android.permission.REQUEST_INSTALL_PACKAGES")
+      A: android:name(0x01010003)="android.permission.MANAGE_EXTERNAL_STORAGE" (Raw: "android.permission.MANAGE_EXTERNAL_STORAGE")
+      A: android:name(0x01010003)="android.permission.READ_EXTERNAL_STORAGE" (Raw: "android.permission.READ_EXTERNAL_STORAGE")
+      A: android:name(0x01010003)="android.permission.READ_MEDIA_IMAGES" (Raw: "android.permission.READ_MEDIA_IMAGES")
+      A: android:name(0x01010003)="android.permission.READ_MEDIA_VIDEO" (Raw: "android.permission.READ_MEDIA_VIDEO")
+      A: android:name(0x01010003)="android.permission.READ_MEDIA_AUDIO" (Raw: "android.permission.READ_MEDIA_AUDIO")
+      A: android:name(0x01010003)="android.hardware.camera.any" (Raw: "android.hardware.camera.any")
+      A: android:name(0x01010003)="android.permission.POST_NOTIFICATIONS" (Raw: "android.permission.POST_NOTIFICATIONS")
+      A: android:name(0x01010003)="android.permission.RECEIVE_BOOT_COMPLETED" (Raw: "android.permission.RECEIVE_BOOT_COMPLETED")
+          A: android:name(0x01010003)="android.intent.action.VIEW" (Raw: "android.intent.action.VIEW")
+          A: android:name(0x01010003)="android.intent.action.VIEW" (Raw: "android.intent.action.VIEW")
+          A: android:name(0x01010003)="android.intent.action.SEND" (Raw: "android.intent.action.SEND")
+        A: android:name(0x01010003)="com.whatsapp" (Raw: "com.whatsapp")
+        A: android:name(0x01010003)="com.whatsapp.w4b" (Raw: "com.whatsapp.w4b")
+      A: android:name(0x01010003)="android.permission.RECORD_AUDIO" (Raw: "android.permission.RECORD_AUDIO")
+      A: android:name(0x01010003)="com.filesearch.smartlifefluttertest.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" (Raw: "com.filesearch.smartlifefluttertest.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION")
+      A: android:name(0x01010003)="com.filesearch.smartlifefluttertest.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" (Raw: "com.filesearch.smartlifefluttertest.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION")
+      A: android:name(0x01010003)="android.permission.ACCESS_NETWORK_STATE" (Raw: "android.permission.ACCESS_NETWORK_STATE")
+      A: android:name(0x01010003)="android.app.Application" (Raw: "android.app.Application")
+      E: activity (line=70)
+        A: android:name(0x01010003)="com.example.smart_life.SmartLifeScannerActivity" (Raw: "com.example.smart_life.SmartLifeScannerActivity")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+      E: activity (line=73)
+        A: android:name(0x01010003)="com.filesearch.app.SmartFilesActivity" (Raw: "com.filesearch.app.SmartFilesActivity")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+      E: activity (line=76)
+        A: android:theme(0x01010000)=@0x7f0e00a2
+        A: android:name(0x01010003)="com.example.smart_life.MainActivity" (Raw: "com.example.smart_life.MainActivity")
+        A: android:exported(0x01010010)=(type 0x12)0xffffffff
+          A: android:name(0x01010003)="io.flutter.embedding.android.NormalTheme" (Raw: "io.flutter.embedding.android.NormalTheme")
+            A: android:name(0x01010003)="android.intent.action.MAIN" (Raw: "android.intent.action.MAIN")
+            A: android:name(0x01010003)="android.intent.category.LAUNCHER" (Raw: "android.intent.category.LAUNCHER")
+      E: activity (line=95)
+        A: android:theme(0x01010000)=@0x01030010
+        A: android:name(0x01010003)="com.example.smart_life.PcShareActivity" (Raw: "com.example.smart_life.PcShareActivity")
+        A: android:exported(0x01010010)=(type 0x12)0xffffffff
+            A: android:name(0x01010003)="android.intent.action.SEND" (Raw: "android.intent.action.SEND")
+            A: android:name(0x01010003)="android.intent.category.DEFAULT" (Raw: "android.intent.category.DEFAULT")
+            A: android:name(0x01010003)="android.intent.action.SEND_MULTIPLE" (Raw: "android.intent.action.SEND_MULTIPLE")
+            A: android:name(0x01010003)="android.intent.category.DEFAULT" (Raw: "android.intent.category.DEFAULT")
+        A: android:name(0x01010003)="androidx.core.content.FileProvider" (Raw: "androidx.core.content.FileProvider")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+          A: android:name(0x01010003)="android.support.FILE_PROVIDER_PATHS" (Raw: "android.support.FILE_PROVIDER_PATHS")
+        A: android:name(0x01010003)="flutterEmbedding" (Raw: "flutterEmbedding")
+        A: android:name(0x01010003)="com.example.smart_life.TaskReminderReceiver" (Raw: "com.example.smart_life.TaskReminderReceiver")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+        A: android:name(0x01010003)="com.example.smart_life.TaskBootReceiver" (Raw: "com.example.smart_life.TaskBootReceiver")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+            A: android:name(0x01010003)="android.intent.action.BOOT_COMPLETED" (Raw: "android.intent.action.BOOT_COMPLETED")
+        A: android:name(0x01010003)="com.crazecoder.openfile.FileProvider" (Raw: "com.crazecoder.openfile.FileProvider")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+          A: android:name(0x01010003)="android.support.FILE_PROVIDER_PATHS" (Raw: "android.support.FILE_PROVIDER_PATHS")
+        A: android:name(0x01010003)="dev.fluttercommunity.plus.share.ShareFileProvider" (Raw: "dev.fluttercommunity.plus.share.ShareFileProvider")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+          A: android:name(0x01010003)="android.support.FILE_PROVIDER_PATHS" (Raw: "android.support.FILE_PROVIDER_PATHS")
+        A: android:name(0x01010003)="dev.fluttercommunity.plus.share.SharePlusPendingIntent" (Raw: "dev.fluttercommunity.plus.share.SharePlusPendingIntent")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+            A: android:name(0x01010003)="EXTRA_CHOSEN_COMPONENT" (Raw: "EXTRA_CHOSEN_COMPONENT")
+      E: service (line=180)
+        A: android:name(0x01010003)="androidx.camera.core.impl.MetadataHolderService" (Raw: "androidx.camera.core.impl.MetadataHolderService")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+          A: android:name(0x01010003)="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER" (Raw: "androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER")
+      E: activity (line=193)
+        A: android:theme(0x01010000)=@0x0103000a
+        A: android:name(0x01010003)="com.google.mlkit.vision.documentscanner.internal.GmsDocumentScanningDelegateActivity" (Raw: "com.google.mlkit.vision.documentscanner.internal.GmsDocumentScanningDelegateActivity")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+        A: android:name(0x01010003)="com.google.mlkit.common.internal.MlKitInitProvider" (Raw: "com.google.mlkit.common.internal.MlKitInitProvider")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+      E: service (line=206)
+        A: android:name(0x01010003)="com.google.mlkit.common.internal.MlKitComponentDiscoveryService" (Raw: "com.google.mlkit.common.internal.MlKitComponentDiscoveryService")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+          A: android:name(0x01010003)="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar" (Raw: "com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar")
+      E: activity (line=215)
+        A: android:theme(0x01010000)=@0x01030010
+        A: android:name(0x01010003)="com.google.android.gms.common.api.GoogleApiActivity" (Raw: "com.google.android.gms.common.api.GoogleApiActivity")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+        A: android:name(0x01010003)="com.google.android.gms.version" (Raw: "com.google.android.gms.version")
+        A: android:name(0x01010003)="androidx.window.extensions" (Raw: "androidx.window.extensions")
+        A: android:name(0x01010003)="androidx.window.sidecar" (Raw: "androidx.window.sidecar")
+        A: android:name(0x01010003)="androidx.startup.InitializationProvider" (Raw: "androidx.startup.InitializationProvider")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+          A: android:name(0x01010003)="androidx.emoji2.text.EmojiCompatInitializer" (Raw: "androidx.emoji2.text.EmojiCompatInitializer")
+          A: android:name(0x01010003)="androidx.lifecycle.ProcessLifecycleInitializer" (Raw: "androidx.lifecycle.ProcessLifecycleInitializer")
+          A: android:name(0x01010003)="androidx.profileinstaller.ProfileInstallerInitializer" (Raw: "androidx.profileinstaller.ProfileInstallerInitializer")
+        A: android:name(0x01010003)="androidx.profileinstaller.ProfileInstallReceiver" (Raw: "androidx.profileinstaller.ProfileInstallReceiver")
+        A: android:exported(0x01010010)=(type 0x12)0xffffffff
+            A: android:name(0x01010003)="androidx.profileinstaller.action.INSTALL_PROFILE" (Raw: "androidx.profileinstaller.action.INSTALL_PROFILE")
+            A: android:name(0x01010003)="androidx.profileinstaller.action.SKIP_FILE" (Raw: "androidx.profileinstaller.action.SKIP_FILE")
+            A: android:name(0x01010003)="androidx.profileinstaller.action.SAVE_PROFILE" (Raw: "androidx.profileinstaller.action.SAVE_PROFILE")
+            A: android:name(0x01010003)="androidx.profileinstaller.action.BENCHMARK_OPERATION" (Raw: "androidx.profileinstaller.action.BENCHMARK_OPERATION")
+      E: service (line=266)
+        A: android:name(0x01010003)="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery" (Raw: "com.google.android.datatransport.runtime.backends.TransportBackendDiscovery")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+          A: android:name(0x01010003)="backend:com.google.android.datatransport.cct.CctBackendFactory" (Raw: "backend:com.google.android.datatransport.cct.CctBackendFactory")
+      E: service (line=273)
+        A: android:name(0x01010003)="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" (Raw: "com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+        A: android:name(0x01010003)="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver" (Raw: "com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver")
+        A: android:exported(0x01010010)=(type 0x12)0x0
+
+Flutter asset names:
+assets/dexopt/baseline.prof
+assets/dexopt/baseline.profm
+assets/flutter_assets/AssetManifest.bin
+assets/flutter_assets/NOTICES.Z
+assets/flutter_assets/NativeAssetsManifest.json
+assets/flutter_assets/fonts/MaterialIcons-Regular.otf
+assets/flutter_assets/shaders/stretch_effect.frag
+assets/flutter_assets/shaders/ink_sparkle.frag
+assets/flutter_assets/FontManifest.json
+
+DEX strings relevant to startup/opening motion:
+Paused duration = 
+ VideoEncoderSession: 
+. as Animations cannot run alongside Animators.
+0 as Animations cannot run alongside Transitions.
+! has no video validated profiles.
+ has reached onAnimationStart.
+Y is an older Office format. Save it once as DOCX, XLSX or PPTX for automatic PDF opening.
+2 is not supported yet and is ignored (PDFBOX-2831)
+ migrations are provided
+$ or can not be divided by alignment 
+%PDF-
+                For a more detailed explanation, please refer to Flow documentation.
+See callbackFlow API documentation for the details.
+0(?i)^(doc|document|scan|img)[-_ ]*\d+[-_0-9a-z]*
+!) with useCaseVideoStabilization(
+, cameraActiveDurationNs=
+, cameraClosingDurationNs=
+, cameraOpenDurationNs=
+, cameraRetryDurationNs=
+, defaultVideoProfile=
+, durationLimitMillis=
+, hasVideoCapture=
+D, imageReaderProxyProvider=null, postviewSettings=null, requestEdge=
+, mProviderPackage: 
+, pdf=
+%, profile=-1, compatibleVideoProfile=
+2, unable to create EncoderProfilesProviderAdapter.
+4, videoCapabilitiesSource=0, videoEncoderInfoFinder=
+, videoMime=
+, videoProfiles=
+, videoRecordingType=
+, videoStabilization=
+Y, you will not be able to use AndroidViewModel with the default ViewModelProvider.Factory
+		Please refer to 'flow' documentation or use 'flowOn' instead
+/. Camera might have been closed during opening.
+2. Current request contains video stream use case: 
+[. Please read KDoc to 'handleFatalException' method and report this incident to maintainers
+%.Builder.setVideoStabilizationEnabled
+.docx
+.fileProvider
+%.fileProvider.com.crazecoder.openfile
+.flutter.share_provider
+.pdf
+.pdfbox.cache
+/Smart Life
+8/com/tom_roush/pdfbox/resources/glyphlist/additional.txt
+6/com/tom_roush/pdfbox/resources/text/BidiMirroring.txt
+A: Attempt to provide a surface resulted with unrecognizable code.
+R: Camera may have been closed (possibly due to an error) immediately after opening
+3: Provided surface could not be used by the camera.
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>
+<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr></w:body></w:document>
+}A different provider has been set. To change the provider, call SurfaceEdge#invalidate before calling SurfaceEdge#setProvider
+ A document scan is already open.
+*AGGREGATED_ON_DEVICE_DOCUMENT_CROP_PROCESS
+,AGGREGATED_ON_DEVICE_DOCUMENT_DETECT_PROCESS
+-AGGREGATED_ON_DEVICE_DOCUMENT_ENHANCE_PROCESS
+An exported PDF page was empty.
+QAn invalid account was specified when connecting. Please provide a valid account.
+Animation from operation 
+AnimationCallback
+rAttempting to create a new Dart instance of VideoRecordEventListener, but the class has a nonnull callback method.
+8Attempting to request an undeclared dependency Provider<
+<Attempting to request an undeclared dependency Provider<Set<
+)Audio data reaches duration limit %d > %d
+'BackupHdrProfileEncoderProfilesProvider
+BufferProvider is not active.
+CLOUD_DOCUMENT_TEXT_CLOSE
+CLOUD_DOCUMENT_TEXT_CREATE
+CLOUD_DOCUMENT_TEXT_DETECT
++CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES
+ CONTROL_VIDEO_STABILIZATION_MODE
+CONVERTER_IMAGES_PDF
+CONVERTER_PDF_IMAGES
+CONVERTER_PDF_WORD
+CONVERTER_VIDEO_AUDIO
+COSDocument
+_COSStream has been closed and cannot be read. Perhaps its enclosing PDDocument has been closed?
+CX:CameraProvider-RetryStatus
+ICached audio data while we wait for video keyframe before starting muxer.
+QCached video keyframe while we wait for first audio sample before starting muxer.
+nCallback to `VideoRecordEventListener.onEvent` failed because native instance was not in the instance manager.
+ECamera EncoderProfilesProvider doesn't contain any supported Quality.
+CameraGraphConfigProvider<
+Can't find videoEncoderInfo
+Can't set target frame rate on a UseCase (by Preview.Builder.setTargetFrameRate() or VideoCapture.Builder.setTargetFrameRate()) if the frame rate range has already been set in the SessionConfig.
+-Cannot decrypt PDF, the password is incorrect
+8Cannot return null from a non-@Nullable @Provides method
+KComponents are not allowed to depend on interfaces they themselves provide.
+ConfigureVideoEncoderFuture 
+,Could not connect to Smart Life PC Receiver.
+*Could not convert this Office file to PDF.
+#Could not convert this PDF to Word.
+&Could not create Downloads/Smart Life.
+Could not create PDF folder.
++Could not create Smart Life exports folder.
+)Could not create a PDF from these images.
+!Could not create document folder.
+Could not delete document.
+Could not export PDF pages.
+*Could not extract the video's audio track.
+Could not load libflutter.so this is possibly because the application is running on an architecture that Flutter Android does not support (e.g. x86) see https://docs.flutter.dev/deployment/android#what-are-the-supported-target-architectures for more detail.
+Could not load saved documents.
+'Could not open Google document scanner.
+Could not rename document.
+ Could not save scanned document.
+!Could not scan photos and videos.
+4Couldn't find meta-data for provider with authority 
+Create VideoEncoderSession: 
+DELETE_DOCUMENT
+DIRECTORY_DOCUMENTS
+7Decryption material is not compatible with the document
+DefaultExecutor was shut down. This error indicates that Dispatchers.shutdown() was invoked prior to completion of exiting coroutines, leaving coroutines in incomplete state. Please refer to Dispatchers.shutdown documentation for more details
+DisplayDocTitle
+Do not call dispatchConfigurationChanged() on host. Host implements OnConfigurationChangedProvider and automatically dispatches configuration changes to fragments.
+Do not call dispatchLowMemory() on host. Host implements OnTrimMemoryProvider and automatically dispatches low memory callbacks to fragments.
+Do not call dispatchMultiWindowModeChanged() on host. Host implements OnMultiWindowModeChangedProvider and automatically dispatches multi-window mode changes to fragments.
+Do not call dispatchPictureInPictureModeChanged() on host. Host implements OnPictureInPictureModeChangedProvider and automatically dispatches picture-in-picture mode changes to fragments.
+DocChecksum
+DocMDP
+DocTimeStamp
+Document
+Document no longer exists.
+Document scan was cancelled.
+DocumentScan
+ Documents folder is unavailable.
+2Downstream VideoCapture failed to provide Surface.
+3Downstream node failed to provide Surface. Target: 
+,Drop video data since recording is stopping.
+ZDropped cached keyframe since we have new video data and have not yet received audio data.
+NDropped video data since muxer has not yet started and data is not a keyframe.
+ Duration limit in microseconds: 
+DurationNs(value=
+ODynamic range must be a fully specified dynamic range [provided dynamic range: 
+ERROR_DURATION_LIMIT_REACHED
+7EmojiCompat font provider not available on this device.
+EmojiCompatInitializer and InitializationProvider is present in
+     EmojiCompatInitializer or InitializationProvider. For more information
+     about manifest exclusions see the documentation for the androidx startup
+learn more in the documentation for BundledEmojiCompatConfig.
+9Encoder mime set to AAC, but no AAC profile was provided.
+eEncoderProfiles contains invalid video profiles, use CamcorderProfile to create EncoderProfilesProxy.
+EncoderProfilesProviderAdapter
+Error parsing AFM document:
+TError registering plugin document_scan, com.oguzhan.document_scan.DocumentScanPlugin
+Error: Corrupt AFM document:
+FORMAT_PDF
+zFailed to create EncoderProfilesProxy, EncoderProfiles might contain invalid video profiles. Use CamcorderProfile instead.
+Failed to get visible insets. getViewRootImpl() returned null from the provided view. This means that the view is either not attached or the method has been overridden
+=Failed to parse android.support.FILE_PROVIDER_PATHS meta-data
+@Failed to retrieve default CameraXConfig.Provider from meta-data
+First video time: %d (%s)
+!FontRequest {mProviderAuthority: 
+FontsProvider
+\FormatCombo must have at least one valid track. Both videoMime and audioMime cannot be null.
+Found content provider 
+GPSImgDirection
+GPSImgDirectionRef
+	GTS_PDFA1
+GmsDocScanDelAct
+GmsDocumentScannerImpl
+ GmsDocumentScanningResult{pages=
+Google document scanner 
+^HIGH_SPEED CameraGraph must only contain Preview and/or Video streams. Configured outputs are 
+@Ignore the video data since the video encoder has been released.
+Ignoring Animation set on 
+3Image processing performance profiling, duration: [
+5ImmutableEncoderProfilesProxy{defaultDurationSeconds=
+|Incorrect provider authority in manifest. Most likely due to a missing applicationId variable in application's build.gradle.
+GInvalid app configuration provided. Missing CameraDeviceSurfaceManager.
+:Invalid app configuration provided. Missing CameraFactory.
+AInvalid app configuration provided. Missing UseCaseConfigFactory.
+EInvalid zip data. Stream ended after $totalBytesRead bytes. Expected 
+LIST_DOCUMENTS
+-Landroid/animation/Animator$AnimatorListener;
+Landroid/animation/Animator;
+$Landroid/animation/AnimatorInflater;
++Landroid/animation/AnimatorListenerAdapter;
+'Landroid/animation/AnimatorSet$Builder;
+Landroid/animation/AnimatorSet;
+$Landroid/animation/LayoutTransition;
+!Landroid/content/ContentProvider;
+'Landroid/content/ContentProviderClient;
+!Landroid/content/pm/ProviderInfo;
+'Landroid/graphics/pdf/PdfDocument$Page;
+3Landroid/graphics/pdf/PdfDocument$PageInfo$Builder;
++Landroid/graphics/pdf/PdfDocument$PageInfo;
+"Landroid/graphics/pdf/PdfDocument;
+'Landroid/graphics/pdf/PdfRenderer$Page;
+"Landroid/graphics/pdf/PdfRenderer;
+,Landroid/media/EncoderProfiles$VideoProfile;
+0Landroid/media/MediaCodecInfo$VideoCapabilities;
+'Landroid/provider/MediaStore$Downloads;
+*Landroid/provider/MediaStore$Images$Media;
+)Landroid/provider/MediaStore$Video$Media;
+Landroid/provider/MediaStore;
+"Landroid/provider/Settings$Global;
+"Landroid/provider/Settings$Secure;
+4Landroid/provider/Settings$SettingNotFoundException;
+"Landroid/provider/Settings$System;
+Landroid/provider/Settings;
+&Landroid/view/InputDevice$MotionRange;
+(Landroid/view/MotionEvent$PointerCoords;
+,Landroid/view/MotionEvent$PointerProperties;
+Landroid/view/MotionEvent;
+-Landroid/view/WindowInsetsAnimation$Callback;
+$Landroid/view/WindowInsetsAnimation;
+6Landroid/view/accessibility/AccessibilityNodeProvider;
+4Landroid/view/animation/Animation$AnimationListener;
+"Landroid/view/animation/Animation;
+%Landroid/view/animation/AnimationSet;
+'Landroid/view/animation/AnimationUtils;
+'Landroid/view/animation/Transformation;
+(Landroid/window/OnBackAnimationCallback;
+7Landroidx/camera/camera2/Camera2Config$DefaultProvider;
+FLandroidx/camera/camera2/compat/quirk/CloseCaptureSessionOnVideoQuirk;
+NLandroidx/camera/camera2/compat/quirk/ImageCaptureFailedForVideoSnapshotQuirk;
+ULandroidx/camera/camera2/compat/quirk/ImageCaptureFailedWhenVideoCaptureIsBoundQuirk;
+@Landroidx/camera/camera2/compat/quirk/InvalidVideoProfilesQuirk;
+OLandroidx/camera/camera2/compat/quirk/PreviewDelayWhenVideoCaptureIsBoundQuirk;
+QLandroidx/camera/camera2/compat/quirk/PreviewStretchWhenVideoCaptureIsBoundQuirk;
+VLandroidx/camera/camera2/compat/quirk/RepeatingStreamConstraintForVideoRecordingQuirk;
+TLandroidx/camera/video/internal/compat/quirk/AudioEncoderIgnoresInputTimestampQuirk;
+WLandroidx/camera/video/internal/compat/quirk/AudioTimestampFramePositionIncorrectQuirk;
+PLandroidx/camera/video/internal/compat/quirk/CameraUseInconsistentTimebaseQuirk;
+DLandroidx/camera/video/internal/compat/quirk/CodecStuckOnFlushQuirk;
+OLandroidx/camera/video/internal/compat/quirk/ExcludeStretchedVideoQualityQuirk;
+HLandroidx/camera/video/internal/compat/quirk/ExtraSupportedQualityQuirk;
+KLandroidx/camera/video/internal/compat/quirk/ExtraSupportedResolutionQuirk;
+PLandroidx/camera/video/internal/compat/quirk/GLProcessingStuckOnCodecFlushQuirk;
+MLandroidx/camera/video/internal/compat/quirk/HdrRepeatingRequestFailureQuirk;
+MLandroidx/camera/video/internal/compat/quirk/MediaCodecDefaultDataSpaceQuirk;
+TLandroidx/camera/video/internal/compat/quirk/MediaCodecInfoReportIncorrectInfoQuirk;
+HLandroidx/camera/video/internal/compat/quirk/MediaStoreVideoCannotWrite;
+RLandroidx/camera/video/internal/compat/quirk/NegativeLatLongSavesIncorrectlyQuirk;
+LLandroidx/camera/video/internal/compat/quirk/PrematureEndOfStreamVideoQuirk;
+ELandroidx/camera/video/internal/compat/quirk/PreviewBlackScreenQuirk;
+WLandroidx/camera/video/internal/compat/quirk/PreviewFreezeAfterHighSpeedRecordingQuirk;
+SLandroidx/camera/video/internal/compat/quirk/ReportedVideoQualityNotSupportedQuirk;
+OLandroidx/camera/video/internal/compat/quirk/SignalEosOutputBufferNotComeQuirk;
+HLandroidx/camera/video/internal/compat/quirk/SizeCannotEncodeVideoQuirk;
+_Landroidx/camera/video/internal/compat/quirk/StopCodecAfterSurfaceRemovalCrashMediaServerQuirk;
+KLandroidx/camera/video/internal/compat/quirk/StretchedVideoResolutionQuirk;
+DLandroidx/camera/video/internal/compat/quirk/VideoEncoderCrashQuirk;
+_Landroidx/camera/video/internal/compat/quirk/VideoEncoderSuspendDoesNotIncludeSuspendTimeQuirk;
+CLandroidx/camera/video/internal/compat/quirk/VideoInterlacingQuirk;
+?Landroidx/camera/video/internal/compat/quirk/VideoQualityQuirk;
+$Landroidx/core/content/FileProvider;
+)Landroidx/startup/InitializationProvider;
+5Landroidx/window/extensions/WindowExtensionsProvider;
+)Landroidx/window/sidecar/SidecarProvider;
+&Lcom/crazecoder/openfile/FileProvider;
+4Lcom/google/mlkit/common/internal/MlKitInitProvider;
+VLcom/google/mlkit/vision/documentscanner/internal/GmsDocumentScanningDelegateActivity;
+3Ldev/fluttercommunity/plus/share/ShareFileProvider;
+ALifecycleOwner must be set to get ProcessCameraProvider instance.
+LLio/flutter/plugin/editing/ImeSyncDeferringInsetsCallback$AnimationCallback;
+!Ljava/lang/annotation/Documented;
+'Ljava/security/NoSuchProviderException;
+!Ljava/security/ProviderException;
+Ljava/util/zip/Adler32;
+Ljava/util/zip/CRC32;
+#Ljava/util/zip/DataFormatException;
+Ljava/util/zip/Deflater;
+$Ljava/util/zip/DeflaterOutputStream;
+Ljava/util/zip/GZIPInputStream;
+ Ljava/util/zip/GZIPOutputStream;
+Ljava/util/zip/Inflater;
+Ljava/util/zip/ZipEntry;
+Ljava/util/zip/ZipFile;
+Ljava/util/zip/ZipOutputStream;
+Lorg/opencv/imgproc/Imgproc;
+mMLKitLoggingOptions{libraryName=play-services-mlkit-document-scanner, enableFirelog=true, firelogEventType=1}
+jMediaSpec contains OUTPUT_FORMAT_UNSPECIFIED. Using CamcorderProfile to derive VIDEO settings [mime type: 
+iMediaSpec video mime matches EncoderProfiles. Using EncoderProfiles to derive VIDEO settings [mime type: 
+MediaSpec{videoSpec=
+"MimeMatchedVideoCapabilities(mime=
+Missing PDF file path.
+5Missing android.support.FILE_PROVIDER_PATHS meta-data
+Missing document path or name.
+Missing document path.
+Missing video file path.
+MlKitDocScanUI.API
+MlKitInitProvider
+Module with the Main dispatcher is missing. Add dependency providing the Main dispatcher, e.g. 'kotlinx-coroutines-android' and ensure it has the same version as 'kotlinx-coroutines-core'
+Multiple components provide 
+7Muxer cannot be started without an encoded video frame.
+Muxer.addTrack() for video 
+fNo EncoderProfiles present. May rely on fallback defaults to derive VIDEO settings [chosen mime type: 
+8No PostScript name information is provided for the font 
+No default CameraXConfig.Provider specified in meta-data. The most likely cause is you did not include a default implementation in your build such as 'camera-camera2'.
+>No enum constant com.tom_roush.pdfbox.pdmodel.font.FontFormat.
+,No readable text was found in this document.
+No video EncoderProfile is compatible with requested output format and dynamic range. May rely on fallback defaults to derive VIDEO settings [chosen mime type: 
+Null defaultVideoProfile
+Null videoProfiles
+OFFICE_PDF
+ON_DEVICE_DOCUMENT_CROP_CLOSE
+ON_DEVICE_DOCUMENT_CROP_CREATE
+ON_DEVICE_DOCUMENT_CROP_LOAD
+ON_DEVICE_DOCUMENT_CROP_PROCESS
+ON_DEVICE_DOCUMENT_DETECT_CLOSE
+ ON_DEVICE_DOCUMENT_DETECT_CREATE
+ON_DEVICE_DOCUMENT_DETECT_LOAD
+!ON_DEVICE_DOCUMENT_DETECT_PROCESS
+ ON_DEVICE_DOCUMENT_ENHANCE_CLOSE
+!ON_DEVICE_DOCUMENT_ENHANCE_CREATE
+ON_DEVICE_DOCUMENT_ENHANCE_LOAD
+"ON_DEVICE_DOCUMENT_ENHANCE_PROCESS
+!ON_DEVICE_DOCUMENT_SCANNER_FINISH
+ ON_DEVICE_DOCUMENT_SCANNER_START
+$ON_DEVICE_DOCUMENT_SCANNER_UI_CREATE
+$ON_DEVICE_DOCUMENT_SCANNER_UI_FINISH
+#ON_DEVICE_DOCUMENT_SCANNER_UI_START
+OPENING
+$OPTIONAL_MODULE_DOCUMENT_CROP_CREATE
+"OPTIONAL_MODULE_DOCUMENT_CROP_INIT
+%OPTIONAL_MODULE_DOCUMENT_CROP_PROCESS
+%OPTIONAL_MODULE_DOCUMENT_CROP_RELEASE
+&OPTIONAL_MODULE_DOCUMENT_DETECT_CREATE
+$OPTIONAL_MODULE_DOCUMENT_DETECT_INIT
+'OPTIONAL_MODULE_DOCUMENT_DETECT_PROCESS
+'OPTIONAL_MODULE_DOCUMENT_DETECT_RELEASE
+'OPTIONAL_MODULE_DOCUMENT_ENHANCE_CREATE
+%OPTIONAL_MODULE_DOCUMENT_ENHANCE_INIT
+(OPTIONAL_MODULE_DOCUMENT_ENHANCE_PROCESS
+(OPTIONAL_MODULE_DOCUMENT_ENHANCE_RELEASE
+3OPTIONAL_MODULE_DOCUMENT_SCANNER_UI_PAGE_PROCESSING
+0OPTIONAL_MODULE_DOCUMENT_SCANNER_UI_SCREEN_CLICK
+0OPTIONAL_MODULE_DOCUMENT_SCANNER_UI_SCREEN_ERROR
+2OPTIONAL_MODULE_DOCUMENT_SCANNER_UI_SCREEN_LOADING
+/OPTIONAL_MODULE_DOCUMENT_SCANNER_UI_SCREEN_VIEW
+2OPTIONAL_MODULE_DOCUMENT_SCANNER_UI_SESSION_FINISH
+1OPTIONAL_MODULE_DOCUMENT_SCANNER_UI_SESSION_START
+Office_Document
+&Only 32-bit sample duration is allowed
+1Open Smart Life > Settings > Connect to PC first.
+ OpenDocument content is missing.
+Opening 
+PDF file is unavailable.
+PDF file was empty.
+TPDFBoxResourceLoader is not initialized, call PDFBoxResourceLoader.init() before use
+PDFDocEncoding
+PDFOperator{
+PREVIEW_VIDEO_STILL
+6Package manager required to locate emoji font provider
+PdfBox-Android
+Pdf{uri=
+"Please provide a valid libraryName
+ProcessCameraProvider
+               under InitializationProvider in your AndroidManifest.xml
+Provided data element number (
+`Provided decryption material is not compatible with the document - did you pass a null keyStore?
+$Provided dictionary is not of type '
+#Provided message must not be empty.
+#Provider must grant uri permissions
+Provider must not be exported
+RENAME_DOCUMENT
+RandomAccessRead pdfSource
+BRead PDF specification about EncryptMetadata (default value: true)
+%Receive BufferProvider state change: 
+*Received video keyframe. Starting muxer...
+%RecordingStats{recordedDurationNanos=
+Releasing video encoder.
+Releasing video encoder: 
+Reopening camera device
+3Replaced cached video keyframe with newer keyframe.
+1Resolved VIDEO frame rates: Capture frame rate = 
+Retry setupVideo #
+;SavedStateProvider with the given key is already registered
+EScoped provider was invoked recursively returning different results: 
+Sending VideoRecordEvent 
+sSetting a summary with a String formatting marker is no longer supported. You should use a SummaryProvider instead.
+)Should contain at least one VideoProfile.
+0Shutting down CameraPresenceProvider monitoring.
+:Skipping audio data: timestamp precedes first video frame.
+Smart Life
+Smart Life phone receiver
+Smart Life reminder
+Smart Life reminders
+SmartLifeDocuments
+*Span count should be at least 1. Provided 
++Starting CameraPresenceProvider monitoring.
+~System property com.tom_roush.pdfbox.pdfparser.nonSequentialPDFParser.eofLookupRange does not contain an integer value, but: '
+TEMPLATE_VIDEO_SNAPSHOT
+/The EncoderInput of video isn't a SurfaceInput.
+The PDF has no pages to export.
+RThe parent is closed. Call SurfaceEdge#invalidate() before setting a new provider.
+The previous high speed request and the current high speed request do not have the same video stream use case. Previous request contains video stream use case: 
+The provided context (
+9The provided context did not have an application context.
+TThe provided focal length and sensor length result in an invalid view angle degrees.
+The provider's format(
+The provider's size(
+]The returned sizes list of the resolution filter must be a subset of the provided sizes list.
+UThe stream doesn't provide any stream length, using fallback readUntilEnd, at offset 
+FThe video frame producer became inactive before any data was received.
+;There should be a previous data for adjusting the duration.
+=There's no VideoEncoder to release! Finish release completer.
+>This Office format is not supported for automatic PDF opening.
++This video does not contain an audio track.
+CThis video's audio format cannot be exported as M4A on this device.
+Total paused duration = 
+%Try to safely release video encoder: 
+Unable to establish connection on channel: 'dev.flutter.pigeon.camera_android_camerax.ProcessCameraProvider.pigeon_newInstance'.
+wUnable to establish connection on channel: 'dev.flutter.pigeon.camera_android_camerax.VideoCapture.pigeon_newInstance'.
+vUnable to establish connection on channel: 'dev.flutter.pigeon.camera_android_camerax.VideoOutput.pigeon_newInstance'.
+{Unable to establish connection on channel: 'dev.flutter.pigeon.camera_android_camerax.VideoRecordEvent.pigeon_newInstance'.
+Unable to establish connection on channel: 'dev.flutter.pigeon.camera_android_camerax.VideoRecordEventFinalize.pigeon_newInstance'.
+xUnable to establish connection on channel: 'dev.flutter.pigeon.camera_android_camerax.VideoRecordEventListener.onEvent'.
+Unable to establish connection on channel: 'dev.flutter.pigeon.camera_android_camerax.VideoRecordEventStart.pigeon_newInstance'.
+%Unable to find a VideoEncoderInfoImpl
+XUnable to get input buffer, the BufferProvider could be transitioning to INACTIVE state.
+.Unable to get min frame duration for format = 
+#Unable to initialize video encoder.
+$Unable to query the content provider
+FUnexpected configurations: Overwriting current videoStabilizationMode(
++Unexpected throwable during camera opening!
+Android documentation: https://developer.android.com/reference/android/view/View#announceForAccessibility(java.lang.CharSequence)
+Using fallback VIDEO bitrate
+1Using resolved VIDEO bitrate from EncoderProfiles
+VIDD
+VIDEO_CALL
+VIDEO_CAPTURE
+VIDEO_RECORD
+VIDEO_STABILIZATION
+VIDJL
+VidEncCfgDefaultRslvr
+VidEncVdPrflRslvr
+4Video data comes before the track is added to Muxer.
+)Video data reaches duration limit %d > %d
+Video file is unavailable.
+(Video source has transitioned to state: 
+,Video source transitions to the same state: 
+VideoCapture
+5VideoCapture can only be detached on the main thread.
+CVideoCapture is detached from the camera. Surface update cancelled.
+)VideoCapture#onStateAttached: cameraID = 
+VideoCapture#onStateDetached
+VideoCapture:
+VideoConfigUtil
+VideoEncoder
+VideoEncoder Setup error: 
+VideoEncoder can be released: 
+"VideoEncoder configuration failed.
+VideoEncoder is created. 
+VideoEncoder is releasing: 
+VideoEncoderConfig{mimeType=
+VideoEncoderDataSpace{standard=
+VideoEncoderInfoImpl
+VideoEncoderInfoWrapper
+VideoEncoderSession
+VideoEncoderSession@
+VideoHandle
+VideoMimeInfo(mimeType=
+VideoOutput
+VideoOutput is required
+VideoProfileProxy{codec=
+VideoQuality 
+VideoRecordEvent
+VideoRecordEventFinalize
+VideoRecordEventListener
+ VideoRecordEventListener.onEvent
+VideoRecordEventStart
+VideoSpec{qualitySelector=
+VideoTimebaseConverter
+:VideoValidatedEncoderProfilesProxy{defaultDurationSeconds=
+)Warning: You did not close a PDF Document
+9WindowExtensionsProvider#getWindowExtensions is not valid
+!Word document content is missing.
+=You can assign a directory to the 'pdfbox.fontcache' property
+FYou must parse the document first before calling getAccessPermission()
+>You must parse the document first before calling getDocument()
+@You must parse the document first before calling getEncryption()
+)[Landroid/view/MotionEvent$PointerCoords;
+-[Landroid/view/MotionEvent$PointerProperties;
+$acquireUnstableContentProviderClient
+addAnimation
+*aggregatedOnDeviceDocumentCroppingLogEvent
++aggregatedOnDeviceDocumentDetectionLogEvent
+-aggregatedOnDeviceDocumentEnhancementLogEvent
+#android.intent.action.OPEN_DOCUMENT
+#android.permission.READ_MEDIA_VIDEO
+#android.support.FILE_PROVIDER_PATHS
+Gandroidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER
+Gandroidx.camera.featurecombinationquery.PLAY_SERVICES_IMPL_PROVIDER_KEY
+/androidx.camera.video.VideoCapture.streamUpdate
+0androidx.lifecycle.ViewModelProvider.DefaultKey:
+5androidx.lifecycle.internal.SavedStateHandlesProvider
+3androidx.window.extensions.WindowExtensionsProvider
+animationCallback
+application/pdf
+Iapplication/vnd.openxmlformats-officedocument.presentationml.presentation
+Aapplication/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+Gapplication/vnd.openxmlformats-officedocument.wordprocessingml.document
+application/x-camera-motion
+application/x-gzip
+application/x-zip-compressed
+
+Flutter AOT strings relevant to opening motion:
+AnimationController.
+_handleAnimationChanged@97443363
+_animation@333160358
+deleteDocument
+package:document_scan/src/types/scan_input.dart
+VideoRecordEventStart
+moveToBeginningOfDocumentAndModifySelection:
+package:document_scan/src/detector/document_detector.dartH
+_MixinApplication100&State&TickerProviderStateMixin&RestorationMixin&WidgetsBindingObserver@18353248
+package:flutter/src/animation/animation_controller.dart
+_AlwaysCompleteAnimation@61411118
+_shareDocument@877187301
+_primaryPositionAnimation@109053933
+Could not create the PDF preview.
+_handleInertiaAnimation@181066802
+Download complete. Opening Android installer...
+package:image/src/formats/psd/layer_data/psd_layer_section_divider.dart
+A DefaultSelectionStyle constructed with DefaultSelectionStyle.fallback cannot be incorporated into the widget tree, it is meant only to provide a fallback value returned by DefaultSelectionStyle.of() when no enclosing default selection style is present in a BuildContext.
+ScrollAwareImageProvider
+_LocalDocumentScannerPageState@132121708.
+package:document_scan/src/detector/detection_event.dart
+_MixinApplication88&State&SingleTickerProviderStateMixin@18353248
+get:_scrollToDocumentBoundary@175183791
+_DividerDefaultsM2@260283978
+DocumentCorners(TL:
+_animationController@207145554
+/docs
+dev.flutter.pigeon.camera_android_camerax.VideoCapture.pigeon_newInstance
+_DocsPageState@877187301
+_MixinApplication331&Animation&AnimationEagerListenerMixin&AnimationLocalListenersMixin@18353248
+_currentRotationAnimation@87420462
+set:dividerColor
+_MixinApplication67&Animation&AnimationLazyListenerMixin&AnimationLocalListenersMixin&AnimationLocalStatusListenersMixin@18353248
+get:dragStartDistanceMotionThreshold
+No documents saved yet
+video/x-ms-wvx
+ExrZipCompressor
+_moveAnimation@173238936
+video/vnd.dece.hd
+application/vnd.oasis.opendocument.text-template
+Create an editable DOCX from PDF text
+_hoverAnimation@94019562
+AnimationLocalListenersMixin
+_MixinApplication72&State&TickerProviderStateMixin@18353248
+video/x-ms-vob
+application/vnd.openxmlformats-officedocument.wordprocessingml.template
+_sheetAnimation@497001611
+" from Smart Life organization? The files themselves will stay exactly where Android stores them.
+AnimationStyle
+init:videoRecordingEventStreamController
+_fadeoutAnimationController@119211710
+ExpandSelectionToDocumentBoundaryIntent
+video/vnd.ms-playready.media.pyv
+VideoRecordEventFinalize
+docx
+Document.pdf
+Open Smart Life PC Receiver on the computer. Enter the PC address and pairing code shown there.
+VideoQuality.
+Tap a photo or video to preview it. Use the checkbox to select items for trash. Android still asks for confirmation before anything is moved.
+_doGradientFilter@825460636
+Could not share this document: 
+Create a PDF from this image
+Delete document?
+ScannedDocument
+_loadDocuments@877187301
+_MixinApplication99&State&TickerProviderStateMixin&RestorationMixin@18353248.
+Convert this document to PDF
+package:path_provider/path_provider.dart
+video/x-ms-wm
+Could not scan this document: 
+VideoCapture.pigeon_withOutput
+init:_animation@97443363
+getFadeDurationForType
+package:flutter/src/material/ink_splash.dart
+_buildAnimation@113243954
+videoRecordingEventStreamController
+Scan a document and it will appear here, ready to preview or share.
+smzip
+reverseDuration
+_getSplashRadiusForPositionInSize@528036029
+get:animation
+_handlePreviousAnimationStatusChanged@87420462
+No document found. Put it on a contrasting background and try again.
+.docx
+Choose the document type.
+video/x-ms-wmx
+dev.flutter.pigeon.camera_android_camerax.VideoRecordEvent.pigeon_newInstance
+Categories are Smart Life tags only. Renaming or deleting one never moves or deletes the Android file.
+Add to Smart Life
+_opacityAnimation@81005770
+video/3gpp2
+_none@289282460
+com.oguzhan.document_scan/detector
+video/vnd.dece.pd
+_DocumentCard@877187301
+video/vnd.dece.video
+_MixinApplication98&State&TickerProviderStateMixin@18353248
+video/h261
+_MixinApplication185&State&TickerProviderStateMixin&RestorationMixin@18353248
+package:path_provider_android/src/path_provider_android_real.dart
+animation
+video/x-msvideo
+package:flutter/src/widgets/scroll_aware_image_provider.dart
+duration
+GPSImgDirection
+_MixinApplication125&State&SingleTickerProviderStateMixin@18353248
+application/vnd.airzip.filesecure.azs
+systemNavigationBarDividerColor
+package:smart_life/document_organization.dart
+VideoRecordEventListener
+SmartDocumentOrganization
+splashColor
+_animationListener@276338117
+_duration@308443839
+video/vnd.vivo
+_updateSecondaryAnimation@39188637
+createAnimationController
+NumpadDivide
+application/vnd.oasis.opendocument.spreadsheet-template
+_RenderMagnification@289282460.
+CompoundAnimation
+application/x-futuresplash
+AnimationStatus.
+dev.flutter.pigeon.camera_android_camerax.ProcessCameraProvider.getInstance
+_DocumentOverlayPainter@132121708
+_disposeAnimations@87420462
+application/vnd.oasis.opendocument.image-template
+_scaleAnimation@97443363
+zips
+DocumentCorners
+_updateAnimations@108490068
+Could not load saved documents: 
+CurvedAnimation
+application/vnd.oasis.opendocument.database
+scrollToEndOfDocument:
+package:flutter/src/animation/tween.dart
+dev.flutter.pigeon.camera_android_camerax.ProcessCameraProvider.getAvailableCameraInfos
+_animationController@527321118
+application/vnd.dece.zip
+application/vnd.oasis.opendocument.image
+_Magnifier@289282460
+onAnimationStatusChange
+SavedDocument
+get:_enableAnimations@60066280
+get:_overlayAnimation@188258657
+_MixinApplication67&Animation&AnimationLazyListenerMixin&AnimationLocalListenersMixin&AnimationLocalStatusListenersMixin@18353248.
+videos
+package:flutter/src/animation/animation_style.dart
+package:path_provider_android/src/path_provider.g.dart
+init:_pigeonVar_codecProcessCameraProvider@599074700
+_SmartLifeOpeningBadge@21392330
+_MixinApplication337&Animation&AnimationWithParentMixin@18353248
+_blendVividLight@694161258
+Could not rename this document: 
+package:flutter/src/animation/animation.dart
+Scan New Document
+PathProviderPlatform
+_MixinApplication101&State&TickerProviderStateMixin@18353248
+video/ogg
+" is not supported by the platform. Refer to https://docs.flutter.dev/release/breaking-changes/network-policy-ios-android.
+package:path_provider_platform_interface/src/method_channel_path_provider.dart
+DocumentScanner.
+AnimationLocalStatusListenersMixin
+moveToEndOfDocumentAndModifySelection:
+_globalizeTransforms@30494604
+video/mp4
+dev.flutter.pigeon.camera_android_camerax.ProcessCameraProvider.bindToLifecycle
+Check and install the latest Smart Life version
+Duplicate Videos
+get:splashRadius
+convertImagesToPdf
+application/vnd.openxmlformats-officedocument.presentationml.slide
+application/vnd.oasis.opendocument.text-web
+application/vnd.oasis.opendocument.spreadsheet
+listDocuments
+Large Videos
+createAnimation
+VideoRecordEvent
+video/x-flv
+Smart Life 
+_SmartLifeOpeningHostState@21392330
+Name document
+SmartDocumentCategory.fromMap
+video/vnd.fvt
+_MixinApplication293&State&TickerProviderStateMixin@18353248
+_floatingLabelAnimation@94019562
+trueMotion
+_onAnimationStatusChanged@543267081
+Export every PDF page as a PNG image
+set:_openingController@21392330
+_MixinApplication70&State&SingleTickerProviderStateMixin@18353248
+PathProviderPlatform.
+get:_lastTransform@30494604
+package:path_provider_platform_interface/path_provider_platform_interface.dart
+AnimationWithParentMixin
+Point at the document and tap the shutter.
+frameDuration
+Document name
+ from Smart Life?
+AnimationBehavior
+ProcessCameraProvider
+VerticalDivider
+animationStatusCallback
+_SmartDocumentOrganizationState@879332913
+dev.flutter.pigeon.camera_android_camerax.Preview.setSurfaceProvider
+application/vnd.oasis.opendocument.formula-template
+_MixinApplication99&State&TickerProviderStateMixin&RestorationMixin@18353248
+application/vnd.ms-word.document.macroenabled.12
+) to trash. Smart Life does not remove anything automatically.
+VideoRecordedEvent
+VideoQuality
+Could not preview this document.
+noAnimation
+PsdLayerSectionDivider
+_proxyAnimation@279011697$
+SmartDocumentCategory
+GZipCodec
+hintFadeDuration
+enableAnimation
+moveToBeginningOfDocument:
+dev.flutter.pigeon.camera_android_camerax.VideoCapture.withOutput
+maybeDisableAnimationsOf
+_MixinApplication260&State&SingleTickerProviderStateMixin@18353248
+ProxyAnimation.
+smart_document_assignments_v1
+_toTextAffinity@383246054
+video_recorded
+_doHorizontalFilter@825460636
+Android did not provide an update file location.
+_SemanticsConfigurationProvider@28266271
+DocumentProcessor
+transitionDuration
+get:splashFactory
+SingleTickerProviderStateMixin
+_positionAnimation@112428833
+ImageProvider
+onAnimationValueChange
+_MixinApplication198&State&TickerProviderStateMixin@18353248
+application/vnd.oasis.opendocument.formula
+_MixinApplication259&State&SingleTickerProviderStateMixin@18353248
+renameDocument
+_InkSplashFactory@528036029
+_updateAnimations@87420462
+video/x-smv
+get:splashColor
+_extendedCurrentScaleAnimation@87420462
+AnimationStatus
+Organize files inside Smart Life without moving them in Android.
+(isRecordingVideo: 
+application/vnd.oasis.opendocument.chart-template
+Duration
+_MixinApplication333&Animation&AnimationLazyListenerMixin@18353248
+_MixinApplication95&State&TickerProviderStateMixin@18353248
+_animationStatusListener@333160358
+Smart Life
+_MixinApplication66&Animation&AnimationLazyListenerMixin&AnimationLocalListenersMixin@18353248
+video/x-mng
+InternalExrZipCompressor
+_updateCurvedAnimations@112428833
+Rename document
+dev.flutter.pigeon.camera_android_camerax.ProcessCameraProvider.unbindAll
+dev.flutter.pigeon.camera_android_camerax.Preview.releaseSurfaceProvider
+VideoOutput
+set:splashRadius
+application/vnd.oasis.opendocument.graphics
+video/x-f4v
+`path_provider_android` threw an error: 
+, videoBitrate: $
+video/jpeg
+package:image/src/formats/exr/exr_zip_compressor.dart
+VideoStabilizationMode.
+ScannedDocument(
+_deleteDocument@877187301
+There are several ways to avoid this problem. The simplest is to use a Builder to get a context that is "under" the Scaffold. For an example of this, please see the documentation for Scaffold.of():
+_RenderMagnification@289282460
+_MixinApplication331&Animation&AnimationEagerListenerMixin&AnimationLocalListenersMixin@18353248.
+_MixinApplication166&State&AutomaticKeepAliveClientMixin&WidgetsBindingObserver&TickerProviderStateMixin&TextSelectionDelegate&TextInputClient@18353248
+_MixinApplication179&State&TickerProviderStateMixin&RestorationMixin@18353248.
+Divider
+_AnimationSwap@86063916.
+omdoc
+dev.flutter.pigeon.camera_android_camerax.VideoRecordEventListener.onEvent
+_effectiveAnimationStatus@276338117
+video/vnd.dece.sd
+_MixinApplication32&State&SingleTickerProviderStateMixin@18353248
+_AlwaysDismissedAnimation@61411118
+largeVideos
+set:reverseDuration
+videoBitrate
+video/vnd.dece.mobile
+application/vnd.fujixerox.docuworks
+_updateAnimations@112428833
+package:flutter/src/widgets/ticker_provider.dart
+init:_pigeonVar_codecVideoCapture@599074700
+maxVideoDuration
+application/docbook+xml
+application/vnd.openxmlformats-officedocument.presentationml.template
+application/vnd.adobe.air-application-installer-package+zip
+AnimationEagerListenerMixin
+_setAnimations@543267081
+_MixinApplication100&State&TickerProviderStateMixin&RestorationMixin&WidgetsBindingObserver@18353248.
+video/x-sgi-movie
+_MixinApplication164&State&AutomaticKeepAliveClientMixin&WidgetsBindingObserver&TickerProviderStateMixin@18353248
+_MatrixTransformPart@30494604
+Preparing PDF preview...
+PathProviderAndroid
+application/vnd.openxmlformats-officedocument.wordprocessingml.document
+video/h264
+_MixinApplication262&State&TickerProviderStateMixin&ToggleableStateMixin@18353248
+checkmarkAnimation
+package:flutter/src/widgets/implicit_animations.dart
+withAnimation
+Animation
+TrainHoppingAnimation
+application/vnd.openxmlformats-officedocument.presentationml.presentation
+_restartAnimation@333160358
+video/mp2t
+package:flutter/src/animation/animations.dart
+, videoStabilizationMode: 
+_MixinApplication261&State&TickerProviderStateMixin@18353248
+TickerProvider
+get:reverseTransitionDuration
+_openingController@21392330
+Could not open the PDF preview.
+_MixinApplication185&State&TickerProviderStateMixin&RestorationMixin@18353248.
+_doVerticalFilter@825460636
+_ParentInkResponseProvider@91059085
+getRotationAnimation
+_MixinApplication75&State&SingleTickerProviderStateMixin@18353248
+_MixinApplication335&Animation&AnimationLazyListenerMixin&AnimationLocalListenersMixin&AnimationLocalStatusListenersMixin@18353248
+AlwaysStoppedAnimation
+AnimationController
+application/vnd.airzip.filesecure.azf
+_DocsHeader@877187301
+_TransformPart@30494604
+package:flutter/src/painting/image_provider.dart
+package:document_scan/src/types/document_corners.dart
+_setSecondaryAnimation@39188637
+A DefaultTextStyle constructed with DefaultTextStyle.fallback cannot be incorporated into the widget tree, it is meant only to provide a fallback value returned by DefaultTextStyle.of() when no enclosing default text style is present in a BuildContext.
+video/x-ms-wmv
+PathProviderAndroid.
+_scrollToDocumentBoundary@175183791
+_MixinApplication24&State&TickerProviderStateMixin&ToggleableStateMixin@18353248
+_opacityAnimation@97443363
+moveToEndOfDocument:
+_MixinApplication118&State&SingleTickerProviderStateMixin@18353248
+_AnimationSwap@86063916
+_MixinApplication190&State&TickerProviderStateMixin@18353248
+Change Smart Life colors only.
+_MixinApplication97&State&TickerProviderStateMixin@18353248
+dividerTheme
+jumpOnAnimationEnd
+application/vnd.fujixerox.docuworks.binder
+_MixinApplication115&State&TickerProviderStateMixin@18353248
+_MixinApplication334&Animation&AnimationLazyListenerMixin&AnimationLocalListenersMixin@18353248.
+application/vnd.ms-xpsdocument
+_fadeoutOpacityAnimation@119211710
+deleteDrawerAnimation
+ReverseAnimation
+AnimationMin.
+dividerColor
+Duplicates, similar or blurry photos & large videos
+Could not convert this Office file to PDF.
+_MixinApplication24&State&TickerProviderStateMixin&ToggleableStateMixin@18353248.
+video/x-m4v
+VideoStabilizationMode
+application/x-bzip2
+_animation@97443363
+Smart Life needs All files access so PDF, Word, images, videos and search can work across internal storage.
+application/omdoc+xml
+PsdLayerSectionDivider.
+Videos
+package:flutter/src/animation/tween_sequence.dart
+_updateHighlightsAndSplashes@91059085
+.doc
+ Smart Life files
+_MixinApplication65&Animation&AnimationLazyListenerMixin@18353248
+disableAnimations
+set:_curvedSheetAnimation@497001611
+_confirmStartResizeAnimation@173238936
+_scanNewDocument@877187301
+video/vnd.mpegurl
+_documentBoundary@175183791
+AnimationBehavior.
+package:flutter/src/material/divider_theme.dart
+_updateAnimations@276338117
+_MixinApplication335&Animation&AnimationLazyListenerMixin&AnimationLocalListenersMixin&AnimationLocalStatusListenersMixin@18353248.
+_pigeonVar_codecProcessCameraProvider@599074700
+video/webm
+dev.flutter.pigeon.camera_android_camerax.ProcessCameraProvider.pigeon_newInstance
+This happens when a plugin sends messages to the framework side before the framework has had an opportunity to register a listener. See the ChannelBuffers API documentation for details on how to configure the channel to expect more messages, or to expect messages to get discarded:
+video/mpeg
+_MixinApplication178&State&TickerProviderStateMixin@18353248
+package:flutter/src/material/divider.dart
+_MixinApplication332&Animation&AnimationEagerListenerMixin&AnimationLocalListenersMixin&AnimationLocalStatusListenersMixin@18353248.
+application/epub+zip
+package:document_scan/src/detector/corner_stabilizer.dart
+video/mj2
+Docs
+_IndividualOverrides@95247952
+ScrollToDocumentBoundaryIntent
+_EmptyDocumentsCard@877187301
+CurvedAnimation.
+_handleAnimationUpdate@279011697
+InkSplash
+video/quicktime
+_scaleAnimationFocalPoint@181066802
+video/vnd.uvvu.mp4
+_MixinApplication241&State&SingleTickerProviderStateMixin@18353248
+_setAnimation@511506021
+_MixinApplication74&State&TickerProviderStateMixin@18353248
+animationDuration
+Double-check whether the map was used in a place that documents support for WidgetStateProperty objects. If so, please file a bug report. (The https://pub.dev/ page for a package contains a link to "View/report issues".)
+_AnimationDirection.
+_createSplash@91059085
+Found by dividing color wheel by 6, then finding the 2 colors adjacent to source.
+dart:core/duration.dart
+_AnimationDirection@60066280
+_MixinApplication25&State&TickerProviderStateMixin@18353248
+VideoCapture.withOutput
+Tap Check for Update to look for a newer Smart Life build.
+package:smart_life/docs_page.dart
+video/h263
+_disposeAnimations@543267081
+_MixinApplication89&State&SingleTickerProviderStateMixin@18353248
+suitableForTransitionAnimationPredicate
+_MixinApplication336&Animation&AnimationLazyListenerMixin&AnimationLocalStatusListenersMixin@18353248.
+VideoModeNext
+set:duration
+The camera could not be opened because "Do Not Disturb" mode is enabled. Please disable this mode, and try opening the camera again.
+application/vnd.oasis.opendocument.graphics-template
+_setOpacityAnimation@81005770
+TrainHoppingAnimation.$
+video/x-matroska
+SmartLifeOpeningHost
+_handleScaleAnimation@181066802
+_startResizeAnimation@173238936
+_MixinApplication69&State&TickerProviderStateMixin@18353248
+_MixinApplication184&State&TickerProviderStateMixin@18353248
+scrollToBeginningOfDocument:
+dev.flutter.pigeon.camera_android_camerax.VideoRecordEventStart.pigeon_newInstance
+application/x-bzip
+VideoCapture
+_hoverAnimationController@364083257
+video/x-ms-asf
+set:_animation@333160358
+_MixinApplication332&Animation&AnimationEagerListenerMixin&AnimationLocalListenersMixin&AnimationLocalStatusListenersMixin@18353248
+_startNewSplash@91059085
+avatarDrawerAnimation
+_predictLine@825460636
+package:camera_platform_interface/src/types/video_stabilization_mode.dart
+package:flutter/src/animation/curves.dart
+get:transitionDuration
+AnimationMin
+package:document_scan/src/scanner/document_scanner.dart
+_currentScaleAnimation@87420462
+splashFactory
+_DividerDefaultsM3@260283978
+application/pdf
+package:flutter/src/animation/listener_helpers.dart
+application/vnd.oasis.opendocument.text
+DocumentName
+_pigeonVar_codecVideoCapture@599074700
+_MixinApplication330&Animation&AnimationEagerListenerMixin@18353248
+duplicateVideos
+_NegativeClip@289282460
+ExtendSelectionToDocumentBoundaryIntent
+SavedDocument.fromMap
+_MixinApplication174&State&TickerProviderStateMixin@18353248
+dev.flutter.pigeon.camera_android_camerax.VideoRecordEventFinalize.pigeon_newInstance
+TickerProviderStateMixin
+package:document_scan/src/processor/document_processor.dart
+ProxyAnimation
+_performAnimationUpdate@279011697
+DocumentCorners.fromUnordered
+_LocalDocumentScannerPageState@132121708
+_hasFrameDurationPassed@429483930
+Could not convert this Office file to PDF: 
+GPSImgDirectionRef
+_curvedSheetAnimation@497001611
+convertPdfToDocx
+_IndividualOverrides@71318349
+_MixinApplication197&State&TickerProviderStateMixin@18353248
+_MixinApplication15&State&TickerProviderStateMixin@18353248
+None of the provided map keys matched this set, and the type "
+_MixinApplication1&State&SingleTickerProviderStateMixin@18353248
+_previousScaleAnimation@87420462
+application/zip
+CompoundAnimation.
+Saved Documents
+set:_floatingLabelAnimation@94019562
+_MixinApplication90&State&SingleTickerProviderStateMixin@18353248
+get:_documentBoundary@175183791
+dev.flutter.pigeon.camera_android_camerax.VideoOutput.pigeon_newInstance
+DocumentDetector
+_MixinApplication139&State&TickerProviderStateMixin@18353248
+application/vnd.oasis.opendocument.presentation
+dev.flutter.pigeon.camera_android_camerax.ProcessCameraProvider.isBound
+_MixinApplication165&State&AutomaticKeepAliveClientMixin&WidgetsBindingObserver&TickerProviderStateMixin&TextSelectionDelegate@18353248
+DividerThemeData
+This organizes the file inside Smart Life only. The Android file stays where it is.
+video/vnd.dvb.file
+_MixinApplication242&State&SingleTickerProviderStateMixin@18353248
+setSurfaceProvider
+convertOfficeToPdf
+SmartDocumentCategoryStore
+_ScalingFabMotionAnimator@86063916
+getScaleAnimation
+get:disableAnimations
+_secondaryPositionAnimation@109053933
+_MixinApplication96&State&TickerProviderStateMixin@18353248
+_MixinApplication160&State&TickerProviderStateMixin&AutomaticKeepAliveClientMixin@18353248
+application/vnd.openxmlformats-officedocument.presentationml.slideshow
+application/vnd.oasis.opendocument.text-master
+docm$
+_updateMoveAnimation@173238936
+set:animationValue
+video/jpm
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+_bottomSheetScrimAnimationController@87420462
+_MixinApplication179&State&TickerProviderStateMixin&RestorationMixin@18353248
+Smart Life Update
+opening
+application/vnd.oasis.opendocument.presentation-template
+Could not delete this document: 
+_animationController@128165514
+plugins.flutter.io/path_provider
+releaseSurfaceProvider
+_setupAnimation@109053933
+_replace@383246054
+_MixinApplication209&State&SingleTickerProviderStateMixin@18353248
+video/3gpp
+DocsPage
+set:dividerWidth
+MethodChannelPathProvider.
+application/vnd.oasis.opendocument.chart
+InkSplash.
+_primaryShadowAnimation@109053933
+smart_document_categories_v1
+_MixinApplication334&Animation&AnimationLazyListenerMixin&AnimationLocalListenersMixin@18353248
+_MixinApplication159&State&TickerProviderStateMixin@18353248
+convertPdfToImages
+set:_sheetAnimation@497001611
+delayedPerformAnimationUpdate
+_flingDuration@308443839
+The app requested a view, but the platform did not provide one.
+This is likely because the app called `runApp` to render its root widget, which expects the platform to provide a default view to render into (the "implicit" view).
+`runWidget` allows you to provide a `View` widget, without requiring a default view.
+_OffsetTransformPart@30494604
+_MixinApplication336&Animation&AnimationLazyListenerMixin&AnimationLocalStatusListenersMixin@18353248
+_MixinApplication23&State&TickerProviderStateMixin@18353248
+DocumentScanner
+doCompare 
+LocalDocumentScannerPage
+_opacityAnimation@207145554
+ReverseAnimation.
+AnimationController.unbounded
+DividerTheme
+_thicknessAnimationController@408305104
+AnimationLazyListenerMixin
+_MixinApplication138&State&SingleTickerProviderStateMixin@18353248
+No Scaffold ancestor could be found starting from the context that was passed to Scaffold.of(). This usually happens when the context provided is from the same StatefulWidget as that whose build function actually creates the Scaffold widget being sought.
+application/vnd.openxmlformats-officedocument.spreadsheetml.template
+_MixinApplication111&Animation&AnimationWithParentMixin@18353248
+_MixinApplication16&State&SingleTickerProviderStateMixin@18353248
+_borderAnimation@94019562
+MethodChannelPathProvider
+video/x-fli
+DocumentBoundary
+WidgetStateProperty objects should only be used in places that document their support.
+_previousRotationAnimation@87420462
+package:document_scan/src/types/scanned_document.dart
+_DocBadge@877187301
+gzip
+.pdf
+extractVideoAudio
+_openDocument@877187301
+package:document_scan/src/types/detection_sensitivity.dart
+
+Native library list:
+lib/arm64-v8a/libapp.so
+lib/arm64-v8a/libc++_shared.so
+lib/arm64-v8a/libdartjni.so
+lib/arm64-v8a/libdatastore_shared_counter.so
+lib/arm64-v8a/libflutter.so
+lib/arm64-v8a/libimage_processing_util_jni.so
+lib/arm64-v8a/libopencv_java4.so
+lib/arm64-v8a/libsurface_util_jni.so
