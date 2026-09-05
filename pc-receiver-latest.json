@@ -1,0 +1,6 @@
+{
+  "version": "0.4.7",
+  "installerUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-PC-Receiver-Setup.exe",
+  "sha256": "762160238cb90c5e000b220384f5d33de93c4df65ee67aeb51376a10b9d67582",
+  "releaseNotes": "Persistent PC-to-phone Pending queue, automatic delivery when Smart Life opens on the phone, background tray receiver after the window closes, start-with-Windows registration, and Windows desktop notifications for files received from the phone. Local LAN only; no cloud required."
+}
