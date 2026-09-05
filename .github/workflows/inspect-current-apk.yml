@@ -17,24 +17,47 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Inspect APK archive
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Inspect APK archive and opening motion clues
         shell: bash
         run: |
           set -euo pipefail
-          test -f Smart-Life-Flutter-Test.apk
+          APK='Smart-Life-Flutter-Test.apk'
+          test -f "$APK"
+          rm -rf /tmp/smartlife-apk
+          mkdir -p /tmp/smartlife-apk
+          unzip -q "$APK" -d /tmp/smartlife-apk
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+
           {
-            echo 'Current Smart Life APK contents'
-            echo '==============================='
+            echo 'Current Smart Life APK deep inspection'
+            echo '======================================'
             echo
-            echo "APK size: $(stat -c%s Smart-Life-Flutter-Test.apk) bytes"
-            echo "SHA256: $(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')"
+            echo "APK size: $(stat -c%s "$APK") bytes"
+            echo "SHA256: $(sha256sum "$APK" | awk '{print $1}')"
             echo
-            echo 'Flutter-related entries:'
-            unzip -l Smart-Life-Flutter-Test.apk | grep -Ei 'flutter|kernel_blob|isolate_snapshot|libapp|assets/' || true
+            echo 'Package badging:'
+            "$TOOLS/aapt" dump badging "$APK" | head -n 20 || true
             echo
-            echo 'Top-level archive entries:'
-            unzip -l Smart-Life-Flutter-Test.apk | head -n 300
-          } > current-apk-listing.txt
+            echo 'Manifest activity/service clues:'
+            "$TOOLS/aapt" dump xmltree "$APK" AndroidManifest.xml | grep -E 'E: (activity|service)|A: android:name|A: android:theme|A: android:exported' | head -n 220 || true
+            echo
+            echo 'Flutter asset names:'
+            find /tmp/smartlife-apk/assets -maxdepth 4 -type f 2>/dev/null | sed 's#^/tmp/smartlife-apk/##' | grep -Ei 'flutter|asset|manifest|kernel|snapshot|icon|splash|opening' | head -n 300 || true
+            echo
+            echo 'DEX strings relevant to startup/opening motion:'
+            find /tmp/smartlife-apk -maxdepth 1 -type f -name 'classes*.dex' -print0 | xargs -0 -r strings -a | grep -Ei 'Smart Life|opening|motion|splash|PDF|DOC|IMG|VID|ZIP|460|Duration|Animation' | head -n 500 || true
+            echo
+            echo 'Flutter AOT strings relevant to opening motion:'
+            if [ -f /tmp/smartlife-apk/lib/arm64-v8a/libapp.so ]; then
+              strings -a /tmp/smartlife-apk/lib/arm64-v8a/libapp.so | grep -Ei 'Smart Life|opening|motion|splash|PDF|DOC|IMG|VID|ZIP|460|Duration|Animation' | head -n 800 || true
+            fi
+            echo
+            echo 'Native library list:'
+            find /tmp/smartlife-apk/lib -maxdepth 2 -type f 2>/dev/null | sed 's#^/tmp/smartlife-apk/##' | sort || true
+          } > current-apk-deep-inspection.txt
 
       - name: Commit inspection result
         shell: bash
@@ -42,7 +65,7 @@ jobs:
           set -euo pipefail
           git config user.name 'Smart Life Inspection Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add current-apk-listing.txt
-          git commit -m 'Inspect current Smart Life APK contents' || true
+          git add current-apk-deep-inspection.txt
+          git commit -m 'Inspect Smart Life opening motion internals' || true
           git pull --rebase origin main
           git push origin main
