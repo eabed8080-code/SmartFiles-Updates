@@ -1,0 +1,72 @@
+name: Publish Smart Life v0.6.5 Opening Motion
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-v0065-opening-motion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Download signed Smart Life v0.6.5 build artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-d628-81fd-9a6d-196d17a079c3/raw?se=2026-09-05T14%3A32%3A12Z&sp=r&sv=2026-02-06&sr=b&scid=d9dd3a36-1849-5685-acc0-7a3d447c4add&skoid=732f244e-db13-47c3-bcc7-7ee02a9397bc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-04T23%3A18%3A35Z&ske=2026-09-05T23%3A18%3A35Z&sks=b&skv=2026-02-06&sig=9l3vt%2BQq2bL2kubNMDSBxIhtFvn133duD%2BP2aI64u/c%3D' -o /tmp/smart-life-v0065.zip
+          test "$(sha256sum /tmp/smart-life-v0065.zip | awk '{print $1}')" = '27553748a68c86cc06d9aae16e405522aba4e89478bff8b9ecc243035911de78'
+          rm -rf /tmp/smart-life-v0065
+          mkdir -p /tmp/smart-life-v0065
+          unzip -q /tmp/smart-life-v0065.zip -d /tmp/smart-life-v0065
+          test -f /tmp/smart-life-v0065/Smart-Life-v0.6.5-Opening-Motion.apk
+          test "$(sha256sum /tmp/smart-life-v0065/Smart-Life-v0.6.5-Opening-Motion.apk | awk '{print $1}')" = '2c4b0caf289a8fcb25b5b24a8d1eb8eb06d5475de98ab528b57e06bd1edc5c57'
+          cp /tmp/smart-life-v0065/Smart-Life-v0.6.5-Opening-Motion.apk Smart-Life-Flutter-Test.apk
+
+      - name: Verify signed release metadata and permanent certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          "$TOOLS/apksigner" verify --verbose --print-certs Smart-Life-Flutter-Test.apk | tee /tmp/apksigner.txt
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionCode='6047'"
+          echo "$BADGING" | grep -q "versionName='0.6.5'"
+          grep -qi 'fb:a1:a6:52:ac:3e:d9:50:b4:5e:a2:65:85:cc:cb:eb:84:97:15:3f:13:7f:76:1d:17:ea:12:ca:e7:1c:95:5b' /tmp/apksigner.txt
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '2c4b0caf289a8fcb25b5b24a8d1eb8eb06d5475de98ab528b57e06bd1edc5c57'
+
+      - name: Update Smart Life Flutter feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.6.5",
+            "versionCode": 6047,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "New fast Smart Life opening motion: the real app starts immediately underneath a short 460 ms visual layer with the Smart Life mark and file-type badges, then fades directly into Find. No video asset and no artificial startup wait were added. Based on the stable v0.6.4 runtime."
+          }
+          JSON
+
+      - name: Publish Smart Life v0.6.5 opening motion
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Smart Life Update Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.6.5 build 6047 opening motion' || true
+          git pull --rebase origin main
+          git push origin main
