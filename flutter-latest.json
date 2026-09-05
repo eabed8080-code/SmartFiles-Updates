@@ -1,6 +1,6 @@
 {
-  "versionName": "0.6.2",
-  "versionCode": 6044,
+  "versionName": "0.6.3",
+  "versionCode": 6045,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Startup hotfix after v0.6.1. Quick Transfer no longer starts background retry/network work during normal Smart Life launch. The phone receiver starts only after a PC connection is configured, and all Quick Transfer startup work is isolated so it cannot prevent Smart Life from opening. Quick Transfer features remain available."
+  "releaseNotes": "Stable restore based on the known-good Smart Life v0.6.0 runtime. This release restores normal app startup after the Quick Transfer startup issue. Quick Transfer phone changes are not enabled in this stable build."
 }
