@@ -44,7 +44,7 @@ jobs:
           echo "$BADGING"
           echo "$BADGING" | grep -q "versionCode='6047'"
           echo "$BADGING" | grep -q "versionName='0.6.5'"
-          grep -qi 'fb:a1:a6:52:ac:3e:d9:50:b4:5e:a2:65:85:cc:cb:eb:84:97:15:3f:13:7f:76:1d:17:ea:12:ca:e7:1c:95:5b' /tmp/apksigner.txt
+          grep -qi 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b' /tmp/apksigner.txt
           test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '2c4b0caf289a8fcb25b5b24a8d1eb8eb06d5475de98ab528b57e06bd1edc5c57'
 
       - name: Update Smart Life Flutter feed
