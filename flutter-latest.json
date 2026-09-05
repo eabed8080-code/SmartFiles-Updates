@@ -1,6 +1,6 @@
 {
-  "versionName": "0.7.0",
-  "versionCode": 6052,
+  "versionName": "0.7.1",
+  "versionCode": 6053,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Search document-image indexing: the first run now prepares a persistent local content index instead of doing a heavy OCR sweep when you search. PDFs, Smart Life scans and Screenshots are prioritized. Ordinary Camera, WhatsApp and Downloads images get a lightweight text/document probe first, and only likely IDs, invoices, receipts or document-like images receive full OCR. Normal photos such as people, cars, homes and decor are skipped. Progress is shown during the initial preparation, and unchanged files reuse the saved index on later runs."
+  "releaseNotes": "Smart Search Index is now managed from Settings with exact Indexed X of Y progress, Ready/Indexing/Paused status, last-updated time, Resume Indexing and a confirmed Rebuild Index action. Completed Image/PDF file versions are persisted in the local index, so interrupted indexing resumes from the files still pending instead of starting over. Find now searches the saved index immediately and no longer owns or waits for the OCR indexing process. Existing document-image filtering, Screenshot/scan/PDF priority, voice search and opening motion are preserved."
 }
