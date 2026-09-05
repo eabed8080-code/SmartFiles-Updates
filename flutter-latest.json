@@ -1,6 +1,6 @@
 {
-  "versionName": "0.6.8",
-  "versionCode": 6050,
+  "versionName": "0.6.9",
+  "versionCode": 6051,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Search update: the existing search box now automatically searches inside Images and PDFs. Images use local on-device OCR, WhatsApp Images and Screenshots are indexed first, scanned/image PDFs get OCR fallback, and filename results remain available while the local index is preparing. Existing voice search, compact File Types, Converter cleanup, and opening motion are preserved."
+  "releaseNotes": "Smart Search reliability fix: OCR content indexing now runs in small progressive batches, restarts automatically when a content search is typed, prioritizes WhatsApp files and Screenshots, retries difficult images through a bounded bitmap OCR path, rebuilds the local content index, and scans up to 12 pages for image/scanned PDFs. Filename search remains immediate while OCR indexing proceeds. Existing voice search, compact File Types, Converter cleanup, and opening motion are preserved."
 }
