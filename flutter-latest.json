@@ -1,6 +1,6 @@
 {
-  "versionName": "0.6.6",
-  "versionCode": 6048,
+  "versionName": "0.6.7",
+  "versionCode": 6049,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Opening motion visibility update: animation increased to 1.8 seconds, file-type badges enlarged from 52 to 68 pixels, the center Smart Life mark enlarged, badge spread widened, and fade delayed so the motion is clearly visible. The real Find page still starts underneath the visual layer with no artificial startup wait."
+  "releaseNotes": "Compact layout update: reduced extra spacing in File Types while preserving the current 3D icon size, tightened Converter spacing, and removed the duplicate Converter body title. The v0.6.6 opening motion remains unchanged."
 }
