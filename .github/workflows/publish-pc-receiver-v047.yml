@@ -27,13 +27,9 @@ jobs:
           rm -rf /tmp/pc-v047
           mkdir -p /tmp/pc-v047
           unzip -q /tmp/pc-v047.zip -d /tmp/pc-v047
-          EXE='/tmp/pc-v047/bin/Release/net8.0-windows/win-x64/publish/SmartLifeReceiver.exe'
           SETUP='/tmp/pc-v047/installer_output/Smart-Life-PC-Receiver-Setup-v0.4.7.exe'
-          test -f "$EXE"
           test -f "$SETUP"
-          test "$(sha256sum "$EXE" | awk '{print $1}')" = '813c8d672569e785b6d396930258148ed42b7c13c87659271846ace1578408ae'
           test "$(sha256sum "$SETUP" | awk '{print $1}')" = '762160238cb90c5e000b220384f5d33de93c4df65ee67aeb51376a10b9d67582'
-          cp "$EXE" SmartLifeReceiver.exe
           cp "$SETUP" Smart-Life-PC-Receiver-Setup-v0.4.7.exe
           cp "$SETUP" Smart-Life-PC-Receiver-Setup.exe
 
@@ -56,7 +52,7 @@ jobs:
           set -euo pipefail
           git config user.name 'Smart Life Update Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add SmartLifeReceiver.exe Smart-Life-PC-Receiver-Setup-v0.4.7.exe Smart-Life-PC-Receiver-Setup.exe pc-receiver-latest.json
+          git add Smart-Life-PC-Receiver-Setup-v0.4.7.exe Smart-Life-PC-Receiver-Setup.exe pc-receiver-latest.json
           git commit -m 'Publish Smart Life PC Receiver v0.4.7' || true
           git pull --rebase origin main
           git push origin main
