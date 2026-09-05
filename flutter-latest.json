@@ -1,6 +1,6 @@
 {
-  "versionName": "0.7.3",
-  "versionCode": 6055,
+  "versionName": "0.7.4",
+  "versionCode": 6056,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Search is temporarily narrowed to PDF only so the large image library cannot interfere with indexing. PDF indexing now runs in two stages: Stage 1 reads searchable PDF text without OCR in batches of 10; Stage 2 OCRs only scanned/image PDFs one at a time to reduce memory pressure. Progress is persisted and shown as Indexed X of Y PDFs. The content index is rebuilt cleanly for this PDF-only phase, and images are intentionally not indexed while PDF indexing is validated. Existing Smart Search Index Settings, Resume/Rebuild controls, voice search and opening motion are preserved."
+  "releaseNotes": "PDF Stage 1 reliability test: Smart Search is still limited to PDFs only and now checks exactly one PDF at a time with OCR completely disabled. Searchable PDF text is saved immediately. Scanned/image PDFs are checkpointed for the next OCR stage without attempting OCR yet. Malformed, encrypted, or unreadable PDFs are isolated per file and cannot stop the remaining PDFs. The Stage 1 progress runs through the full PDF list, reports searchable/scanned/failed counts, and uses a fresh local PDF index. Images remain excluded while the PDF pipeline is validated."
 }
