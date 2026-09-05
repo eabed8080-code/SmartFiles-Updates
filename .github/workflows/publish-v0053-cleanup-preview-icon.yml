@@ -48,7 +48,7 @@ jobs:
           sha256sum Smart-Life-Flutter-Test.apk
           ls -lh Smart-Life-Flutter-Test.apk
 
-      - name: Download Smart Life PC Receiver Quick Transfer
+      - name: Download Smart Life PC Receiver Quick Transfer setup
         shell: bash
         run: |
           set -euo pipefail
@@ -61,8 +61,8 @@ jobs:
           test -f "$SETUP"
           test "$(sha256sum "$SETUP" | awk '{print $1}')" = '344bf7b2e134dffc137df287701c7c4d633fe99dbda66cee681d18e31e7af996'
           cp "$SETUP" Smart-Life-PC-Receiver-Setup.exe
-          cp /tmp/smart-life-pc-v050.zip Smart-Life-PC-Receiver.zip
           test "$(stat -c%s Smart-Life-PC-Receiver-Setup.exe)" -gt 1000000
+          test "$(stat -c%s Smart-Life-PC-Receiver-Setup.exe)" -lt 100000000
 
       - name: Update Smart Life feeds
         shell: bash
@@ -81,7 +81,6 @@ jobs:
           {
             "versionName": "0.5.0",
             "setupUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-PC-Receiver-Setup.exe",
-            "packageUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-PC-Receiver.zip",
             "releaseNotes": "Quick Transfer PC Receiver runs in the background, starts with Windows, keeps phone-bound files in Pending, supports drag & drop, and stores received phone files in Smart Life Inbox."
           }
           JSON
@@ -92,7 +91,7 @@ jobs:
           set -euo pipefail
           git config user.name 'Smart Life Update Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add Smart-Life-Flutter-Test.apk flutter-latest.json Smart-Life-PC-Receiver-Setup.exe Smart-Life-PC-Receiver.zip pc-latest.json
-          git commit -m 'Publish Smart Life v0.6.1 build 6043 and PC Quick Transfer' || true
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json Smart-Life-PC-Receiver-Setup.exe pc-latest.json
+          git commit -m 'Publish Smart Life v0.6.1 build 6043 and PC Quick Transfer setup' || true
           git pull --rebase origin main
           git push origin main
