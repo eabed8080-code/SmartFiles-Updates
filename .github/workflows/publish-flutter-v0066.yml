@@ -38,10 +38,10 @@ jobs:
           echo "$BADGING" | grep -q "package: name='com.filesearch.smartlifefluttertest'"
           echo "$BADGING" | grep -q "versionCode='6048'"
           echo "$BADGING" | grep -q "versionName='0.6.6'"
-          "$TOOLS/apksigner" verify --verbose --print-certs Smart-Life-Flutter-Test.apk
-          CERT_SHA256="$("$TOOLS/apksigner" verify --print-certs Smart-Life-Flutter-Test.apk | sed -n 's/^Signer #1 certificate SHA-256 digest: //p' | head -n 1)"
-          test "$CERT_SHA256" = 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
-          sha256sum Smart-Life-Flutter-Test.apk
+          CERTS="$("$TOOLS/apksigner" verify --verbose --print-certs Smart-Life-Flutter-Test.apk)"
+          echo "$CERTS"
+          echo "$CERTS" | grep -Fq 'certificate SHA-256 digest: fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          echo '50012e99fd36c24491690e9d69b072d229b92e7b1f3c77f3c2fcfea6c30c126a  Smart-Life-Flutter-Test.apk' | sha256sum -c -
 
       - name: Update Flutter feed
         shell: bash
