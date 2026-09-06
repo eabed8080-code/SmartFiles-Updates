@@ -1,6 +1,6 @@
 {
-  "versionName": "0.7.7",
-  "versionCode": 6059,
+  "versionName": "0.7.8",
+  "versionCode": 6060,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "File Type tiles now have no square selection or press effect, with larger icons inside the same compact space. The Photos viewer now supports direct one-finger left/right swipe navigation at normal zoom while preserving pinch zoom and drag behavior. Search by Name and Search Content from v0.7.6 are preserved."
+  "releaseNotes": "Phone to PC Phase 1: Android Share now sends directly to Smart Life PC Receiver for any shared file type. Shared files are first saved locally in a persistent Pending outbox; if the PC is unavailable, Smart Life keeps them safely on the phone and retries automatically. Multiple-file sharing, boot recovery, existing Connect to PC pairing, Search by Name, Search Content, File Type touch behavior, and Photos swipe navigation are preserved."
 }
