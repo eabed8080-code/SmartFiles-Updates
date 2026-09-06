@@ -1,0 +1,78 @@
+name: Publish Smart Life v0.7.7 FileType Photo Touch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0077.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.7.7 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-332c-81fd-9f29-eb66b084b193/raw?se=2026-09-06T22%3A13%3A45Z&sp=r&sv=2026-02-06&sr=b&scid=c2cab9f3-9d0d-55d5-b53e-73626ca50bfe&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-06T14%3A42%3A32Z&ske=2026-09-07T14%3A42%3A32Z&sks=b&skv=2026-02-06&sig=PRTEW116EkCFTiv%2B5wHxM6GLBEMMAJWvkRijIEz5lDs%3D'
+          EXPECTED_SHA256: '151de36b3e13dfbcef5e8e1ea05cce5531940230f7fb76a5edb04b67f8535cef'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v077
+          mkdir incoming-v077
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v077/artifact.zip
+          unzip -q incoming-v077/artifact.zip -d incoming-v077/unpacked
+          APK="$(find incoming-v077/unpacked -type f -name 'Smart-Life-v0.7.7-FileType-Photo-Touch.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Write v0.7.7 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.7.7",
+            "versionCode": 6059,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "File Type tiles now have no square selection or press effect, with larger icons inside the same compact space. The Photos viewer now supports direct one-finger left/right swipe navigation at normal zoom while preserving pinch zoom and drag behavior. Search by Name and Search Content from v0.7.6 are preserved."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.7.7 (6059)'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"versionName": "0.7.7"' flutter-latest.json
+          grep -q '"versionCode": 6059' flutter-latest.json
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '151de36b3e13dfbcef5e8e1ea05cce5531940230f7fb76a5edb04b67f8535cef'
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.7.7"' /tmp/published-latest.json
+          grep -q '"versionCode": 6059' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '151de36b3e13dfbcef5e8e1ea05cce5531940230f7fb76a5edb04b67f8535cef'
+          echo 'Smart Life v0.7.7 update channel verified remotely.'
