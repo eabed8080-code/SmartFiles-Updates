@@ -1,0 +1,47 @@
+name: Check signing readiness
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/check-signing-readiness.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check secret presence without exposing values
+        shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          set -euo pipefail
+          {
+            echo 'Smart Life signing readiness'
+            echo '============================'
+            for v in KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_PASSWORD KEY_ALIAS; do
+              if [ -n "${!v:-}" ]; then
+                echo "$v=SET"
+              else
+                echo "$v=UNSET"
+              fi
+            done
+          } > signing-readiness.txt
+      - name: Commit readiness report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add signing-readiness.txt
+          git commit -m 'Record signing readiness' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
