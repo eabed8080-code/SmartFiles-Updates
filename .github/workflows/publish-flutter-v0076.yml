@@ -1,0 +1,78 @@
+name: Publish Smart Life v0.7.6 Search Modes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0076.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.7.6 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-b224-81f5-8194-1a7050e493b4/raw?se=2026-09-06T19%3A36%3A07Z&sp=r&sv=2026-02-06&sr=b&scid=c3a35831-e24d-55b9-9291-9b21f3918c02&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-06T14%3A43%3A12Z&ske=2026-09-07T14%3A43%3A12Z&sks=b&skv=2026-02-06&sig=ZPIbSlpVBviNhINI5CfRwQdzUuGmFfYBNr0BenpCl6E%3D'
+          EXPECTED_SHA256: 'dd6b312c53422f83d647150e4c75f8cfff36840af4af79dbfac29110d5cef319'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v076
+          mkdir incoming-v076
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v076/artifact.zip
+          unzip -q incoming-v076/artifact.zip -d incoming-v076/unpacked
+          APK="$(find incoming-v076/unpacked -type f -name 'Smart-Life-v0.7.6-Search-Modes.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Write v0.7.6 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.7.6",
+            "versionCode": 6058,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Smart Search now separates Search by Name from Search Content. Name is the default and searches only file names, while Content explicitly searches saved PDF text, including searchable PDFs and Google Document AI OCR text from scanned PDFs. Search results now show Name match or Content match so it is clear why each file appeared. Existing PDF Smart Search, Google OCR, voice search, and local index behavior are preserved."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.7.6 (6058)'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"versionName": "0.7.6"' flutter-latest.json
+          grep -q '"versionCode": 6058' flutter-latest.json
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = 'dd6b312c53422f83d647150e4c75f8cfff36840af4af79dbfac29110d5cef319'
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.7.6"' /tmp/published-latest.json
+          grep -q '"versionCode": 6058' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = 'dd6b312c53422f83d647150e4c75f8cfff36840af4af79dbfac29110d5cef319'
+          echo 'Smart Life v0.7.6 update channel verified remotely.'
