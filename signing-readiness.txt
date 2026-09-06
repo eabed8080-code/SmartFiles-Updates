@@ -1,0 +1,6 @@
+Smart Life signing readiness
+============================
+KEYSTORE_BASE64=UNSET
+KEYSTORE_PASSWORD=UNSET
+KEY_PASSWORD=UNSET
+KEY_ALIAS=UNSET
