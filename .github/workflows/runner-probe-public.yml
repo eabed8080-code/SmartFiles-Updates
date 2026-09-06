@@ -1,0 +1,15 @@
+name: Smart Life public runner probe
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/runner-probe-public.yml'
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Runner check
+        run: echo 'public runner available'
