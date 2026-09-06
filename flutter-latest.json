@@ -1,6 +1,6 @@
 {
-  "versionName": "0.7.5",
-  "versionCode": 6057,
+  "versionName": "0.7.6",
+  "versionCode": 6058,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "PDF Smart Search now adds Google Document AI Enterprise OCR for scanned/image PDFs while searchable PDFs remain local. Google OCR runs one PDF at a time and saves returned Arabic/English text into the local Smart Search Index for later local searches. Google OCR requires one-time Document AI project, processor and service-account setup inside Smart Search Index; credentials are encrypted on-device with Android Keystore. Images outside PDFs remain excluded in this version."
+  "releaseNotes": "Smart Search now separates Search by Name from Search Content. Name is the default and searches only file names, while Content explicitly searches saved PDF text, including searchable PDFs and Google Document AI OCR text from scanned PDFs. Search results now show Name match or Content match so it is clear why each file appeared. Existing PDF Smart Search, Google OCR, voice search, and local index behavior are preserved."
 }
