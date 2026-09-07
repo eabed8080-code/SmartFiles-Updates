@@ -1,6 +1,6 @@
 {
-  "versionName": "0.9.0",
-  "versionCode": 10072,
+  "versionName": "0.9.1",
+  "versionCode": 10073,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Fixes Smart Search staying at 0/N by restoring the missing native Smart Search status and clear bridge after the staged-index rewrites. Local Arabic and English PaddleOCR remains fully on-device, PDFs are processed first, and progress no longer rescans the entire phone inventory after every small batch. Existing Search by Name, Search Content, Connect to PC, Transfer Status, reminders, sound dropdowns, and previous Smart Life behavior are preserved."
+  "releaseNotes": "Smart Search is now lighter and faster: a first OCR-free stage handles searchable PDFs and filters ordinary photos in batches of 200, then deep OCR runs only on scanned PDFs and document-like images in groups of 20, one OCR file at a time. Progress is checkpointed continuously, Pause/Resume keeps saved work, unchanged files are skipped, and PaddleOCR uses fewer threads to reduce device load. Existing Search by Name, Search Content, Connect to PC, Transfer Status, reminders, sounds, and previous Smart Life behavior are preserved."
 }
