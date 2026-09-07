@@ -1,6 +1,6 @@
 {
-  "versionName": "0.8.5",
-  "versionCode": 10067,
+  "versionName": "0.8.6",
+  "versionCode": 10068,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Phone to PC Pending queue. Android Share first saves a persistent local copy on the phone. If the PC is available, the file sends immediately and the local Pending copy is removed only after confirmed upload. If the PC is off or unreachable, the file stays safely in Pending and Android JobScheduler retries in the background. MainActivity/startup remains unchanged. Text-only share links now explain to choose Send a copy."
+  "releaseNotes": "Settings now shows outgoing Transfer Status under Connect to PC: All files sent when the phone queue is empty, or the number of files still Pending to PC. The status refreshes when Smart Life resumes and can also be refreshed manually. The proven v0.8.5 Pending queue, immediate send, and background retry transport are unchanged."
 }
