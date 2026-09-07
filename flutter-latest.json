@@ -1,6 +1,6 @@
 {
-  "versionName": "0.8.4",
-  "versionCode": 10066,
+  "versionName": "0.8.5",
+  "versionCode": 10067,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Android Share diagnostics for the WhatsApp/PDF viewer case. If no file URI is received, Smart Life now shows the incoming Intent action, MIME type, data, ClipData details, and extras so the exact share payload can be identified. Startup, URI collection, and PC upload transport remain unchanged."
+  "releaseNotes": "Phone to PC Pending queue. Android Share first saves a persistent local copy on the phone. If the PC is available, the file sends immediately and the local Pending copy is removed only after confirmed upload. If the PC is off or unreachable, the file stays safely in Pending and Android JobScheduler retries in the background. MainActivity/startup remains unchanged. Text-only share links now explain to choose Send a copy."
 }
