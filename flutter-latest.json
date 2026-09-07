@@ -1,6 +1,6 @@
 {
-  "versionName": "0.8.0",
-  "versionCode": 6062,
+  "versionName": "0.8.2",
+  "versionCode": 10064,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Startup isolation hotfix. Removes the unintended PhoneReceiveServer startup lifecycle from the main Smart Life activity. Phone to PC Android Share, persistent Pending outbox, PC pairing, retry engine, Search by Name, Search Content, File Type touch behavior, and Photos swipe navigation remain preserved."
+  "releaseNotes": "Safe direct Android Share to PC. Smart Life now appears as an Android share target for any file type. Startup/MainActivity and the existing PC sender implementation are unchanged from the known-good runtime. Pending retry is intentionally not included in this phase."
 }
