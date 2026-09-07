@@ -1,6 +1,6 @@
 {
-  "versionName": "0.8.2",
-  "versionCode": 10064,
+  "versionName": "0.8.3",
+  "versionCode": 10065,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Safe direct Android Share to PC. Smart Life now appears as an Android share target for any file type. Startup/MainActivity and the existing PC sender implementation are unchanged from the known-good runtime. Pending retry is intentionally not included in this phase."
+  "releaseNotes": "Android Share compatibility fix for WhatsApp and document/PDF viewers. Smart Life now accepts shared file URIs from EXTRA_STREAM, ClipData, and intent.data. Startup/MainActivity is unchanged, and no Pending retry logic is added in this phase."
 }
