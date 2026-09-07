@@ -1,0 +1,78 @@
+name: Publish Smart Life v0.7.9 Startup Hotfix
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-flutter-v0079-hotfix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.7.9 hotfix artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-865c-81f5-83f0-7f006ae21d6a/raw?se=2026-09-07T00%3A17%3A27Z&sp=r&sv=2026-02-06&sr=b&scid=0555a476-d1b3-585c-ac6b-ec971fcd02a3&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-06T12%3A27%3A41Z&ske=2026-09-07T12%3A27%3A41Z&sks=b&skv=2026-02-06&sig=MsZs48FujN4/9jHFKnL7r/c6nf87GnvMOndjR7LpmnU%3D'
+          EXPECTED_SHA256: '8d48182f5090418c62b862cef55f1fbaa52c06e846c9d271dab652fbc390eee1'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v079
+          mkdir incoming-v079
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v079/artifact.zip
+          unzip -q incoming-v079/artifact.zip -d incoming-v079/unpacked
+          APK="$(find incoming-v079/unpacked -type f -name 'Smart-Life-v0.7.9-Startup-Hotfix.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Write v0.7.9 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.7.9",
+            "versionCode": 6061,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Startup hotfix for v0.7.8. Removes the new Pending retry call from Smart Life startup so the main app can open normally again. Android Share to PC, persistent Pending outbox, pairing, retry engine, Search by Name, Search Content, File Type touch behavior, and Photos swipe navigation remain preserved."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.7.9 (6061) startup hotfix'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"versionName": "0.7.9"' flutter-latest.json
+          grep -q '"versionCode": 6061' flutter-latest.json
+          test "$(sha256sum Smart-Life-Flutter-Test.apk | awk '{print $1}')" = '8d48182f5090418c62b862cef55f1fbaa52c06e846c9d271dab652fbc390eee1'
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.7.9"' /tmp/published-latest.json
+          grep -q '"versionCode": 6061' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '8d48182f5090418c62b862cef55f1fbaa52c06e846c9d271dab652fbc390eee1'
+          echo 'Smart Life v0.7.9 startup hotfix update channel verified remotely.'
