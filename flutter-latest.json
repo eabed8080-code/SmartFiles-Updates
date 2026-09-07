@@ -1,6 +1,6 @@
 {
-  "versionName": "0.8.7",
-  "versionCode": 10069,
+  "versionName": "0.8.8",
+  "versionCode": 10070,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Adds Sounds & Effects controls in Settings: independent interface and Life Inbox reminder sounds, selectable short effects with preview, volume control, and reminder repeat options including 1x, 3x, and 10x. Reminder effects work from the Android reminder receiver even when Flutter is not open. Existing Connect to PC and Transfer Status behavior is preserved."
+  "releaseNotes": "Adds fully local Arabic and English Smart Search indexing with PaddleOCR for scanned PDFs and document-like images, persistent incremental indexing with pause/resume, and fast filtering that skips ordinary photos. Search Content now covers PDFs and document images without Google billing. Sound effect selectors in Settings are now inline dropdown lists. Existing Connect to PC, Transfer Status, reminders, and v0.8.7 behavior are preserved."
 }
