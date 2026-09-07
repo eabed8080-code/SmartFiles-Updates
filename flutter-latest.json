@@ -1,6 +1,6 @@
 {
-  "versionName": "0.8.9",
-  "versionCode": 10071,
+  "versionName": "0.9.0",
+  "versionCode": 10072,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Recovers Smart Search local PaddleOCR runtime on Android by using one shared OpenCV runtime, keeps Arabic and English OCR fully on-device, and allows embedded-text PDFs to keep indexing even if an OCR-dependent file fails. Existing Search by Name, Search Content, Connect to PC, Transfer Status, reminders, sound dropdowns, and previous Smart Life behavior are preserved."
+  "releaseNotes": "Fixes Smart Search staying at 0/N by restoring the missing native Smart Search status and clear bridge after the staged-index rewrites. Local Arabic and English PaddleOCR remains fully on-device, PDFs are processed first, and progress no longer rescans the entire phone inventory after every small batch. Existing Search by Name, Search Content, Connect to PC, Transfer Status, reminders, sound dropdowns, and previous Smart Life behavior are preserved."
 }
