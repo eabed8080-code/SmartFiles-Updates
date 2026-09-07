@@ -1,0 +1,86 @@
+name: Publish Smart Life v0.8.8 Local Arabic OCR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-flutter-v0088-local-arabic-ocr.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.8.8 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-a2fc-81f5-bf30-0df39eda522c/raw?se=2026-09-07T18%3A00%3A00Z&sp=r&sv=2026-02-06&sr=b&scid=9552f7d8-f685-5521-9349-558ef38ae229&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-06T21%3A24%3A07Z&ske=2026-09-07T21%3A24%3A07Z&sks=b&skv=2026-02-06&sig=OJT0gcSv9YumD/dNOhihVtzQ67BGk3NjBRxb748pcC4%3D'
+          EXPECTED_SHA256: '8d700db5db136cb734a537bb92a7ba03a6861925f3a00e5377658341ff5168fc'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v088
+          mkdir incoming-v088
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v088/artifact.zip
+          unzip -q incoming-v088/artifact.zip -d incoming-v088/unpacked
+          APK="$(find incoming-v088/unpacked -type f -name 'Smart-Life-v0.8.8-Local-Arabic-OCR.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Verify APK identity before publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          CERT="$($TOOLS/apksigner verify --verbose --print-certs Smart-Life-Flutter-Test.apk)"
+          printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]' | tr -d ': ' | grep -q 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionName='0.8.8'"
+          echo "$BADGING" | grep -q "versionCode='10070'"
+
+      - name: Write v0.8.8 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.8.8",
+            "versionCode": 10070,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Adds fully local Arabic and English Smart Search indexing with PaddleOCR for scanned PDFs and document-like images, persistent incremental indexing with pause/resume, and fast filtering that skips ordinary photos. Search Content now covers PDFs and document images without Google billing. Sound effect selectors in Settings are now inline dropdown lists. Existing Connect to PC, Transfer Status, reminders, and v0.8.7 behavior are preserved."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.8.8 (10070) Local Arabic OCR'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK remotely
+        shell: bash
+        run: |
+          set -euo pipefail
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.8.8"' /tmp/published-latest.json
+          grep -q '"versionCode": 10070' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '8d700db5db136cb734a537bb92a7ba03a6861925f3a00e5377658341ff5168fc'
+          echo 'Smart Life v0.8.8 update channel verified remotely.'
