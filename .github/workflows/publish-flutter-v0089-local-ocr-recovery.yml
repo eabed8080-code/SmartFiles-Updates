@@ -22,7 +22,7 @@ jobs:
       - name: Download and verify signed v0.8.9 artifact
         shell: bash
         env:
-          SOURCE_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-fcf0-81f7-b404-b74ff876a7ee/raw?se=2026-09-07T18%3A45%3A47Z&sp=r&sv=2026-02-06&sr=b&scid=4a36943e-2d00-56a1-84fa-7abef5038b4c&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-06T21%3A29%3A20Z&ske=2026-09-07T21%3A29%3A20Z&sks=b&skv=2026-02-06&sig=PtrSz/ex0hUo7RYcxpIN77Y5Cpkf5v8YpolgXkmodZY%3D'
+          SOURCE_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-6268-81f7-8310-d67fa86c7f40/raw?se=2026-09-07T18%3A47%3A05Z&sp=r&sv=2026-02-06&sr=b&scid=62ec8c47-f62c-5139-b119-5704a14fa610&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-07T11%3A45%3A13Z&ske=2026-09-08T11%3A45%3A13Z&sks=b&skv=2026-02-06&sig=SilhiOzC8yWXaYBuOwkc70jzkQfA/HJtmpqQRsnS9HU%3D'
           EXPECTED_SHA256: '41f34dddda11c55bbb3a1c6b82564c5588a5cabc988824cd1a1dd754be0e611f'
         run: |
           set -euo pipefail
@@ -69,7 +69,9 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add Smart-Life-Flutter-Test.apk flutter-latest.json
-          git commit -m 'Publish Smart Life v0.8.9 (10071) Local OCR Recovery'
+          if ! git diff --cached --quiet; then
+            git commit -m 'Publish Smart Life v0.8.9 (10071) Local OCR Recovery'
+          fi
           git pull --rebase origin main
           git push origin HEAD:main
 
