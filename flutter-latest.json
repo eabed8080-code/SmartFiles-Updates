@@ -1,6 +1,6 @@
 {
-  "versionName": "0.7.8",
-  "versionCode": 6060,
+  "versionName": "0.7.9",
+  "versionCode": 6061,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Phone to PC Phase 1: Android Share now sends directly to Smart Life PC Receiver for any shared file type. Shared files are first saved locally in a persistent Pending outbox; if the PC is unavailable, Smart Life keeps them safely on the phone and retries automatically. Multiple-file sharing, boot recovery, existing Connect to PC pairing, Search by Name, Search Content, File Type touch behavior, and Photos swipe navigation are preserved."
+  "releaseNotes": "Startup hotfix for v0.7.8. Removes the new Pending retry call from Smart Life startup so the main app can open normally again. Android Share to PC, persistent Pending outbox, pairing, retry engine, Search by Name, Search Content, File Type touch behavior, and Photos swipe navigation remain preserved."
 }
