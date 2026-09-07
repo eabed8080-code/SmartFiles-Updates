@@ -1,6 +1,6 @@
 {
-  "versionName": "0.8.6",
-  "versionCode": 10068,
+  "versionName": "0.8.7",
+  "versionCode": 10069,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Settings now shows outgoing Transfer Status under Connect to PC: All files sent when the phone queue is empty, or the number of files still Pending to PC. The status refreshes when Smart Life resumes and can also be refreshed manually. The proven v0.8.5 Pending queue, immediate send, and background retry transport are unchanged."
+  "releaseNotes": "Adds Sounds & Effects controls in Settings: independent interface and Life Inbox reminder sounds, selectable short effects with preview, volume control, and reminder repeat options including 1x, 3x, and 10x. Reminder effects work from the Android reminder receiver even when Flutter is not open. Existing Connect to PC and Transfer Status behavior is preserved."
 }
