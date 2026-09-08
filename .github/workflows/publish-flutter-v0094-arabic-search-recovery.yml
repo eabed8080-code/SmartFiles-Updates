@@ -1,0 +1,86 @@
+name: Publish Smart Life v0.9.4 Arabic Search Recovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-flutter-v0094-arabic-search-recovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.9.4 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-56a0-8210-9343-93205e79e5c5/raw?se=2026-09-08T16%3A29%3A38Z&sp=r&sv=2026-02-06&sr=b&scid=8e207c0f-9a05-5a8b-a5a9-f54afb3187ea&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-08T14%3A00%3A20Z&ske=2026-09-09T14%3A00%3A20Z&sks=b&skv=2026-02-06&sig=Qruydd2FfZ8RMAfYc3Bk3mO/WCICCFvBxNrdNM%2BAfds%3D'
+          EXPECTED_SHA256: '5152241bec90a08350af4705f6ee73d1ed56211ef0ad403a3e0bd82026b80ceb'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v094
+          mkdir incoming-v094
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v094/artifact.zip
+          unzip -q incoming-v094/artifact.zip -d incoming-v094/unpacked
+          APK="$(find incoming-v094/unpacked -type f -name 'Smart-Life-v0.9.4-Arabic-Search-Recovery.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Verify APK identity before publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          CERT="$($TOOLS/apksigner verify --verbose --print-certs Smart-Life-Flutter-Test.apk)"
+          printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]' | tr -d ': ' | grep -q 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionName='0.9.4'"
+          echo "$BADGING" | grep -q "versionCode='10076'"
+
+      - name: Write v0.9.4 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.9.4",
+            "versionCode": 10076,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Arabic Search Recovery keeps the completed Smart Search index instead of rebuilding it. Arabic content already saved in the index is matched with Arabic-aware folding for Alef variants, Ya/Alef-Maqsura, Ta-Marbuta, tatweel, diacritics, joined or separated spaces such as عبدالرحيم / عبد الرحيم, Arabic-Indic digits, and RTL reversed OCR tokens. English and number search behavior remains unchanged. PaddleOCR Arabic recognition no longer discards lines at the previous 0.28 confidence threshold twice, so newly indexed or changed visual PDFs/images retain more Arabic text. Existing SQLite path/mtime/size checkpoints, Turbo micro-batches, Pause/Resume, Search by Name, Search Content, Connect to PC, Transfer Status, reminders, sounds, and prior Smart Life behavior are preserved."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.9.4 (10076) Arabic Search Recovery'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK remotely
+        shell: bash
+        run: |
+          set -euo pipefail
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.9.4"' /tmp/published-latest.json
+          grep -q '"versionCode": 10076' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '5152241bec90a08350af4705f6ee73d1ed56211ef0ad403a3e0bd82026b80ceb'
+          echo 'Smart Life v0.9.4 update channel verified remotely.'
