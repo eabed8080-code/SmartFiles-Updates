@@ -1,6 +1,6 @@
 {
-  "versionName": "0.9.5",
-  "versionCode": 10077,
+  "versionName": "0.9.6",
+  "versionCode": 10078,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Arabic Rescue Search keeps the completed Smart Search index and never starts a full rebuild automatically. When an Arabic Search Content query has no saved match, Smart Life checks only likely OCR-dependent files: scanned PDFs first, then document-like images with existing OCR text or high-probability document paths. The corrected PaddleOCR Arabic model runs on a small bounded batch, fresh OCR text is merged into the existing SQLite row so English and numbers are preserved, and separate path/mtime/size repair checkpoints ensure the same files are not repeated. A search attempt repairs at most 24 visual files and stops early when matches are found; if needed, repeating the same Arabic search continues from saved repair progress. Existing Turbo Deep OCR checkpoints, Search by Name, English/number search, Pause/Resume, Connect to PC, Transfer Status, reminders, sounds, and all previous Smart Life behavior are preserved."
+  "releaseNotes": "Arabic OCR Diagnostic adds a safe one-file test under Settings > Smart Search Index. Pick one PDF or image and Smart Life runs the current local PaddleOCR directly, shows RAW OCR TEXT plus Arabic/Latin/digit counts, and does not clear, rebuild, or rewrite the completed Smart Search index. Existing v0.9.5 Arabic Rescue Search, English/number search, checkpoints, Pause/Resume, Turbo OCR, Connect to PC, reminders, sounds, and prior Smart Life behavior are preserved."
 }
