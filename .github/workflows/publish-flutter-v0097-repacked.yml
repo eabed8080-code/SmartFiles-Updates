@@ -1,0 +1,91 @@
+name: Publish Smart Life v0.9.7 Repacked Hybrid OCR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-flutter-v0097-repacked.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify repacked signed v0.9.7 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-567c-81fd-ad4d-a155935e5973/raw?se=2026-09-08T19%3A26%3A37Z&sp=r&sv=2026-02-06&sr=b&scid=85048f41-e868-5b26-aa79-d19273d0f359&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-08T19%3A10%3A35Z&ske=2026-09-09T19%3A10%3A35Z&sks=b&skv=2026-02-06&sig=NOGq1rIxBdC/cf5f3nptuyABTRSt2Gnx7Y1tsBWl6T8%3D'
+          EXPECTED_SHA256: 'e07455927a4bff4d2310e7f8c08b20524b42b834a66f77ed86675587ee91e626'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v097-repacked
+          mkdir incoming-v097-repacked
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v097-repacked/artifact.zip
+          unzip -q incoming-v097-repacked/artifact.zip -d incoming-v097-repacked/unpacked
+          APK="$(find incoming-v097-repacked/unpacked -type f -name 'Smart-Life-v0.9.7-Tesseract-Arabic-Hybrid.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          SIZE="$(stat -c %s "$APK")"
+          echo "APK bytes: $SIZE"
+          test "$SIZE" -lt 104857600
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Verify APK identity and Arabic OCR payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          CERT="$($TOOLS/apksigner verify --verbose --print-certs Smart-Life-Flutter-Test.apk)"
+          printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]' | tr -d ': ' | grep -q 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionName='0.9.7'"
+          echo "$BADGING" | grep -q "versionCode='10079'"
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/tessdata/ara.traineddata'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'lib/arm64-v8a/libtesseract.so'
+
+      - name: Write v0.9.7 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.9.7",
+            "versionCode": 10079,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Arabic OCR upgraded to a local hybrid pipeline: PaddleOCR remains for English and digits while Tesseract Arabic is added as the Arabic recovery engine. OCR output is merged into the existing Smart Search index without clearing or rebuilding it. Arabic Rescue uses a new repair generation so previously attempted files can be retried with Tesseract. Existing checkpoints, Pause/Resume, Turbo OCR, one-file diagnostic, Connect to PC, reminders, sounds, and prior Smart Life behavior are preserved."
+          }
+          JSON
+
+      - name: Publish to Smart Life update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.9.7 (10079) Tesseract Arabic Hybrid OCR repacked'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published metadata and APK remotely
+        shell: bash
+        run: |
+          set -euo pipefail
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.9.7"' /tmp/published-latest.json
+          grep -q '"versionCode": 10079' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = 'e07455927a4bff4d2310e7f8c08b20524b42b834a66f77ed86675587ee91e626'
+          echo 'Smart Life v0.9.7 repacked update channel verified remotely.'
