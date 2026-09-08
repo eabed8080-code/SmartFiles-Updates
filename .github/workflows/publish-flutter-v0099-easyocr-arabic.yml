@@ -1,0 +1,96 @@
+name: Publish Smart Life v0.9.9 EasyOCR Arabic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-flutter-v0099-easyocr-arabic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.9.9 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-a37c-81f7-9e00-6d36ed9b221a/raw?se=2026-09-08T21%3A59%3A59Z&sp=r&sv=2026-02-06&sr=b&scid=a3732168-a3ad-54ba-b421-9fb93ffa22b5&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-08T13%3A12%3A26Z&ske=2026-09-09T13%3A12%3A26Z&sks=b&skv=2026-02-06&sig=NCqFilOus2Z6bnY3G49a91inOZmVq6crGsYEay6XdoI%3D'
+          EXPECTED_SHA256: '3643f2a9de5bae4b8a9011e45b6e08d193578e5defb7196b0b4521b9c32d2b1d'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v099
+          mkdir incoming-v099
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v099/artifact.zip
+          unzip -q incoming-v099/artifact.zip -d incoming-v099/unpacked
+          APK="$(find incoming-v099/unpacked -type f -name 'Smart-Life-v0.9.9-EasyOCR-Arabic-Mobile.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          SIZE="$(stat -c %s "$APK")"
+          echo "APK bytes: $SIZE"
+          test "$SIZE" = '91891303'
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Verify APK identity and OCR payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          CERT="$($TOOLS/apksigner verify --verbose --print-certs Smart-Life-Flutter-Test.apk)"
+          printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]' | tr -d ': ' | grep -q 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionName='0.9.9'"
+          echo "$BADGING" | grep -q "versionCode='10081'"
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/easyocr/easyocr_arabic_charset.txt'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/rec/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/det/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'lib/arm64-v8a/libonnxruntime.so'
+          if unzip -l Smart-Life-Flutter-Test.apk | grep -q 'easyocr_arabic_rec_mobile.onnx'; then echo 'Large EasyOCR model must download separately'; exit 1; fi
+          if unzip -l Smart-Life-Flutter-Test.apk | grep -q 'lib/arm64-v8a/libtesseract.so'; then echo 'Tesseract payload unexpectedly present'; exit 1; fi
+          if unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/tessdata/'; then echo 'Tessdata unexpectedly present'; exit 1; fi
+
+      - name: Write v0.9.9 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.9.9",
+            "versionCode": 10081,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "New Arabic OCR engine: PaddleOCR keeps text detection and English/digit recognition, while EasyOCR Arabic ONNX handles Arabic lines on-device. The Arabic model downloads once (~52 MB), is SHA-256 verified, then OCR remains local. Existing Smart Search content is preserved and arabic_repair_v4 retries prior Arabic repair attempts without clearing the main index. Tesseract has been removed from the production OCR path."
+          }
+          JSON
+
+      - name: Publish update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.9.9 (10081) EasyOCR Arabic'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published update remotely
+        shell: bash
+        run: |
+          set -euo pipefail
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.9.9"' /tmp/published-latest.json
+          grep -q '"versionCode": 10081' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '3643f2a9de5bae4b8a9011e45b6e08d193578e5defb7196b0b4521b9c32d2b1d'
+          echo 'Smart Life v0.9.9 update channel verified remotely.'
