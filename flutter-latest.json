@@ -1,6 +1,6 @@
 {
-  "versionName": "0.9.9",
-  "versionCode": 10081,
+  "versionName": "0.10.0",
+  "versionCode": 10082,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "New Arabic OCR engine: PaddleOCR keeps text detection and English/digit recognition, while EasyOCR Arabic ONNX handles Arabic lines on-device. The Arabic model downloads once (~52 MB), is SHA-256 verified, then OCR remains local. Existing Smart Search content is preserved and arabic_repair_v4 retries prior Arabic repair attempts without clearing the main index. Tesseract has been removed from the production OCR path."
+  "releaseNotes": "Arabic Search Hardening: PP-OCRv5 Arabic is now the primary on-device OCR path with more tolerant text detection for faint Arabic scans. EasyOCR remains a best-effort fallback and can no longer suppress valid Paddle output if its model or decode fails. Raw OCR plus safe RTL variants are preserved, Arabic search adds Unicode NFKC/zero-width normalization and bounded fuzzy matching for small OCR mistakes, and arabic_repair_v5 retries prior Arabic repair attempts lazily without clearing the completed Smart Search index."
 }
