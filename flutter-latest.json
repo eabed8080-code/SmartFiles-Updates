@@ -1,6 +1,6 @@
 {
-  "versionName": "0.9.6",
-  "versionCode": 10078,
+  "versionName": "0.9.7",
+  "versionCode": 10079,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Arabic OCR Diagnostic adds a safe one-file test under Settings > Smart Search Index. Pick one PDF or image and Smart Life runs the current local PaddleOCR directly, shows RAW OCR TEXT plus Arabic/Latin/digit counts, and does not clear, rebuild, or rewrite the completed Smart Search index. Existing v0.9.5 Arabic Rescue Search, English/number search, checkpoints, Pause/Resume, Turbo OCR, Connect to PC, reminders, sounds, and prior Smart Life behavior are preserved."
+  "releaseNotes": "Arabic OCR upgraded to a local hybrid pipeline: PaddleOCR remains for English and digits while Tesseract Arabic is added as the Arabic recovery engine. OCR output is merged into the existing Smart Search index without clearing or rebuilding it. Arabic Rescue uses a new repair generation so previously attempted files can be retried with Tesseract. Existing checkpoints, Pause/Resume, Turbo OCR, one-file diagnostic, Connect to PC, reminders, sounds, and prior Smart Life behavior are preserved."
 }
