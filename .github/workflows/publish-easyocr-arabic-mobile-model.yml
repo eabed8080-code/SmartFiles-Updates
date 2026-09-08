@@ -1,0 +1,77 @@
+name: Publish EasyOCR Arabic mobile model
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-easyocr-arabic-mobile-model.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-model:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download verified model artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-56a0-81f7-933b-b9b5682d75a7/raw?se=2026-09-08T21%3A20%3A30Z&sp=r&sv=2026-02-06&sr=b&scid=22ae63ee-c2f0-55cc-afd6-2df317b47357&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-08T19%3A28%3A21Z&ske=2026-09-09T19%3A28%3A21Z&sks=b&skv=2026-02-06&sig=wbt6CHBHxr706K6a1QVGt3n19NcVds%2BlUudJ58T/TVw%3D'
+          MODEL_SHA256: '8f1ede9f802d21a632a6678cc017b97e69685db672c5bb8c021171f7466dfb0a'
+          CHARSET_SHA256: 'e141a737eb1a08c76d7a2036aae1f2f37f6df8e6fd6d7529d40ffd74612d153b'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-easyocr
+          mkdir incoming-easyocr
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-easyocr/artifact.zip
+          unzip -q incoming-easyocr/artifact.zip -d incoming-easyocr/unpacked
+          MODEL="incoming-easyocr/unpacked/easyocr_arabic_rec_mobile.onnx"
+          CHARSET="incoming-easyocr/unpacked/easyocr_arabic_charset.txt"
+          MANIFEST="incoming-easyocr/unpacked/easyocr_arabic_mobile_manifest.txt"
+          test -s "$MODEL"
+          test -s "$CHARSET"
+          test -s "$MANIFEST"
+          test "$(sha256sum "$MODEL" | awk '{print $1}')" = "$MODEL_SHA256"
+          test "$(sha256sum "$CHARSET" | awk '{print $1}')" = "$CHARSET_SHA256"
+          grep -q 'calibration=synthetic_generic_arabic_only_no_user_data' "$MANIFEST"
+          grep -q "model_sha256=$MODEL_SHA256" "$MANIFEST"
+          cp "$MODEL" ./easyocr_arabic_rec_mobile.onnx
+          cp "$CHARSET" ./easyocr_arabic_charset.txt
+          cp "$MANIFEST" ./easyocr_arabic_mobile_manifest.txt
+
+      - name: Publish stable public release asset
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG='easyocr-arabic-v1'
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" \
+              easyocr_arabic_rec_mobile.onnx \
+              easyocr_arabic_charset.txt \
+              easyocr_arabic_mobile_manifest.txt \
+              --clobber
+          else
+            gh release create "$TAG" \
+              easyocr_arabic_rec_mobile.onnx \
+              easyocr_arabic_charset.txt \
+              easyocr_arabic_mobile_manifest.txt \
+              --title 'Smart Life EasyOCR Arabic Mobile Model v1' \
+              --notes 'Local Arabic OCR recognition model for Smart Life. EasyOCR 1.7.2 Arabic recognizer converted to ONNX. Conv layers use static INT8 calibrated only with synthetic generic Arabic text; LSTM and MatMul use dynamic INT8. No user document or private image is included in the calibration data or release assets.'
+          fi
+
+      - name: Verify public release asset
+        shell: bash
+        env:
+          MODEL_SHA256: '8f1ede9f802d21a632a6678cc017b97e69685db672c5bb8c021171f7466dfb0a'
+        run: |
+          set -euo pipefail
+          URL='https://github.com/eabed8080-code/SmartFiles-Updates/releases/download/easyocr-arabic-v1/easyocr_arabic_rec_mobile.onnx'
+          curl -fL --retry 3 --retry-delay 2 "$URL" -o /tmp/easyocr_arabic_rec_mobile.onnx
+          test "$(sha256sum /tmp/easyocr_arabic_rec_mobile.onnx | awk '{print $1}')" = "$MODEL_SHA256"
+          echo 'EasyOCR Arabic mobile model release verified.'
