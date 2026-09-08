@@ -1,6 +1,6 @@
 {
-  "versionName": "0.9.3",
-  "versionCode": 10075,
+  "versionName": "0.9.4",
+  "versionCode": 10076,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Turbo Deep OCR speeds up the remaining Smart Search work without rebuilding or discarding completed index progress. The deep stage no longer repeats the image document probe or PDF embedded-text extraction already completed by the fast stage. OCR working images are reduced to a practical document-reading size, idle pauses between micro-batches are shortened, and capable 8+ core phones can process up to three OCR files at a time while 6-7 core devices use two and smaller devices remain sequential. PaddleOCR stays limited to two inference threads per call to avoid excessive CPU pressure. SQLite checkpoints, Pause/Resume, unchanged-file reuse, Search by Name, Search Content, Connect to PC, Transfer Status, reminders, sounds, and previous Smart Life behavior are preserved."
+  "releaseNotes": "Arabic Search Recovery keeps the completed Smart Search index instead of rebuilding it. Arabic content already saved in the index is matched with Arabic-aware folding for Alef variants, Ya/Alef-Maqsura, Ta-Marbuta, tatweel, diacritics, joined or separated spaces such as عبدالرحيم / عبد الرحيم, Arabic-Indic digits, and RTL reversed OCR tokens. English and number search behavior remains unchanged. PaddleOCR Arabic recognition no longer discards lines at the previous 0.28 confidence threshold twice, so newly indexed or changed visual PDFs/images retain more Arabic text. Existing SQLite path/mtime/size checkpoints, Turbo micro-batches, Pause/Resume, Search by Name, Search Content, Connect to PC, Transfer Status, reminders, sounds, and prior Smart Life behavior are preserved."
 }
