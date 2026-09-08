@@ -1,6 +1,6 @@
 {
-  "versionName": "0.9.8",
-  "versionCode": 10080,
+  "versionName": "0.9.9",
+  "versionCode": 10081,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Arabic index writeback repair. The one-file diagnostic proved the exact original PDF can read ‘عبد الرحيم’ with Tesseract on Android. v0.9.8 now makes Arabic Rescue use the same 2000px Tesseract-quality path before merging OCR text into the existing Smart Search row. A new arabic_repair_v3 checkpoint generation retries files previously attempted at lower resolution, up to 48 candidates per Arabic search, and future scanned PDF/image OCR also uses the 2000px quality floor. The completed main index is preserved; no rebuild or clear is performed."
+  "releaseNotes": "New Arabic OCR engine: PaddleOCR keeps text detection and English/digit recognition, while EasyOCR Arabic ONNX handles Arabic lines on-device. The Arabic model downloads once (~52 MB), is SHA-256 verified, then OCR remains local. Existing Smart Search content is preserved and arabic_repair_v4 retries prior Arabic repair attempts without clearing the main index. Tesseract has been removed from the production OCR path."
 }
