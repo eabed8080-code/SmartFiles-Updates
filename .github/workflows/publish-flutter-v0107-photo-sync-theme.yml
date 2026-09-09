@@ -1,0 +1,95 @@
+name: Publish Smart Life v0.10.7 Photo Sync & Theme Colors
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-flutter-v0107-photo-sync-theme.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.10.7 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprwestus.oaiusercontent.com/files/00000000-b53c-8230-88a1-876d8c39cd79/raw?se=2026-09-09T20%3A54%3A26Z&sp=r&sv=2026-02-06&sr=b&scid=dc648cdf-611a-5d67-80e0-4cc13b4149e2&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-09T20%3A12%3A22Z&ske=2026-09-10T20%3A12%3A22Z&sks=b&skv=2026-02-06&sig=x0k8wHcRgYoOWa/v9w21pi%2By6eV0/2WAUfv/T0nbY7c%3D'
+          EXPECTED_SHA256: '8af47713efb577b56ef723aff06b701f95ea00096355e7a33c9322ceab21d45b'
+          EXPECTED_SIZE: '91956839'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v0107
+          mkdir incoming-v0107
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v0107/artifact.zip
+          unzip -q incoming-v0107/artifact.zip -d incoming-v0107/unpacked
+          APK="$(find incoming-v0107/unpacked -type f -name 'Smart-Life-v0.10.7-Photo-Sync-Theme.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          SIZE="$(stat -c %s "$APK")"
+          echo "APK bytes: $SIZE"
+          test "$SIZE" = "$EXPECTED_SIZE"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Verify APK identity and OCR payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          CERT="$($TOOLS/apksigner verify --verbose --print-certs Smart-Life-Flutter-Test.apk)"
+          printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]' | tr -d ': ' | grep -q 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionName='0.10.7'"
+          echo "$BADGING" | grep -q "versionCode='10089'"
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/easyocr/easyocr_arabic_charset.txt'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/rec/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/det/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'lib/arm64-v8a/libonnxruntime.so'
+
+      - name: Write v0.10.7 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.10.7",
+            "versionCode": 10089,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Photos now refresh directly from Android MediaStore and resync quietly when Smart Life returns to the foreground. Recent is ordered by when an image was added to the phone, so newly downloaded Gmail/Downloads images appear at the top even when their original capture date is older. The existing photo selection actions remain intact. Theme colors are expanded with Midnight Navy, Royal Blue, Deep Teal, Emerald, Forest Green, Burgundy, Plum, Royal Purple, Charcoal, Slate Blue, Coffee Brown, Champagne Gold, and the existing palettes in a scrollable color picker."
+          }
+          JSON
+
+      - name: Publish update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.10.7 (10089) photo sync theme colors'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published update remotely
+        shell: bash
+        run: |
+          set -euo pipefail
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.10.7"' /tmp/published-latest.json
+          grep -q '"versionCode": 10089' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '8af47713efb577b56ef723aff06b701f95ea00096355e7a33c9322ceab21d45b'
+          echo 'Smart Life v0.10.7 update channel verified remotely.'
