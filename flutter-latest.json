@@ -1,6 +1,6 @@
 {
-  "versionName": "0.10.3",
-  "versionCode": 10085,
+  "versionName": "0.10.4",
+  "versionCode": 10086,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Main Find now acts as the organization inbox: once a file is assigned to a Category it disappears from Find and remains available from its Category. Each Category now has its own file-name search field for quickly locating files inside large categories. Settings > Sounds & Effects is collapsed by default and expands only when tapped. Existing batch category actions, sound choices, Arabic OCR, and search stack are preserved."
+  "releaseNotes": "Category files now support Rename while keeping the file in the same Category. Photos now open in a native-style swipe gallery and support multi-select with Share and Delete actions. Smart Search no longer starts indexing automatically when the app or Find opens; it reads the saved index until an explicit update/rebuild is requested. Existing organization inbox, Category search, sound controls, Arabic OCR, and search stack are preserved."
 }
