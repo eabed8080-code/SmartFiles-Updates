@@ -1,6 +1,6 @@
 {
-  "versionName": "0.10.1",
-  "versionCode": 10083,
+  "versionName": "0.10.2",
+  "versionCode": 10084,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Category organization polish: Find results now show each file's Smart Life category or Uncategorized, with an Uncategorized quick filter and a clear Already in Category message. Category rename/delete remain Smart Life tag operations only and never delete or move the Android file. Sounds & Effects now uses anchored dropdown/combo controls for Navigation effect and Reminder effect with immediate preview, while Reminder repeats remains a dropdown. The existing v0.10.0 Arabic OCR/search stack is preserved."
+  "releaseNotes": "Multi-select now shows a clear Add to Category button so several selected files can be categorized in one action. Navigation effect and Reminder effect now expand their sound choices inline directly below the tapped field, with immediate preview; Reminder repeats remains a dropdown. Existing category status/Uncategorized workflow and Arabic OCR/search stack are preserved."
 }
