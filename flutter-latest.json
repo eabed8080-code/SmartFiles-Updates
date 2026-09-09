@@ -1,6 +1,6 @@
 {
-  "versionName": "0.10.6",
-  "versionCode": 10088,
+  "versionName": "0.10.7",
+  "versionCode": 10089,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Find selection actions are expanded: selecting one file now offers Share, Rename, Add to Category, and Delete; selecting multiple files offers Share, Add to Category, and bulk Delete. Delete permanently removes the selected files from the phone after confirmation and refreshes the saved Find index. Rename remains single-file only so a file can be named correctly before categorizing it. The startup grow/shrink opening transition is removed so Smart Life opens directly into Find."
+  "releaseNotes": "Photos now refresh directly from Android MediaStore and resync quietly when Smart Life returns to the foreground. Recent is ordered by when an image was added to the phone, so newly downloaded Gmail/Downloads images appear at the top even when their original capture date is older. The existing photo selection actions remain intact. Theme colors are expanded with Midnight Navy, Royal Blue, Deep Teal, Emerald, Forest Green, Burgundy, Plum, Royal Purple, Charcoal, Slate Blue, Coffee Brown, Champagne Gold, and the existing palettes in a scrollable color picker."
 }
