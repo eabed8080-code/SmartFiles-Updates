@@ -1,0 +1,95 @@
+name: Publish Smart Life v0.10.1 Category Status & Sound Dropdowns
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-flutter-v0101-category-status-sound-dropdowns.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.10.1 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-c62c-820c-aa00-742874f681fe/raw?se=2026-09-09T02%3A31%3A03Z&sp=r&sv=2026-02-06&sr=b&scid=b4a55589-1224-5957-a561-1b5a5dc4e029&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-09T01%3A55%3A46Z&ske=2026-09-10T01%3A55%3A46Z&sks=b&skv=2026-02-06&sig=s5SUPQ9vgZjKjxZCT2o1kZ8bSO5P94NeBczow73S7W4%3D'
+          EXPECTED_SHA256: '07037b0b5519720c36bb5ca25e72581813e965d383f78cab3591c61ca5e3f97e'
+          EXPECTED_SIZE: '91891303'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v0101
+          mkdir incoming-v0101
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v0101/artifact.zip
+          unzip -q incoming-v0101/artifact.zip -d incoming-v0101/unpacked
+          APK="$(find incoming-v0101/unpacked -type f -name 'Smart-Life-v0.10.1-Category-Status-Sound-Dropdowns.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          SIZE="$(stat -c %s "$APK")"
+          echo "APK bytes: $SIZE"
+          test "$SIZE" = "$EXPECTED_SIZE"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Verify APK identity and OCR payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          CERT="$($TOOLS/apksigner verify --verbose --print-certs Smart-Life-Flutter-Test.apk)"
+          printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]' | tr -d ': ' | grep -q 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionName='0.10.1'"
+          echo "$BADGING" | grep -q "versionCode='10083'"
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/easyocr/easyocr_arabic_charset.txt'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/rec/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/det/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'lib/arm64-v8a/libonnxruntime.so'
+
+      - name: Write v0.10.1 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.10.1",
+            "versionCode": 10083,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Category organization polish: Find results now show each file's Smart Life category or Uncategorized, with an Uncategorized quick filter and a clear Already in Category message. Category rename/delete remain Smart Life tag operations only and never delete or move the Android file. Sounds & Effects now uses anchored dropdown/combo controls for Navigation effect and Reminder effect with immediate preview, while Reminder repeats remains a dropdown. The existing v0.10.0 Arabic OCR/search stack is preserved."
+          }
+          JSON
+
+      - name: Publish update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.10.1 (10083) category status and sound dropdowns'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published update remotely
+        shell: bash
+        run: |
+          set -euo pipefail
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.10.1"' /tmp/published-latest.json
+          grep -q '"versionCode": 10083' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '07037b0b5519720c36bb5ca25e72581813e965d383f78cab3591c61ca5e3f97e'
+          echo 'Smart Life v0.10.1 update channel verified remotely.'
