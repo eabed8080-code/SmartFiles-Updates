@@ -1,6 +1,6 @@
 {
-  "versionName": "0.10.5",
-  "versionCode": 10087,
+  "versionName": "0.10.6",
+  "versionCode": 10088,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Photos multi-select now includes Share, Move, Delete, and More. Move, Copy to Album, Create Album, and Delete are real Android media operations so changes are reflected in the device gallery. More includes Copy to Album, Add to Favorites, and Create Album. A new Photo file names setting can show each filename under its thumbnail with fixed one-line spacing and ellipsis for long names. Category Rename and the existing saved-index-first Search behavior are preserved."
+  "releaseNotes": "Find selection actions are expanded: selecting one file now offers Share, Rename, Add to Category, and Delete; selecting multiple files offers Share, Add to Category, and bulk Delete. Delete permanently removes the selected files from the phone after confirmation and refreshes the saved Find index. Rename remains single-file only so a file can be named correctly before categorizing it. The startup grow/shrink opening transition is removed so Smart Life opens directly into Find."
 }
