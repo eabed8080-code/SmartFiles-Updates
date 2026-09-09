@@ -1,6 +1,6 @@
 {
-  "versionName": "0.10.2",
-  "versionCode": 10084,
+  "versionName": "0.10.3",
+  "versionCode": 10085,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Multi-select now shows a clear Add to Category button so several selected files can be categorized in one action. Navigation effect and Reminder effect now expand their sound choices inline directly below the tapped field, with immediate preview; Reminder repeats remains a dropdown. Existing category status/Uncategorized workflow and Arabic OCR/search stack are preserved."
+  "releaseNotes": "Main Find now acts as the organization inbox: once a file is assigned to a Category it disappears from Find and remains available from its Category. Each Category now has its own file-name search field for quickly locating files inside large categories. Settings > Sounds & Effects is collapsed by default and expands only when tapped. Existing batch category actions, sound choices, Arabic OCR, and search stack are preserved."
 }
