@@ -1,6 +1,6 @@
 {
-  "versionName": "0.10.0",
-  "versionCode": 10082,
+  "versionName": "0.10.1",
+  "versionCode": 10083,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Arabic Search Hardening: PP-OCRv5 Arabic is now the primary on-device OCR path with more tolerant text detection for faint Arabic scans. EasyOCR remains a best-effort fallback and can no longer suppress valid Paddle output if its model or decode fails. Raw OCR plus safe RTL variants are preserved, Arabic search adds Unicode NFKC/zero-width normalization and bounded fuzzy matching for small OCR mistakes, and arabic_repair_v5 retries prior Arabic repair attempts lazily without clearing the completed Smart Search index."
+  "releaseNotes": "Category organization polish: Find results now show each file's Smart Life category or Uncategorized, with an Uncategorized quick filter and a clear Already in Category message. Category rename/delete remain Smart Life tag operations only and never delete or move the Android file. Sounds & Effects now uses anchored dropdown/combo controls for Navigation effect and Reminder effect with immediate preview, while Reminder repeats remains a dropdown. The existing v0.10.0 Arabic OCR/search stack is preserved."
 }
