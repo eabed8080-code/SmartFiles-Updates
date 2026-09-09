@@ -1,0 +1,95 @@
+name: Publish Smart Life v0.10.4 Gallery Category Rename & Index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-flutter-v0104-gallery-category-rename-index.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.10.4 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-196c-81f5-85b6-84fd43b78d88/raw?se=2026-09-09T13%3A11%3A21Z&sp=r&sv=2026-02-06&sr=b&scid=d3d71dac-f6a8-557a-bb87-700a4f8121e5&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-09T01%3A43%3A03Z&ske=2026-09-10T01%3A43%3A03Z&sks=b&skv=2026-02-06&sig=D87e1kiVvETsAfV9cCjs/TCZ1bZ2gzJt5bzkQFeFbwU%3D'
+          EXPECTED_SHA256: 'e98d84d0feda0518ce46d3a79497e2e20c1c5d9bc411491207f697cbe5e9792a'
+          EXPECTED_SIZE: '91956839'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v0104
+          mkdir incoming-v0104
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v0104/artifact.zip
+          unzip -q incoming-v0104/artifact.zip -d incoming-v0104/unpacked
+          APK="$(find incoming-v0104/unpacked -type f -name 'Smart-Life-v0.10.4-Gallery-Category-Rename-Index.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          SIZE="$(stat -c %s "$APK")"
+          echo "APK bytes: $SIZE"
+          test "$SIZE" = "$EXPECTED_SIZE"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Verify APK identity and OCR payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          CERT="$($TOOLS/apksigner verify --verbose --print-certs Smart-Life-Flutter-Test.apk)"
+          printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]' | tr -d ': ' | grep -q 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionName='0.10.4'"
+          echo "$BADGING" | grep -q "versionCode='10086'"
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/easyocr/easyocr_arabic_charset.txt'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/rec/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/det/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'lib/arm64-v8a/libonnxruntime.so'
+
+      - name: Write v0.10.4 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.10.4",
+            "versionCode": 10086,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Category files now support Rename while keeping the file in the same Category. Photos now open in a native-style swipe gallery and support multi-select with Share and Delete actions. Smart Search no longer starts indexing automatically when the app or Find opens; it reads the saved index until an explicit update/rebuild is requested. Existing organization inbox, Category search, sound controls, Arabic OCR, and search stack are preserved."
+          }
+          JSON
+
+      - name: Publish update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.10.4 (10086) gallery category rename index'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published update remotely
+        shell: bash
+        run: |
+          set -euo pipefail
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.10.4"' /tmp/published-latest.json
+          grep -q '"versionCode": 10086' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = 'e98d84d0feda0518ce46d3a79497e2e20c1c5d9bc411491207f697cbe5e9792a'
+          echo 'Smart Life v0.10.4 update channel verified remotely.'
