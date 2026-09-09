@@ -1,0 +1,95 @@
+name: Publish Smart Life v0.10.8 Selection & Photo Organizer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-flutter-v0108-selection-photo-organizer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify signed v0.10.8 artifact
+        shell: bash
+        env:
+          SOURCE_URL: 'https://sdmntprwestus.oaiusercontent.com/files/00000000-2fc0-8230-8d62-6bec9527e67d/raw?se=2026-09-09T22%3A19%3A36Z&sp=r&sv=2026-02-06&sr=b&scid=4b3be1c5-2c2b-5292-b36f-5d0861330f88&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-09T19%3A59%3A46Z&ske=2026-09-10T19%3A59%3A46Z&sks=b&skv=2026-02-06&sig=4VN%2B2LR9IamhNqqjfMeA4vSNxd55CuP/XCf1LMae1VU%3D'
+          EXPECTED_SHA256: '36bb965e499919218fa31f588a0130d5f13a574ed52bbfd34e50533e2aeb4a7c'
+          EXPECTED_SIZE: '91956839'
+        run: |
+          set -euo pipefail
+          rm -rf incoming-v0108
+          mkdir incoming-v0108
+          curl -fL --retry 3 --retry-delay 2 "$SOURCE_URL" -o incoming-v0108/artifact.zip
+          unzip -q incoming-v0108/artifact.zip -d incoming-v0108/unpacked
+          APK="$(find incoming-v0108/unpacked -type f -name 'Smart-Life-v0.10.8-Selection-Photo-Organizer.apk' -print -quit)"
+          test -n "$APK"
+          ACTUAL_SHA256="$(sha256sum "$APK" | awk '{print $1}')"
+          echo "APK SHA256: $ACTUAL_SHA256"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          SIZE="$(stat -c %s "$APK")"
+          echo "APK bytes: $SIZE"
+          test "$SIZE" = "$EXPECTED_SIZE"
+          cp "$APK" Smart-Life-Flutter-Test.apk
+
+      - name: Verify APK identity and OCR payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          CERT="$($TOOLS/apksigner verify --verbose --print-certs Smart-Life-Flutter-Test.apk)"
+          printf '%s' "$CERT" | tr '[:upper:]' '[:lower:]' | tr -d ': ' | grep -q 'fba1a652ac3ed950b45ea26585cccbeb8497153f137f761d17ea12cae71c955b'
+          BADGING="$("$TOOLS/aapt" dump badging Smart-Life-Flutter-Test.apk | head -n 1)"
+          echo "$BADGING"
+          echo "$BADGING" | grep -q "versionName='0.10.8'"
+          echo "$BADGING" | grep -q "versionCode='10090'"
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/easyocr/easyocr_arabic_charset.txt'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/rec/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'assets/models/det/inference.onnx'
+          unzip -l Smart-Life-Flutter-Test.apk | grep -q 'lib/arm64-v8a/libonnxruntime.so'
+
+      - name: Write v0.10.8 update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.10.8",
+            "versionCode": 10090,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "File Type multi-select is cleaner: Share and single-file Rename stay with the selected count, while Add to Category and Delete appear below the Smart Summary/Uncategorized area with full-width buttons so Delete no longer wraps. In Photos, selecting exactly one photo adds Rename inside the three-dot More menu. Photo rename updates the real Android MediaStore/file so Gallery sees the new name. Albums/Folders remain real Android folders: Create Album/Folder and Move continue to change the actual phone gallery structure."
+          }
+          JSON
+
+      - name: Publish update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.10.8 (10090) selection photo organizer'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Verify published update remotely
+        shell: bash
+        run: |
+          set -euo pipefail
+          PUBLISHED_COMMIT="$(git rev-parse HEAD)"
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/flutter-latest.json" -o /tmp/published-latest.json
+          curl -fL --retry 3 "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/${PUBLISHED_COMMIT}/Smart-Life-Flutter-Test.apk" -o /tmp/published.apk
+          grep -q '"versionName": "0.10.8"' /tmp/published-latest.json
+          grep -q '"versionCode": 10090' /tmp/published-latest.json
+          test "$(sha256sum /tmp/published.apk | awk '{print $1}')" = '36bb965e499919218fa31f588a0130d5f13a574ed52bbfd34e50533e2aeb4a7c'
+          echo 'Smart Life v0.10.8 update channel verified remotely.'
