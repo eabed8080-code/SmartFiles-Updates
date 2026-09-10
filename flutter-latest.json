@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.0",
-  "versionCode": 10092,
+  "versionName": "0.11.1",
+  "versionCode": 10093,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Document Watch adds local expiry-date tracking for important documents. Category refresh checks only new or changed files, scans likely Passport, ID, Driver License and Insurance documents locally, offers Track expiry or Ignore, and can alert at 90, 30, 7 days and on the expiry date. Important expiry alerts also appear inside Today."
+  "releaseNotes": "Find cleanup removes the unused large Today card from Find while keeping the Today bottom tab. File Types are arranged as PDF, Word, Excel, PowerPoint then Images, Videos, Audio, ZIP, APK so PowerPoint is fully visible. Smart Groups now shows only Today, Yesterday and This Week."
 }
