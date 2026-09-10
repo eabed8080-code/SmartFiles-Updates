@@ -26,7 +26,7 @@ jobs:
           test -f /tmp/v0110/Smart-Life-v0.11.0-Document-Watch.apk
           test -f /tmp/v0110/release-version.json
           grep -q '"versionName":"0.11.0"' /tmp/v0110/release-version.json
-          grep -q '"versionCode":11000' /tmp/v0110/release-version.json
+          grep -q '"versionCode":10092' /tmp/v0110/release-version.json
           cp /tmp/v0110/Smart-Life-v0.11.0-Document-Watch.apk Smart-Life-Flutter-Test.apk
           sha256sum Smart-Life-Flutter-Test.apk
 
@@ -37,7 +37,7 @@ jobs:
           cat > flutter-latest.json <<'JSON'
           {
             "versionName": "0.11.0",
-            "versionCode": 11000,
+            "versionCode": 10092,
             "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
             "releaseNotes": "Document Watch adds local expiry-date tracking for important documents. Category refresh checks only new or changed files, scans likely Passport, ID, Driver License and Insurance documents locally, offers Track expiry or Ignore, and can alert at 90, 30, 7 days and on the expiry date. Important expiry alerts also appear inside Today."
           }
