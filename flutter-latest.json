@@ -1,6 +1,6 @@
 {
-  "versionName": "0.10.8",
-  "versionCode": 10090,
+  "versionName": "0.10.9",
+  "versionCode": 10091,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "File Type multi-select is cleaner: Share and single-file Rename stay with the selected count, while Add to Category and Delete appear below the Smart Summary/Uncategorized area with full-width buttons so Delete no longer wraps. In Photos, selecting exactly one photo adds Rename inside the three-dot More menu. Photo rename updates the real Android MediaStore/file so Gallery sees the new name. Albums/Folders remain real Android folders: Create Album/Folder and Move continue to change the actual phone gallery structure."
+  "releaseNotes": "Today replaces Converter and shows items newly added to the phone today from MediaStore without rebuilding Smart Search or OCR indexes. Photos no longer shows the Albums / Folders strip on the main page; Years is moved up and presented as cleaner horizontal year cards. Real album create/move/rename behavior remains available, and the existing photo actions, auto-sync, themes, sounds, saved-index search, OCR payload, signing identity, and update flow are preserved."
 }
