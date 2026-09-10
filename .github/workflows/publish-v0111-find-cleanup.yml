@@ -1,0 +1,54 @@
+name: Publish Smart Life v0.11.1 Find Cleanup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-v0111-find-cleanup.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download verified v0.11.1 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --retry-delay 2 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-6748-81f7-8ddb-e289ef70078b/raw?se=2026-09-10T22%3A45%3A38Z&sp=r&sv=2026-02-06&sr=b&scid=04a74211-c26b-5654-ae09-0d9221da67b1&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-10T02%3A03%3A01Z&ske=2026-09-11T02%3A03%3A01Z&sks=b&skv=2026-02-06&sig=IOhlALaDb7GQj0b39vYXiOLYSWJnSMj/1yGn0Pwnn4E%3D' -o /tmp/v0111.zip
+          unzip -q /tmp/v0111.zip -d /tmp/v0111
+          test -f /tmp/v0111/Smart-Life-v0.11.1-Find-Cleanup.apk
+          test -f /tmp/v0111/release-version.json
+          grep -q '"versionName":"0.11.1"' /tmp/v0111/release-version.json
+          grep -q '"versionCode":10093' /tmp/v0111/release-version.json
+          cp /tmp/v0111/Smart-Life-v0.11.1-Find-Cleanup.apk Smart-Life-Flutter-Test.apk
+          sha256sum Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.11.1",
+            "versionCode": 10093,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Find cleanup removes the unused large Today card from Find while keeping the Today bottom tab. File Types are arranged as PDF, Word, Excel, PowerPoint then Images, Videos, Audio, ZIP, APK so PowerPoint is fully visible. Smart Groups now shows only Today, Yesterday and This Week."
+          }
+          JSON
+
+      - name: Publish v0.11.1 to update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.11.1 Find Cleanup'
+          git push
