@@ -1,6 +1,6 @@
 {
-  "versionName": "0.10.9",
-  "versionCode": 10091,
+  "versionName": "0.11.0",
+  "versionCode": 10092,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Today replaces Converter and shows items newly added to the phone today from MediaStore without rebuilding Smart Search or OCR indexes. Photos no longer shows the Albums / Folders strip on the main page; Years is moved up and presented as cleaner horizontal year cards. Real album create/move/rename behavior remains available, and the existing photo actions, auto-sync, themes, sounds, saved-index search, OCR payload, signing identity, and update flow are preserved."
+  "releaseNotes": "Document Watch adds local expiry-date tracking for important documents. Category refresh checks only new or changed files, scans likely Passport, ID, Driver License and Insurance documents locally, offers Track expiry or Ignore, and can alert at 90, 30, 7 days and on the expiry date. Important expiry alerts also appear inside Today."
 }
