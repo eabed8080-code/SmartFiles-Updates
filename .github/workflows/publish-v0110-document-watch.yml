@@ -1,0 +1,54 @@
+name: Publish Smart Life v0.11.0 Document Watch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-v0110-document-watch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download verified v0.11.0 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --retry-delay 2 'https://sdmntprnortheu.oaiusercontent.com/files/00000000-46e0-81f4-a899-7ca94e3e43e6/raw?se=2026-09-10T03%3A00%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=832dbf0a-3d89-577c-8900-4d7ad2588bd1&skoid=1d6acb5b-b3f4-43ec-a5ec-b05c4a7708c8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-09T20%3A09%3A15Z&ske=2026-09-10T20%3A09%3A15Z&sks=b&skv=2026-02-06&sig=i5/3OELlYll%2BEjAUEQQagIw6tRDgtNkh0WmmRWzFFM8%3D' -o /tmp/v0110.zip
+          unzip -q /tmp/v0110.zip -d /tmp/v0110
+          test -f /tmp/v0110/Smart-Life-v0.11.0-Document-Watch.apk
+          test -f /tmp/v0110/release-version.json
+          grep -q '"versionName":"0.11.0"' /tmp/v0110/release-version.json
+          grep -q '"versionCode":11000' /tmp/v0110/release-version.json
+          cp /tmp/v0110/Smart-Life-v0.11.0-Document-Watch.apk Smart-Life-Flutter-Test.apk
+          sha256sum Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.11.0",
+            "versionCode": 11000,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Document Watch adds local expiry-date tracking for important documents. Category refresh checks only new or changed files, scans likely Passport, ID, Driver License and Insurance documents locally, offers Track expiry or Ignore, and can alert at 90, 30, 7 days and on the expiry date. Important expiry alerts also appear inside Today."
+          }
+          JSON
+
+      - name: Publish v0.11.0 to update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.11.0 Document Watch'
+          git push
