@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.3",
-  "versionCode": 10095,
+  "versionName": "0.11.4",
+  "versionCode": 10096,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "File Types now use cleaner circular icons. Search results no longer show the redundant three-dot menu; single-file More keeps Rename, Favorites and Convert. Images, videos and PDFs now show local previews where available, and Documents categories plus Scan New Document are more compact and readable."
+  "releaseNotes": "Documents categories now use one consistent 3D icon system: soft gradients, depth, highlights and distinct colors for familiar categories. New or renamed categories automatically receive a matching deterministic style, so the page stays clean and consistent as categories change."
 }
