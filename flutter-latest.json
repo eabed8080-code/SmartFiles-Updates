@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.7",
-  "versionCode": 10099,
+  "versionName": "0.11.8",
+  "versionCode": 10100,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Photos now has the same Newest, Oldest, Largest and Smallest sorting as Videos and remembers the selected sort. New is now a lightweight inbox with Today, Yesterday and This Week filters while keeping source groups such as WhatsApp, Downloads and Screenshots. Home, Docs, Media, New and Settings now share a persistent bottom navigation bar with smooth content transitions and preserved visited-tab state."
+  "releaseNotes": "Fixes the top-level navigation freeze introduced in v0.11.7. Home, Docs, Media, New and Settings now keep the bottom navigation bar fixed while page content transitions smoothly and reliably, with visited page state preserved."
 }
