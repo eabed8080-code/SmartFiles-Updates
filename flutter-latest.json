@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.2",
-  "versionCode": 10094,
+  "versionName": "0.11.3",
+  "versionCode": 10095,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Find now shows only PDF, Word, Excel, PowerPoint, Images and Videos while Audio, ZIP and APK remain searchable by name. Smart Groups and Smart Summary are removed from Find results. Tapping a file row selects it, tapping its icon opens it, and selection mode replaces the bottom navigation with Add to Category, Share, Delete and More; single-file More includes Rename."
+  "releaseNotes": "File Types now use cleaner circular icons. Search results no longer show the redundant three-dot menu; single-file More keeps Rename, Favorites and Convert. Images, videos and PDFs now show local previews where available, and Documents categories plus Scan New Document are more compact and readable."
 }
