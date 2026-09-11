@@ -1,0 +1,54 @@
+name: Publish Smart Life v0.11.2 File Manager Selection
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-v0112-file-manager-selection.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download verified v0.11.2 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --retry-delay 2 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-76e8-81f7-befe-14e8a2847d33/raw?se=2026-09-11T01%3A50%3A12Z&sp=r&sv=2026-02-06&sr=b&scid=ce54504a-88e3-58a1-a8f1-ab5134c859e8&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-10T12%3A38%3A57Z&ske=2026-09-11T12%3A38%3A57Z&sks=b&skv=2026-02-06&sig=MY1yHQA7WDEYQumMbbkU/m/ofjAMiSGYqephpdtpuSU%3D' -o /tmp/v0112.zip
+          unzip -q /tmp/v0112.zip -d /tmp/v0112
+          test -f /tmp/v0112/Smart-Life-v0.11.2-File-Manager-Selection.apk
+          test -f /tmp/v0112/release-version.json
+          grep -q '"versionName":"0.11.2"' /tmp/v0112/release-version.json
+          grep -q '"versionCode":10094' /tmp/v0112/release-version.json
+          cp /tmp/v0112/Smart-Life-v0.11.2-File-Manager-Selection.apk Smart-Life-Flutter-Test.apk
+          sha256sum Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.11.2",
+            "versionCode": 10094,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Find now shows only PDF, Word, Excel, PowerPoint, Images and Videos while Audio, ZIP and APK remain searchable by name. Smart Groups and Smart Summary are removed from Find results. Tapping a file row selects it, tapping its icon opens it, and selection mode replaces the bottom navigation with Add to Category, Share, Delete and More; single-file More includes Rename."
+          }
+          JSON
+
+      - name: Publish v0.11.2 to update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.11.2 File Manager Selection'
+          git push
