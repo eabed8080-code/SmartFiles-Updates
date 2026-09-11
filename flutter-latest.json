@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.5",
-  "versionCode": 10097,
+  "versionName": "0.11.6",
+  "versionCode": 10098,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Photos is now Media with separate Photos and Videos views. Videos have their own Years grouping plus Newest, Oldest, Largest and Smallest sorting, with local thumbnails, duration and size details. Existing photo behavior and the v0.11.4 category icon system are preserved."
+  "releaseNotes": "Home now focuses on PDF, Images and Videos with a cleaner single-row layout, larger circular shortcuts and clearer file counts. Find is now Home and Today is now New. Word, Excel and PowerPoint remain fully searchable by name, while Docs and Media behavior are preserved."
 }
