@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.10",
-  "versionCode": 10102,
+  "versionName": "0.11.11",
+  "versionCode": 10103,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Category file selection is simplified: the Remove from Category action is now hidden. Share, Delete and More remain available, and single-file More still includes Rename. The existing selection behavior, real storage source labels and file opening behavior are unchanged."
+  "releaseNotes": "Smart Life v0.11.11 adds Move to Category inside More for one selected category file. New stays view-only, with direct image viewing inside Smart Life and consistent opening behavior for videos and other files."
 }
