@@ -1,0 +1,26 @@
+name: Diagnose GitHub Actions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/diagnose-actions.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record Actions diagnostic
+        run: |
+          set -euo pipefail
+          mkdir -p .build-status
+          printf '{"repo":"SmartFiles-Updates","status":"actions-running","runId":%s}\n' "$GITHUB_RUN_ID" > .build-status/public-actions-diagnostic.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .build-status/public-actions-diagnostic.json
+          git commit -m 'Record public Actions diagnostic'
+          git push origin HEAD:main
