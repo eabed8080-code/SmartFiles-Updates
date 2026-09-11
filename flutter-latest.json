@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.1",
-  "versionCode": 10093,
+  "versionName": "0.11.2",
+  "versionCode": 10094,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Find cleanup removes the unused large Today card from Find while keeping the Today bottom tab. File Types are arranged as PDF, Word, Excel, PowerPoint then Images, Videos, Audio, ZIP, APK so PowerPoint is fully visible. Smart Groups now shows only Today, Yesterday and This Week."
+  "releaseNotes": "Find now shows only PDF, Word, Excel, PowerPoint, Images and Videos while Audio, ZIP and APK remain searchable by name. Smart Groups and Smart Summary are removed from Find results. Tapping a file row selects it, tapping its icon opens it, and selection mode replaces the bottom navigation with Add to Category, Share, Delete and More; single-file More includes Rename."
 }
