@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.9",
-  "versionCode": 10101,
+  "versionName": "0.11.10",
+  "versionCode": 10102,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Category files now use the same touch model as File Types: tap a row to select it and tap its thumbnail or file icon to open it. Multi-select actions include Remove from Category, Share and Delete, while single-file More keeps Rename. Category rows show the real storage source such as WhatsApp Documents or Downloads. Remove from Category never deletes the Android file; Delete removes the real file from the phone."
+  "releaseNotes": "Category file selection is simplified: the Remove from Category action is now hidden. Share, Delete and More remain available, and single-file More still includes Rename. The existing selection behavior, real storage source labels and file opening behavior are unchanged."
 }
