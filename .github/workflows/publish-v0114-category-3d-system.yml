@@ -1,0 +1,54 @@
+name: Publish Smart Life v0.11.4 Category 3D System
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-v0114-category-3d-system.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download verified v0.11.4 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --retry-delay 2 'https://sdmntprwestcentralus.oaiusercontent.com/files/00000000-0d58-81fb-b3e6-ce153bfb0e63/raw?se=2026-09-11T04%3A57%3A42Z&sp=r&sv=2026-02-06&sr=b&scid=df70f64a-72b2-5465-a4cc-57435388b104&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-10T12%3A38%3A21Z&ske=2026-09-11T12%3A38%3A21Z&sks=b&skv=2026-02-06&sig=MWL9xrIlIuDSRns/tUDzMrHPWFMUtQAMAsm025yQvB8%3D' -o /tmp/v0114.zip
+          unzip -q /tmp/v0114.zip -d /tmp/v0114
+          test -f /tmp/v0114/Smart-Life-v0.11.4-Category-3D-System.apk
+          test -f /tmp/v0114/release-version.json
+          grep -q '"versionName":"0.11.4"' /tmp/v0114/release-version.json
+          grep -q '"versionCode":10096' /tmp/v0114/release-version.json
+          echo '3b4e71c05a02ab4d6b972dcfc820a149ab7cb9abf77ef939beced1ad47504666  /tmp/v0114/Smart-Life-v0.11.4-Category-3D-System.apk' | sha256sum -c -
+          cp /tmp/v0114/Smart-Life-v0.11.4-Category-3D-System.apk Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.11.4",
+            "versionCode": 10096,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "Documents categories now use one consistent 3D icon system: soft gradients, depth, highlights and distinct colors for familiar categories. New or renamed categories automatically receive a matching deterministic style, so the page stays clean and consistent as categories change."
+          }
+          JSON
+
+      - name: Publish v0.11.4 to update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.11.4 Category 3D System'
+          git push
