@@ -1,0 +1,54 @@
+name: Publish Smart Life v0.11.3 Visual Polish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-v0113-visual-polish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout update channel
+        uses: actions/checkout@v4
+
+      - name: Download verified v0.11.3 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --retry-delay 2 'https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-cddc-820c-86b8-04d971fb3eff/raw?se=2026-09-11T04%3A18%3A25Z&sp=r&sv=2026-02-06&sr=b&scid=7565c60c-982b-58cd-9a3b-be99a95c84b0&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-11T04%3A09%3A58Z&ske=2026-09-12T04%3A09%3A58Z&sks=b&skv=2026-02-06&sig=zKzCV5PbSQyKZ20VvtvCB5go0n7kRJqMlC%2B1m84uMQU%3D' -o /tmp/v0113.zip
+          unzip -q /tmp/v0113.zip -d /tmp/v0113
+          test -f /tmp/v0113/Smart-Life-v0.11.3-Visual-Polish.apk
+          test -f /tmp/v0113/release-version.json
+          grep -q '"versionName":"0.11.3"' /tmp/v0113/release-version.json
+          grep -q '"versionCode":10095' /tmp/v0113/release-version.json
+          echo 'effdc4db9062ead50e8ea3f5a406457d0f6fc0b2a63e0903f0dfb410ca1adfc5  /tmp/v0113/Smart-Life-v0.11.3-Visual-Polish.apk' | sha256sum -c -
+          cp /tmp/v0113/Smart-Life-v0.11.3-Visual-Polish.apk Smart-Life-Flutter-Test.apk
+
+      - name: Update Smart Life feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > flutter-latest.json <<'JSON'
+          {
+            "versionName": "0.11.3",
+            "versionCode": 10095,
+            "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
+            "releaseNotes": "File Types now use cleaner circular icons. Search results no longer show the redundant three-dot menu; single-file More keeps Rename, Favorites and Convert. Images, videos and PDFs now show local previews where available, and Documents categories plus Scan New Document are more compact and readable."
+          }
+          JSON
+
+      - name: Publish v0.11.3 to update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Smart-Life-Flutter-Test.apk flutter-latest.json
+          git commit -m 'Publish Smart Life v0.11.3 Visual Polish'
+          git push
