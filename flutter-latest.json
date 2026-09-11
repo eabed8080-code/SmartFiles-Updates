@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.6",
-  "versionCode": 10098,
+  "versionName": "0.11.7",
+  "versionCode": 10099,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Home now focuses on PDF, Images and Videos with a cleaner single-row layout, larger circular shortcuts and clearer file counts. Find is now Home and Today is now New. Word, Excel and PowerPoint remain fully searchable by name, while Docs and Media behavior are preserved."
+  "releaseNotes": "Photos now has the same Newest, Oldest, Largest and Smallest sorting as Videos and remembers the selected sort. New is now a lightweight inbox with Today, Yesterday and This Week filters while keeping source groups such as WhatsApp, Downloads and Screenshots. Home, Docs, Media, New and Settings now share a persistent bottom navigation bar with smooth content transitions and preserved visited-tab state."
 }
