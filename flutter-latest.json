@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.15",
-  "versionCode": 10107,
+  "versionName": "0.11.16",
+  "versionCode": 10108,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.15 strengthens Notes backup and recovery. Notes now include a Backup Center with a saved email address, Backup to Email, automatic daily local backup when notes changed, manual local backup, and JSON restore with Merge or Replace. Important notes can be marked with a star and can send a safe copy after saving. Email backup includes a readable TXT copy and a restorable JSON copy."
+  "releaseNotes": "Smart Life v0.11.16 adds Price Photos inside Notes as a separate local tool. Save a product photo with its price and an optional searchable product name, then edit or delete it later. Price Photos stay separate from normal Notes and their Notes backup/restore flow, so existing notes behavior is unchanged."
 }
