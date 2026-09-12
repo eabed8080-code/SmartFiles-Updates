@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.16",
-  "versionCode": 10108,
+  "versionName": "0.11.17",
+  "versionCode": 10109,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.16 adds Price Photos inside Notes as a separate local tool. Save a product photo with its price and an optional searchable product name, then edit or delete it later. Price Photos stay separate from normal Notes and their Notes backup/restore flow, so existing notes behavior is unchanged."
+  "releaseNotes": "Smart Life v0.11.17 improves Price Photos. Tapping a product card now opens a full-screen photo viewer with zoom and the saved price, while editing is available only from the three-dot menu. This keeps quick viewing separate from price editing."
 }
