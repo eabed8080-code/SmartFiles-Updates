@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.17",
-  "versionCode": 10109,
+  "versionName": "0.11.18",
+  "versionCode": 10110,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.17 improves Price Photos. Tapping a product card now opens a full-screen photo viewer with zoom and the saved price, while editing is available only from the three-dot menu. This keeps quick viewing separate from price editing."
+  "releaseNotes": "Smart Life v0.11.18 improves Price Photos entry. The product photo now stays visible while entering the price and name, and tapping the preview opens a full-screen zoom view. Smart Life also tries to suggest the product name from the photo using its existing on-device OCR, while anything typed manually remains unchanged."
 }
