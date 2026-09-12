@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.13",
-  "versionCode": 10105,
+  "versionName": "0.11.14",
+  "versionCode": 10106,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.13 is a visual organization update only. File result rows and Category file rows now use a more consistent compact rhythm, My Categories cards have a uniform compact height, and extra vertical spacing is reduced in Category search/results, Docs Scan, New thumbnail groups, and Media Years. Existing navigation and file actions are unchanged."
+  "releaseNotes": "Smart Life v0.11.14 adds Notes in place of New, renames Docs to Files, and keeps the main bottom navigation visible inside Category file pages. Notes include local text notes, search, colors, pinning, editing, deleting, and manual backup sharing."
 }
