@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.11",
-  "versionCode": 10103,
+  "versionName": "0.11.12",
+  "versionCode": 10104,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.11 adds Move to Category inside More for one selected category file. New stays view-only, with direct image viewing inside Smart Life and consistent opening behavior for videos and other files."
+  "releaseNotes": "Smart Life v0.11.12 fixes top-level tab navigation so the selected Home, Docs, Media, New or Settings tab always matches the visible page. New remains view-only and now shows compact thumbnail grids: direct image previews, cached PDF/video thumbnails, and clear type icons for other files."
 }
