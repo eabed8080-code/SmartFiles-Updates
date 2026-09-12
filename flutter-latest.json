@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.21",
-  "versionCode": 10113,
+  "versionName": "0.11.23",
+  "versionCode": 10115,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.21 simplifies Price Photos by removing the generated-name step so a photo can be saved directly with manual price/name entry. Smart Media Cleanup moves from the Media page into Settings, leaving the photo library cleaner and higher on the screen. Settings is reorganized into compact grouped sections for Appearance, App & Maintenance, Connection & Transfer, and Media & Documents while preserving the existing controls."
+  "releaseNotes": "Smart Life v0.11.23 pauses OCR and Smart Search Index so the app is lighter and simpler again. Settings no longer shows Smart Search Index or OCR-based document expiry analysis. File search remains available by filename and file type. Documents now use a normal camera photo with no OCR or OpenCV scan processing, while saved-document preview, rename, category and share remain available. OCR models, ONNX/Paddle/EasyOCR/Tesseract payloads and OCR-only dependencies are removed from the Android build. The v0.11.22 persistent-tab navigation fix is preserved."
 }
