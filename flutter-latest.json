@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.19",
-  "versionCode": 10111,
+  "versionName": "0.11.20",
+  "versionCode": 10112,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.19 makes Price Photos easier to manage. The three-dot menu now clearly offers Rename, Edit price, and Delete. Rename changes only the product name, while Delete permanently removes that saved price photo after confirmation."
+  "releaseNotes": "Smart Life v0.11.20 improves Price Photos actions. The three-dot action button now sits clearly beside the product name under each photo, with a larger touch target. The menu includes Rename, Edit price, Share, and Delete, and Share sends the saved product photo through Android sharing apps such as WhatsApp."
 }
