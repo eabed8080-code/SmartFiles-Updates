@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.32",
-  "versionCode": 10124,
+  "versionName": "0.11.33",
+  "versionCode": 10125,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.32 refreshes Files > My Categories with a calmer premium two-column layout: smaller category icons, softer depth, equal card heights, aligned two-line names, consistent file counts and subtle navigation. Manage Categories is now a focused workspace with Add, single-category Rename, multi-category Merge, Delete, and drag-to-reorder. Merging moves Smart Life category assignments only; deleting a category removes the label only. Physical files remain in their original Android folders. Notes spelling behavior from v0.11.31 and the latest Inbox improvements are preserved."
+  "releaseNotes": "Smart Life v0.11.33 adds Library as the fifth main tab and moves Settings to a gear. Share video links from YouTube, TikTok or Facebook, ordinary web links, or selected text from Android apps into a local Smart Life Library with search, type filters, editable title, topic and note. Video shares are saved as references to their original links, not downloaded video files; shared files and images continue to use Inbox. Price Photos can now link a product to one saved Library guide without duplicating the Library item. The lightweight OCR pause, Notes spelling recovery, Inbox decision flow and category management remain preserved."
 }
