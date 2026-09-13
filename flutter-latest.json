@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.36",
-  "versionCode": 10128,
+  "versionName": "0.11.37",
+  "versionCode": 10129,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.36 strengthens Instagram saving without adding a server. Share a public Instagram post or Reel to Smart Life: the fast local resolver runs first, then a local Android WebView fallback loads the shared post on the phone, collects media from the post, advances carousel pages, and saves available photos/videos into the existing Library group. The resolver accepts only Instagram/Facebook CDN media URLs and is bounded by a short timeout. If Instagram still blocks the media, Smart Life keeps the original link and now labels it as media unavailable instead of implying the download succeeded. This release changes Instagram only; Facebook and TikTok behavior are unchanged."
+  "releaseNotes": "Smart Life v0.11.37 adds an optional Cloudflare resolver for public Instagram posts and Reels. The phone still downloads and stores media locally. The previous WebView resolver is no longer used in the Share path."
 }
