@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.31",
-  "versionCode": 10123,
+  "versionName": "0.11.32",
+  "versionCode": 10124,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.31 restores the proven local English spelling behavior from v0.11.29 after the v0.11.30 ranking regression. Misspelled English words should again receive reliable red wavy underlines and tap suggestions. The experimental heavy ranking layer is removed from the live editor. Grammar/context correction remains separate for a later step. Inbox improvements from v0.11.30 are preserved."
+  "releaseNotes": "Smart Life v0.11.32 refreshes Files > My Categories with a calmer premium two-column layout: smaller category icons, softer depth, equal card heights, aligned two-line names, consistent file counts and subtle navigation. Manage Categories is now a focused workspace with Add, single-category Rename, multi-category Merge, Delete, and drag-to-reorder. Merging moves Smart Life category assignments only; deleting a category removes the label only. Physical files remain in their original Android folders. Notes spelling behavior from v0.11.31 and the latest Inbox improvements are preserved."
 }
