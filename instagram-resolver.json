@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "enabled": false,
+  "endpoint": "",
+  "note": "Smart Life Instagram resolver is not deployed yet. Enable after Cloudflare Worker deployment succeeds."
+}
