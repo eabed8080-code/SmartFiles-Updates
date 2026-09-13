@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.24",
-  "versionCode": 10116,
+  "versionName": "0.11.25",
+  "versionCode": 10117,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.24 improves image opening from the Files tab. Images found through File Search now open directly inside Smart Life in a full-screen preview with pinch zoom, instead of showing Android Open with. Back returns to the same search results. Other file types keep their existing opening behavior. The lightweight v0.11.23 OCR pause and the persistent navigation fix remain unchanged."
+  "releaseNotes": "Smart Life v0.11.25 adds automatic Arabic/English direction in Notes, a lightweight finger Sketch with pen colors, sizes, eraser and undo/redo saved inside the note, plus a tiny WhatsApp source cue beside Sent or Documents in File Search. Ordinary folders such as Screenshots, Camera and Downloads remain plain text. The v0.11.24 internal image preview and previous navigation/OCR simplification fixes are preserved."
 }
