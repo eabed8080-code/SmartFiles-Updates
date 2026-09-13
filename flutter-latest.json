@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.27",
-  "versionCode": 10119,
+  "versionName": "0.11.28",
+  "versionCode": 10120,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.27 redesigns the Inbox file area as a two-column visual grid. Images show their real local thumbnail, while video, PDF, audio and other files use clear type previews. Tapping an image, video or PDF now opens it inside Smart Life instead of Android Open with; unsupported file types still use the external fallback. Inbox organization, rename, notes and Smart Life-copy-only deletion remain unchanged."
+  "releaseNotes": "Smart Life v0.11.28 upgrades Notes with a familiar productivity workflow: Color filter, Sort and List/Grid view controls now sit under Search, while Pin and Important remain unchanged. Note title and body now use Android English spell checking with red wavy underlines and tap-to-choose suggestions, without forced auto-correction; Arabic, numbers and mixed note content are left alone. Existing automatic Arabic/English direction, Sketch, Price Photos, local/email backup, Inbox and all previous file features are preserved."
 }
