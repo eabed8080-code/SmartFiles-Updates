@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.25",
-  "versionCode": 10117,
+  "versionName": "0.11.26",
+  "versionCode": 10118,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.25 adds automatic Arabic/English direction in Notes, a lightweight finger Sketch with pen colors, sizes, eraser and undo/redo saved inside the note, plus a tiny WhatsApp source cue beside Sent or Documents in File Search. Ordinary folders such as Screenshots, Camera and Downloads remain plain text. The v0.11.24 internal image preview and previous navigation/OCR simplification fixes are preserved."
+  "releaseNotes": "Smart Life v0.11.26 replaces the Photos/Video tab with Inbox. Share important files, images, PDFs, audio, links or text from WhatsApp, email or other Android apps to Smart Life. Smart Life saves its own private local copy even when the main app was closed, while the original in the source app stays untouched. Inbox items can be opened, renamed, noted, deleted, or organized into existing Smart Life categories. The previous Notes, file preview, navigation and lightweight OCR-pause fixes are preserved."
 }
