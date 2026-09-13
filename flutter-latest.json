@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.33",
-  "versionCode": 10125,
+  "versionName": "0.11.34",
+  "versionCode": 10126,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.33 adds Library as the fifth main tab and moves Settings to a gear. Share video links from YouTube, TikTok or Facebook, ordinary web links, or selected text from Android apps into a local Smart Life Library with search, type filters, editable title, topic and note. Video shares are saved as references to their original links, not downloaded video files; shared files and images continue to use Inbox. Price Photos can now link a product to one saved Library guide without duplicating the Library item. The lightweight OCR pause, Notes spelling recovery, Inbox decision flow and category management remain preserved."
+  "releaseNotes": "Smart Life v0.11.34 makes Settings consistent across all five main tabs with a larger colored gear and comfortable touch target. Price Photos Guide badges are now directly tappable to open the linked Library guide, while the existing guide menu remains available. Library, Inbox, Notes spelling recovery, category management and the lightweight OCR pause are preserved."
 }
