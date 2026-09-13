@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.29",
-  "versionCode": 10121,
+  "versionName": "0.11.30",
+  "versionCode": 10122,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.29 completes the Notes and Inbox follow-up. Notes keep the Smart Life Color filter, Sort and List/Grid workflow, while English spelling is now checked fully on-device from a bundled dictionary instead of depending on Samsung/Android spell-check settings; misspelled English words get red wavy underlines and tap suggestions without forced auto-correction, and Arabic/numbers are ignored. Inbox cards use a smaller preview, show the detected source and original folder when Android exposes it, and provide direct Category and Delete decisions. Delete removes only the private Smart Life Inbox copy. Existing Pin, Important, Sketch, Price Photos, backup, previews and file features are preserved."
+  "releaseNotes": "Smart Life v0.11.30 polishes the Notes and Inbox changes from the previous release. English spelling suggestions are now ranked by local edit distance and similarity, so close corrections such as Holeday to Holiday are prioritized while spelling remains fully on-device and Arabic/numbers stay untouched. Inbox cards are more compact, long file names can use two lines, type and file size are shown together, and the detected source plus original folder are easier to read before choosing Category or Delete. Delete still removes only the private Smart Life Inbox copy. Existing Notes Color/Sort/List-Grid controls, Pin, Important, Sketch, Price Photos, backup, previews and file features are preserved."
 }
