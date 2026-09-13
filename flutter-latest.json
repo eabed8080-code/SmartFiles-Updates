@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.34",
-  "versionCode": 10126,
+  "versionName": "0.11.35",
+  "versionCode": 10127,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.34 makes Settings consistent across all five main tabs with a larger colored gear and comfortable touch target. Price Photos Guide badges are now directly tappable to open the linked Library guide, while the existing guide menu remains available. Library, Inbox, Notes spelling recovery, category management and the lightweight OCR pause are preserved."
+  "releaseNotes": "Smart Life v0.11.35 adds Instagram saving directly into Library. Use Instagram Share → Smart Life for a public post or Reel. Smart Life tries to resolve the shared Instagram URL locally on the phone and saves available photos or videos into app-owned storage. Carousel posts stay grouped as one Library item with multiple saved media entries. If Instagram does not expose the media, Smart Life safely keeps the original Instagram link instead of losing the share. No Smart Life server or cloud upload is used. Private, restricted or unavailable Instagram content is not bypassed. Existing Library links, Inbox, Notes, categories and Settings behavior are preserved."
 }
