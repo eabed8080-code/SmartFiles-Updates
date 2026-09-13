@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.23",
-  "versionCode": 10115,
+  "versionName": "0.11.24",
+  "versionCode": 10116,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.23 pauses OCR and Smart Search Index so the app is lighter and simpler again. Settings no longer shows Smart Search Index or OCR-based document expiry analysis. File search remains available by filename and file type. Documents now use a normal camera photo with no OCR or OpenCV scan processing, while saved-document preview, rename, category and share remain available. OCR models, ONNX/Paddle/EasyOCR/Tesseract payloads and OCR-only dependencies are removed from the Android build. The v0.11.22 persistent-tab navigation fix is preserved."
+  "releaseNotes": "Smart Life v0.11.24 improves image opening from the Files tab. Images found through File Search now open directly inside Smart Life in a full-screen preview with pinch zoom, instead of showing Android Open with. Back returns to the same search results. Other file types keep their existing opening behavior. The lightweight v0.11.23 OCR pause and the persistent navigation fix remain unchanged."
 }
