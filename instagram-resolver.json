@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "enabled": false,
-  "endpoint": "",
-  "note": "Smart Life Instagram resolver is not deployed yet. Enable after Cloudflare Worker deployment succeeds."
+  "enabled": true,
+  "endpoint": "https://smart-life-instagram-resolver.eabed1989.workers.dev",
+  "note": "Cloudflare Instagram resolver enabled after successful deployment."
 }
