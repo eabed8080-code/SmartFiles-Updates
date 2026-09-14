@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.37",
-  "versionCode": 10129,
+  "versionName": "0.11.38",
+  "versionCode": 10130,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.37 adds an optional Cloudflare resolver for public Instagram posts and Reels. The phone still downloads and stores media locally. The previous WebView resolver is no longer used in the Share path."
+  "releaseNotes": "Smart Life v0.11.38 adds a fully local Inbox Combine A4 tool. Choose two shared images in order, preview the first on top and the second below on one balanced white A4 page, then create a single PDF in Documents. The images keep their aspect ratio with comfortable white margins and spacing, and the original Inbox copies are never deleted. Existing Inbox Category/Delete actions, Notes, Library and Instagram work are preserved."
 }
