@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.48",
-  "versionCode": 10140,
+  "versionName": "0.11.49",
+  "versionCode": 10141,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.48 merges Inbox into Library without removing or adding Inbox functionality. Library and Inbox now share one root tab with a simple internal switch, while all existing Inbox actions and all Library features remain unchanged. The standalone Inbox bottom-navigation tab is removed, leaving Home, Files, Notes and Library as the four current root tabs. Instagram fetching, Smart Life saving, automatic Gallery saving and manual Save to Gallery from v0.11.47 are preserved."
+  "releaseNotes": "Smart Life v0.11.49 standardizes the Smart Life header across Home, Files, Notes and Library. Price Photos now supports local product categories, category filtering and category management without adding a new app tab. Adding a product now detects an exact existing barcode before creating a copy and warns about possible duplicate names, while allowing legitimate same-name products to be saved. Existing Price Photos automatically remain available as Uncategorized, and deleting a category never deletes its products. The v0.11.48 Library/Inbox merge and v0.11.47 Instagram save/Gallery flow are preserved."
 }
