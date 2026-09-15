@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.41",
-  "versionCode": 10133,
+  "versionName": "0.11.42",
+  "versionCode": 10134,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.41 fixes Instagram Library viewing using a native Android image-decoding bridge. Saved Instagram photos are decoded by Android and sent to Flutter as safe JPEG preview bytes, so the Library no longer depends on Image.file for these app-owned files. Tapping a saved Instagram image now opens a full-screen Smart Life viewer with pinch-to-zoom. Existing saved posts are supported without re-sharing them. This release focuses on making the already-downloaded images visible and openable; Gallery export will be handled separately after this path is verified."
+  "releaseNotes": "Smart Life v0.11.42 fixes the Instagram media pipeline at the source. The Cloudflare resolver now returns a trusted media-proxy URL, and Smart Life prefers that proxy so Instagram/Facebook CDN protection pages are no longer saved as fake .jpg files. Downloads now require a real image/video Content-Type before they are accepted. Existing broken Instagram Library posts can repair themselves: open the post once and Smart Life re-fetches the original public Instagram URL into the same Library item, keeping the old copy unless the replacement succeeds. New shares use the proxy path immediately."
 }
