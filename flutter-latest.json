@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.46",
-  "versionCode": 10138,
+  "versionName": "0.11.47",
+  "versionCode": 10139,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.46 fixes Instagram Save to Gallery on modern Android. Instagram media saved in Smart Life app-specific external storage is now accepted safely and copied through Android MediaStore. Image format is detected before publishing so JPEG, PNG, GIF and WebP files receive the correct Gallery filename and MIME type. The original Library copy remains untouched."
+  "releaseNotes": "Smart Life v0.11.47 fixes Instagram Save to Gallery for existing Library carousel posts by using the correct Library media-path separator. Instagram Share now shows the new three-step progress flow (Fetching Instagram media, Saving to Smart Life, Saving to Gallery) and automatically copies successfully fetched media into the Android Gallery after preserving the Smart Life Library copy. A Gallery failure never removes the Library copy and can still be retried from the Library three-dot menu."
 }
