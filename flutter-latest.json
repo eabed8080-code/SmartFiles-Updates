@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.39",
-  "versionCode": 10131,
+  "versionName": "0.11.40",
+  "versionCode": 10132,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.39 adds optional on-device barcode linking to Price Photos. All existing product photos, names and prices remain unchanged and continue to work without a barcode. Scan a known barcode to open its product immediately; scan a new barcode to link it to an existing product or create a new product. Each product menu can also add, change or remove its barcode, and product search now accepts either name or barcode."
+  "releaseNotes": "Smart Life v0.11.40 fixes Instagram Library image previews. Instagram photos saved from modern CDN image formats are normalized locally to a standard JPEG that Flutter can display, while videos remain unchanged. Existing saved Instagram photos are repaired automatically the next time Library loads, and new Instagram shares are normalized immediately after download. The original Instagram link and Library grouping remain unchanged."
 }
