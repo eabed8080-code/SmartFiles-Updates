@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.47",
-  "versionCode": 10139,
+  "versionName": "0.11.48",
+  "versionCode": 10140,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.47 fixes Instagram Save to Gallery for existing Library carousel posts by using the correct Library media-path separator. Instagram Share now shows the new three-step progress flow (Fetching Instagram media, Saving to Smart Life, Saving to Gallery) and automatically copies successfully fetched media into the Android Gallery after preserving the Smart Life Library copy. A Gallery failure never removes the Library copy and can still be retried from the Library three-dot menu."
+  "releaseNotes": "Smart Life v0.11.48 merges Inbox into Library without removing or adding Inbox functionality. Library and Inbox now share one root tab with a simple internal switch, while all existing Inbox actions and all Library features remain unchanged. The standalone Inbox bottom-navigation tab is removed, leaving Home, Files, Notes and Library as the four current root tabs. Instagram fetching, Smart Life saving, automatic Gallery saving and manual Save to Gallery from v0.11.47 are preserved."
 }
