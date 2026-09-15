@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.49",
-  "versionCode": 10141,
+  "versionName": "0.11.50",
+  "versionCode": 10142,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.49 standardizes the Smart Life header across Home, Files, Notes and Library. Price Photos now supports local product categories, category filtering and category management without adding a new app tab. Adding a product now detects an exact existing barcode before creating a copy and warns about possible duplicate names, while allowing legitimate same-name products to be saved. Existing Price Photos automatically remain available as Uncategorized, and deleting a category never deletes its products. The v0.11.48 Library/Inbox merge and v0.11.47 Instagram save/Gallery flow are preserved."
+  "releaseNotes": "Smart Life v0.11.50 adds My Places as a compact Library entry that opens a dedicated local places page. Places can keep a name, optional category, note, photo, GPS coordinates and a shared map link; Near Me requests location only when used and sorts saved GPS places by distance without background tracking. The shared Home/Files/Notes/Library header is tightened for smaller screens so the subtitle remains readable and the Settings action stays clean and consistent. Price Photos categories/duplicate protection, the Library/Inbox merge, and the stable Instagram Library/Gallery flow are preserved."
 }
