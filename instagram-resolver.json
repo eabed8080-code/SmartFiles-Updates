@@ -1,6 +1,6 @@
 {
-  "version": 1,
+  "version": 2,
   "enabled": true,
-  "endpoint": "https://smart-life-instagram-resolver.eabed1989.workers.dev",
-  "note": "Cloudflare Instagram resolver enabled after successful deployment."
+  "endpoint": "https://smart-life-instagram-backend.onrender.com",
+  "note": "Smart Life Instagram media now resolves through the Render Instaloader backend."
 }
