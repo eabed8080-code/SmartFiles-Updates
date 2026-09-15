@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.42",
-  "versionCode": 10134,
+  "versionName": "0.11.45",
+  "versionCode": 10137,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.42 fixes the Instagram media pipeline at the source. The Cloudflare resolver now returns a trusted media-proxy URL, and Smart Life prefers that proxy so Instagram/Facebook CDN protection pages are no longer saved as fake .jpg files. Downloads now require a real image/video Content-Type before they are accepted. Existing broken Instagram Library posts can repair themselves: open the post once and Smart Life re-fetches the original public Instagram URL into the same Library item, keeping the old copy unless the replacement succeeds. New shares use the proxy path immediately."
+  "releaseNotes": "Smart Life v0.11.45 keeps Instagram Save to Gallery and improves the Share experience. When Instagram or another app shares an item to Smart Life, the native receiver now shows a clear saving progress screen instead of a blank grey page while the item is being processed. Instagram media can still be copied from the Library three-dot menu to the normal Android Gallery using Save to Gallery."
 }
