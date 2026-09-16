@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.53",
-  "versionCode": 10145,
+  "versionName": "0.11.54",
+  "versionCode": 10146,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.53 keeps the large Smart Life identity card on Home only. Files, Notes and Library no longer repeat it. The PDF, Images and Videos summary now lives in Files and uses the same real on-device index counts without a second scan."
+  "releaseNotes": "Smart Life v0.11.54 rebuilds Home as a clean dashboard with the Smart Life identity, greeting, Quick Actions, real recent indexed files, New on your phone and Continue where you left off. The PDF, Images and Videos File Summary is removed from Home and lives in Files only. Files now starts with a real saved-index summary and one full filename/type Search Files panel before Scan and Categories. Files, Notes, Library and Settings no longer repeat the large Smart Life identity header."
 }
