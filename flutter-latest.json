@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.55",
-  "versionCode": 10147,
+  "versionName": "0.11.56",
+  "versionCode": 10148,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.55 refines Home into a clean, focused dashboard. Recent and the extra lower Home cards are removed, Quick Actions are larger and easier to read, and the greeting now shows the current temperature in Celsius. Weather uses coarse rounded coordinates only for the live temperature request and Smart Life does not store those coordinates. The existing Smart Life header, Files, Notes, Library, Settings navigation and Quick Action destinations are preserved."
+  "releaseNotes": "Smart Life v0.11.56 introduces the first pass of the new glass-style visual direction on Home. Home now uses a dark layered background, frosted Smart Life header, compact live Celsius weather card, and four soft 3D glass Quick Action cards while preserving the same Scan, Search, New Note and Save Link destinations. This release intentionally limits the redesign to Home so the new visual system can be reviewed before it is extended to Files, Notes, Library and Settings."
 }
