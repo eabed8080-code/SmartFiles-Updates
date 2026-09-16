@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.52",
-  "versionCode": 10144,
+  "versionName": "0.11.53",
+  "versionCode": 10145,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.52 moves Settings back to the persistent bottom navigation as a fifth tab: Home, Files, Notes, Library and Settings. The shared Home/Files/Notes/Library identity header is now clean and consistent with no Settings gear, and the old floating Settings overlay that caused doubled gears is removed. Five-tab sizing is tightened for phone screens while My Places, Library/Inbox, Price Photos duplicate protection and the stable Instagram save/Gallery flow remain intact."
+  "releaseNotes": "Smart Life v0.11.53 keeps the large Smart Life identity card on Home only. Files, Notes and Library no longer repeat it. The PDF, Images and Videos summary now lives in Files and uses the same real on-device index counts without a second scan."
 }
