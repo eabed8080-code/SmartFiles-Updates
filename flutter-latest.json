@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.57",
-  "versionCode": 10149,
+  "versionName": "0.11.58",
+  "versionCode": 10150,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.57 brings Files into the new dark glass visual system while preserving the existing local file summary, filename/type search, scan, categories and file actions. The persistent Home / Files / Notes / Library / Settings dock is now dark glass, fixed below the page content, and the Files scroll area keeps clear breathing room above it. The redesign uses lightweight translucent surfaces and shadows rather than continuous full-screen blur."
+  "releaseNotes": "Smart Life v0.11.58 returns Home and Files to the previous light design while keeping the current app functions. Home keeps live Celsius weather and the same Scan, Search, New Note and Save Link actions. Files keeps the current on-device file summary, filename/type search, scan, categories and file actions, but returns to the light layout used before the glass redesign. Notes, Library, Settings, sharing, indexing, categories and update behavior are unchanged."
 }
