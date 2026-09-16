@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.54",
-  "versionCode": 10146,
+  "versionName": "0.11.55",
+  "versionCode": 10147,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.54 rebuilds Home as a clean dashboard with the Smart Life identity, greeting, Quick Actions, real recent indexed files, New on your phone and Continue where you left off. The PDF, Images and Videos File Summary is removed from Home and lives in Files only. Files now starts with a real saved-index summary and one full filename/type Search Files panel before Scan and Categories. Files, Notes, Library and Settings no longer repeat the large Smart Life identity header."
+  "releaseNotes": "Smart Life v0.11.55 refines Home into a clean, focused dashboard. Recent and the extra lower Home cards are removed, Quick Actions are larger and easier to read, and the greeting now shows the current temperature in Celsius. Weather uses coarse rounded coordinates only for the live temperature request and Smart Life does not store those coordinates. The existing Smart Life header, Files, Notes, Library, Settings navigation and Quick Action destinations are preserved."
 }
