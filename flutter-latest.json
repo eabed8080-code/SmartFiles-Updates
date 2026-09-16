@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.50",
-  "versionCode": 10142,
+  "versionName": "0.11.51",
+  "versionCode": 10143,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.50 adds My Places as a compact Library entry that opens a dedicated local places page. Places can keep a name, optional category, note, photo, GPS coordinates and a shared map link; Near Me requests location only when used and sorts saved GPS places by distance without background tracking. The shared Home/Files/Notes/Library header is tightened for smaller screens so the subtitle remains readable and the Settings action stays clean and consistent. Price Photos categories/duplicate protection, the Library/Inbox merge, and the stable Instagram Library/Gallery flow are preserved."
+  "releaseNotes": "Smart Life v0.11.51 makes the Home, Files, Notes and Library identity header visually identical with one light translucent background card, consistent spacing and one clean Settings gear. My Places photo actions now offer Take Photo, Choose from Photos and Find Place Photo; the Google option opens a targeted image search using the saved place name and location without scraping. Saved and editor place photos can be tapped for a zoomable full-screen preview, while existing remove/change photo, Near Me, Library/Inbox, Price Photos and Instagram flows stay intact."
 }
