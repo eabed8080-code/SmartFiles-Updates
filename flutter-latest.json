@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.66",
-  "versionCode": 10158,
+  "versionName": "0.11.67",
+  "versionCode": 10159,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.66 restores Smart Life identity on Home with a compact colorful 3D-style logo and keeps Home as the page label. The greeting, Celsius/Fahrenheit temperature and date are larger for readability, and Home now shows a live Bahrain time line that updates locally without extra network or location access. Quick Actions keep the same design and direct Scan, Search, New Note and Save Link behavior. Price Photos barcode-first behavior and all existing user data remain unchanged."
+  "releaseNotes": "Smart Life v0.11.67 adds first-stage TikTok Share support without bypassing creator download controls. When TikTok gives Smart Life an actual shared video stream, Smart Life stores a local Library copy and also attempts a Gallery copy on Android 10 or newer. When TikTok shares only a link, Smart Life keeps a clean TikTok Library item instead of failing; short TikTok links are normalized when possible. Library now recognizes TikTok items and includes a TikTok filter. Instagram saving, Home, Files, Notes, Price Photos barcode behavior and existing user data remain unchanged."
 }
