@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.62",
-  "versionCode": 10154,
+  "versionName": "0.11.63",
+  "versionCode": 10155,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.62 applies only the first approved organization phase. Home, Files, Notes, Library and Settings now use one fixed light page-title header with consistent height and placement. Files is split directly under the header into Category and Search: Category contains the restored real File Summary plus the existing category organization and helper tools, while Search opens directly to the existing filename/type search and filters. No app functions are removed or changed, and broader spacing, Refresh and cross-page layout refinements are intentionally deferred until this phase is reviewed."
+  "releaseNotes": "Smart Life v0.11.63 cleans up Files exactly as approved. File Summary and the PDF/Images/Videos counters are removed completely from Category, so the tab starts directly with My Categories. Search now has only All, Documents, Images and Videos; Documents groups PDF, Word, Excel and PowerPoint. Image results show real local thumbnails and video results show cached frame thumbnails with a small play overlay, while document results keep their existing file-type icons and thumbnail failures safely fall back to icons. All existing file search, category, scan, open and indexing behavior remains intact."
 }
