@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.68",
-  "versionCode": 10160,
+  "versionName": "0.11.69",
+  "versionCode": 10161,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.68 upgrades TikTok Share for creator-downloadable videos. When a public TikTok page explicitly reports downloads enabled and exposes its download address, Smart Life downloads that video into local Library storage and also attempts to save it into Movies/Smart Life/TikTok in Gallery. TikTok videos with downloads disabled, private/unavailable posts, or pages that do not expose an approved download address remain safe link-only Library items. TikTok items with local media now also show the same manual Save to Gallery retry option used by Instagram. Instagram behavior and all existing Smart Life data remain unchanged."
+  "releaseNotes": "Smart Life v0.11.69 strengthens TikTok Share for creator-downloadable videos. Short vt.tiktok.com/vm.tiktok.com links are resolved more carefully, TikTok oEmbed is used as a canonical-page fallback, the resolver now reads both current rehydration data and SIGI variants, primes a browser-like TikTok session before the video page request, and carries session cookies into the approved download request. Smart Life still downloads only when TikTok metadata explicitly reports downloads allowed and exposes a download address; otherwise the item remains link-only. Existing Instagram, Library, Gallery, Home, Files, Notes and Price Photos behavior remains unchanged."
 }
