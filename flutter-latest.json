@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.63",
-  "versionCode": 10155,
+  "versionName": "0.11.64",
+  "versionCode": 10156,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.63 cleans up Files exactly as approved. File Summary and the PDF/Images/Videos counters are removed completely from Category, so the tab starts directly with My Categories. Search now has only All, Documents, Images and Videos; Documents groups PDF, Word, Excel and PowerPoint. Image results show real local thumbnails and video results show cached frame thumbnails with a small play overlay, while document results keep their existing file-type icons and thumbnail failures safely fall back to icons. All existing file search, category, scan, open and indexing behavior remains intact."
+  "releaseNotes": "Smart Life v0.11.64 makes Home Quick Actions act immediately while preserving the current Home design. Scan now starts the existing scan flow directly, Search opens Files on the Search tab, and New Note opens the existing note editor directly. The Home greeting, Celsius/Fahrenheit temperature and date are slightly larger for readability. Files categories/search behavior, Notes data, Library, Settings, saved files, indexing, sharing and all other current functions are unchanged."
 }
