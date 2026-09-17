@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.64",
-  "versionCode": 10156,
+  "versionName": "0.11.65",
+  "versionCode": 10157,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.64 makes Home Quick Actions act immediately while preserving the current Home design. Scan now starts the existing scan flow directly, Search opens Files on the Search tab, and New Note opens the existing note editor directly. The Home greeting, Celsius/Fahrenheit temperature and date are slightly larger for readability. Files categories/search behavior, Notes data, Library, Settings, saved files, indexing, sharing and all other current functions are unchanged."
+  "releaseNotes": "Smart Life v0.11.65 makes Price Photos barcode-first. Scanning a barcode that is already saved opens that exact product immediately. Scanning a new barcode now starts a separate new product record directly, even when another saved item has the same name, brand or price. Product name stays optional, barcode search remains available, and existing photos, prices, categories and saved barcode data remain compatible."
 }
