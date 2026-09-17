@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.70",
-  "versionCode": 10162,
+  "versionName": "0.11.71",
+  "versionCode": 10163,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.70 adds first-stage Facebook Reel/video saving for public shares. When Facebook gives Smart Life a real shared video stream, or a public Facebook page exposes a direct video URL without login, Smart Life stores the video locally in Library and also attempts to save it to Movies/Smart Life/Facebook in Gallery. Private, restricted, login-required, or otherwise unavailable Facebook media stays as a safe Library link. Android Share now has one direct Smart Life target: the old Send to PC share-sheet target is removed while PC pairing/settings code remains available inside the app. Home keeps the existing 76px Smart Life header but removes the small Home label from it; Home is now a larger body title above the description, and the greeting/weather/date/Bahrain time block sits slightly lower for balance. TikTok, Instagram, Quick Actions, Files, Notes, Settings, Price Photos and existing user data remain unchanged."
+  "releaseNotes": "Smart Life v0.11.71 fixes Facebook /share/r/ Reel links. The Facebook resolver now starts a normal logged-out Facebook web session locally on the phone, keeps only temporary session cookies for that request, then reads the public canonical Reel URL and public Open Graph video metadata when Facebook exposes them. This specifically fixes shared Facebook links that previously returned an error before Smart Life could reach the Reel. Successful public videos are stored locally in Library and copied to Movies/Smart Life/Facebook in Gallery; restricted or login-required content still stays link-only. No Facebook account, password, Smart Life server, or cloud upload is used. TikTok, Instagram, Direct Share, Home and all existing user data remain unchanged."
 }
