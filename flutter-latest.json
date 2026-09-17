@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.59",
-  "versionCode": 10151,
+  "versionName": "0.11.62",
+  "versionCode": 10154,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.59 applies the three approved visual refinements without changing app behavior. Home now shows Fahrenheit beside Celsius using the same existing weather reading. Library now has a clear Library title above the existing Library/Inbox content, and the Files summary uses a simpler PDF icon while keeping the same counts and layout. Search, scan, indexing, categories, Notes, Library data, sharing, Settings and all other functions are unchanged."
+  "releaseNotes": "Smart Life v0.11.62 applies only the first approved organization phase. Home, Files, Notes, Library and Settings now use one fixed light page-title header with consistent height and placement. Files is split directly under the header into Category and Search: Category contains the restored real File Summary plus the existing category organization and helper tools, while Search opens directly to the existing filename/type search and filters. No app functions are removed or changed, and broader spacing, Refresh and cross-page layout refinements are intentionally deferred until this phase is reviewed."
 }
