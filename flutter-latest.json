@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.75",
-  "versionCode": 10167,
+  "versionName": "0.11.76",
+  "versionCode": 10168,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.75 refines Files Search and Notes. The All, Doc, Photo and Video filters now use larger soft illustrated tiles with clearer pastel depth and a stronger selected state, while keeping the same four-filter search behavior and the search field underneath. Search-result previews are larger so PDF, Word, Excel, PowerPoint, photo and video results are easier to recognize at a glance. Saving an important note is now silent: the \"Important note saved\" snackbar and EMAIL COPY action no longer appear after save. File indexing, Category organization, search scope, note persistence and backup tools are unchanged."
+  "releaseNotes": "Smart Life v0.11.76 adds local Voice Notes inside Notes. A note can contain text plus one or more voice recordings, or be saved as voice-only. Voice includes Start, Pause/Resume, Stop, local Play/Pause, duration, and per-clip removal. The Notes list shows a compact microphone summary, while existing Sketch, spell-check, Arabic/English direction, filters, sorting, grid/list view, pin/important and Price Photos behavior remain unchanged. Recordings stay on the phone; the existing Notes text/JSON backup does not copy the audio files themselves."
 }
