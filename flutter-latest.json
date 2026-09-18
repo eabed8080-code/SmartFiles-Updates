@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.72",
-  "versionCode": 10164,
+  "versionName": "0.11.73",
+  "versionCode": 10165,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.72 adds the requested direct Add to Category action to every result in Files > Search. After finding any indexed file, the user can tap the new folder-plus action, choose an existing Smart Life category or create a new one, and finish without sharing the file through Inbox. The original Android file is never moved or duplicated; Smart Life stores only the category assignment. Existing Search filters, thumbnails, file opening, Share behavior, Category management, Home, Notes, Library, Settings, TikTok, Instagram and Facebook flows remain unchanged."
+  "releaseNotes": "Smart Life v0.11.73 refines the Home information layout. The Your files, notes, links and more at a glance line now stays on one line, and the greeting, Celsius/Fahrenheit temperature, date and live Bahrain time are placed directly underneath it with slightly larger text. Quick Actions are moved slightly lower for cleaner spacing. Scan, Search, New Note, Save Link, Files categories/search, Notes, Library, Settings and existing Instagram, TikTok and Facebook sharing behavior remain unchanged."
 }
