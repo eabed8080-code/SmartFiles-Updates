@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.71",
-  "versionCode": 10163,
+  "versionName": "0.11.72",
+  "versionCode": 10164,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.71 fixes Facebook /share/r/ Reel links. The Facebook resolver now starts a normal logged-out Facebook web session locally on the phone, keeps only temporary session cookies for that request, then reads the public canonical Reel URL and public Open Graph video metadata when Facebook exposes them. This specifically fixes shared Facebook links that previously returned an error before Smart Life could reach the Reel. Successful public videos are stored locally in Library and copied to Movies/Smart Life/Facebook in Gallery; restricted or login-required content still stays link-only. No Facebook account, password, Smart Life server, or cloud upload is used. TikTok, Instagram, Direct Share, Home and all existing user data remain unchanged."
+  "releaseNotes": "Smart Life v0.11.72 adds the requested direct Add to Category action to every result in Files > Search. After finding any indexed file, the user can tap the new folder-plus action, choose an existing Smart Life category or create a new one, and finish without sharing the file through Inbox. The original Android file is never moved or duplicated; Smart Life stores only the category assignment. Existing Search filters, thumbnails, file opening, Share behavior, Category management, Home, Notes, Library, Settings, TikTok, Instagram and Facebook flows remain unchanged."
 }
