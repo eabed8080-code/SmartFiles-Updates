@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.74",
-  "versionCode": 10166,
+  "versionName": "0.11.75",
+  "versionCode": 10167,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.74 applies the approved Home and Files refinements. Home keeps the same 76dp Smart Life header while making the Smart Life logo and title clearer, slightly enlarging the greeting, and placing Bahrain/time followed by the date on one line. Files Search replaces the old text filter strip with four balanced icon filters: All, Doc, Photo and Video, with the search field directly underneath. Doc continues to group PDF, Word, Excel and PowerPoint, and search results keep their real per-file visuals: document-type icons plus photo/video thumbnails. Categories, file indexing/open behavior, Quick Actions and all existing data remain unchanged."
+  "releaseNotes": "Smart Life v0.11.75 refines Files Search and Notes. The All, Doc, Photo and Video filters now use larger soft illustrated tiles with clearer pastel depth and a stronger selected state, while keeping the same four-filter search behavior and the search field underneath. Search-result previews are larger so PDF, Word, Excel, PowerPoint, photo and video results are easier to recognize at a glance. Saving an important note is now silent: the \"Important note saved\" snackbar and EMAIL COPY action no longer appear after save. File indexing, Category organization, search scope, note persistence and backup tools are unchanged."
 }
