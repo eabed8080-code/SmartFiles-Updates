@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.73",
-  "versionCode": 10165,
+  "versionName": "0.11.74",
+  "versionCode": 10166,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.73 refines the Home information layout. The Your files, notes, links and more at a glance line now stays on one line, and the greeting, Celsius/Fahrenheit temperature, date and live Bahrain time are placed directly underneath it with slightly larger text. Quick Actions are moved slightly lower for cleaner spacing. Scan, Search, New Note, Save Link, Files categories/search, Notes, Library, Settings and existing Instagram, TikTok and Facebook sharing behavior remain unchanged."
+  "releaseNotes": "Smart Life v0.11.74 applies the approved Home and Files refinements. Home keeps the same 76dp Smart Life header while making the Smart Life logo and title clearer, slightly enlarging the greeting, and placing Bahrain/time followed by the date on one line. Files Search replaces the old text filter strip with four balanced icon filters: All, Doc, Photo and Video, with the search field directly underneath. Doc continues to group PDF, Word, Excel and PowerPoint, and search results keep their real per-file visuals: document-type icons plus photo/video thumbnails. Categories, file indexing/open behavior, Quick Actions and all existing data remain unchanged."
 }
