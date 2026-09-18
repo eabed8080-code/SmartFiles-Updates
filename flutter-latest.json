@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.76",
-  "versionCode": 10168,
+  "versionName": "0.11.77",
+  "versionCode": 10169,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.76 adds local Voice Notes inside Notes. A note can contain text plus one or more voice recordings, or be saved as voice-only. Voice includes Start, Pause/Resume, Stop, local Play/Pause, duration, and per-clip removal. The Notes list shows a compact microphone summary, while existing Sketch, spell-check, Arabic/English direction, filters, sorting, grid/list view, pin/important and Price Photos behavior remain unchanged. Recordings stay on the phone; the existing Notes text/JSON backup does not copy the audio files themselves."
+  "releaseNotes": "Smart Life v0.11.77 adds a separate WhatsApp Refresh area inside Inbox. Refresh discovers already-downloaded WhatsApp Documents, Pictures and Videos from regular WhatsApp storage without requiring Share. Discovered WhatsApp items are references to the original files: Smart Life does not copy, move, rename or delete the WhatsApp source file. Adding one to a Smart Life category keeps the original in WhatsApp, and Remove from Smart Life only hides that reference. Normal Share to Smart Life from WhatsApp, email, Gallery, Files, browser and other apps remains unchanged and continues to use the existing private Inbox-copy workflow. Duplicate refresh results are suppressed with a local handled fingerprint, and missing/unavailable WhatsApp storage is reported safely."
 }
