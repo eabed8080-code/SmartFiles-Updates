@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.80",
-  "versionCode": 10172,
+  "versionName": "0.11.81",
+  "versionCode": 10173,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.80 simplifies Settings to only Smart Life Update and Connect to PC. Theme color, Transfer Status, Smart Media Cleanup, Sounds & Effects, Photo file names and About are removed from the Settings screen, while the updater and PC connection behavior remain available."
+  "releaseNotes": "Smart Life v0.11.81 includes the three approved interface updates: Files Search now uses simple circular All / Doc / Photo / Video controls with the label underneath; WhatsApp Inbox adds compact All / Images / Videos / Documents filters; and Price Photos is renamed Price Book with a two-column product catalog, circular product photos, product name and price, direct Guide button, and Add Product action. Existing local products, categories, barcodes, guides, WhatsApp source files, and file-search behavior are preserved."
 }
