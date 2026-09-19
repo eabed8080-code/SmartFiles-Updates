@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.77",
-  "versionCode": 10169,
+  "versionName": "0.11.78",
+  "versionCode": 10170,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.77 adds a separate WhatsApp Refresh area inside Inbox. Refresh discovers already-downloaded WhatsApp Documents, Pictures and Videos from regular WhatsApp storage without requiring Share. Discovered WhatsApp items are references to the original files: Smart Life does not copy, move, rename or delete the WhatsApp source file. Adding one to a Smart Life category keeps the original in WhatsApp, and Remove from Smart Life only hides that reference. Normal Share to Smart Life from WhatsApp, email, Gallery, Files, browser and other apps remains unchanged and continues to use the existing private Inbox-copy workflow. Duplicate refresh results are suppressed with a local handled fingerprint, and missing/unavailable WhatsApp storage is reported safely."
+  "releaseNotes": "Smart Life v0.11.78 improves WhatsApp Inbox with local visual thumbnails: images show their real picture, videos show a generated frame with a play badge, and PDFs show a first-page preview while other documents keep type icons. Price Photos now supports multiple barcodes for one saved product, photo and price. A new flavor or variant barcode can be added to an existing product without taking another picture, and scanning any linked barcode opens the same saved product. Existing single-barcode products migrate automatically, barcode search covers all linked codes, individual barcodes can be managed/removed, and the original product photo/price/category remain unchanged."
 }
