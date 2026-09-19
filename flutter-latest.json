@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.81",
-  "versionCode": 10173,
+  "versionName": "0.11.82",
+  "versionCode": 10174,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.81 includes the three approved interface updates: Files Search now uses simple circular All / Doc / Photo / Video controls with the label underneath; WhatsApp Inbox adds compact All / Images / Videos / Documents filters; and Price Photos is renamed Price Book with a two-column product catalog, circular product photos, product name and price, direct Guide button, and Add Product action. Existing local products, categories, barcodes, guides, WhatsApp source files, and file-search behavior are preserved."
+  "releaseNotes": "Smart Life v0.11.82 restores the simplified Settings layout and adds Tools and About. Tools contains Price Book and a standalone Barcode Scanner. Price Book keeps its current products, categories, guides and barcode workflows while its header scanner shortcut is removed. Barcode Scanner opens the camera directly, opens matching Price Book products, and offers Add Product when a barcode is not found. About shows Smart Life, the version number and Developed by Emad Abed. Edit Note now places Voice and Edit Sketch together with compact Save and Delete actions on the same row. The Price Book shortcut is removed from Notes, while the existing Files Search and WhatsApp Inbox filters are preserved."
 }
