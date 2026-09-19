@@ -1,0 +1,14 @@
+name: Diagnose Actions Runner
+
+on:
+  push:
+    branches:
+      - diag/actions-runner
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Runner started
+        run: echo "runner-ok"
