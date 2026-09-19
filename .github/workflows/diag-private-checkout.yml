@@ -1,0 +1,20 @@
+name: Diagnose Private Source Checkout
+
+on:
+  push:
+    branches:
+      - diag/actions-runner
+  workflow_dispatch:
+
+jobs:
+  checkout-private:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Try private SmartFiles checkout
+        uses: actions/checkout@v4
+        with:
+          repository: eabed8080-code/SmartFiles
+          ref: feature/ui-filters-price-book-v01181
+          token: ${{ secrets.UPDATES_REPO_TOKEN }}
+      - name: Confirm source
+        run: test -f flutter_app/pubspec.yaml && echo "private-source-ok"
