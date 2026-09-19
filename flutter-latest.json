@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.79",
-  "versionCode": 10171,
+  "versionName": "0.11.80",
+  "versionCode": 10172,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.79 fixes Price Photos category selection so long category lists can be scrolled and every saved category remains reachable. It also adds optional subcategories under a main Price Photos category, while keeping existing products and categories unchanged."
+  "releaseNotes": "Smart Life v0.11.80 simplifies Settings to only Smart Life Update and Connect to PC. Theme color, Transfer Status, Smart Media Cleanup, Sounds & Effects, Photo file names and About are removed from the Settings screen, while the updater and PC connection behavior remain available."
 }
