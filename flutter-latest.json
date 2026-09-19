@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.78",
-  "versionCode": 10170,
+  "versionName": "0.11.79",
+  "versionCode": 10171,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.78 improves WhatsApp Inbox with local visual thumbnails: images show their real picture, videos show a generated frame with a play badge, and PDFs show a first-page preview while other documents keep type icons. Price Photos now supports multiple barcodes for one saved product, photo and price. A new flavor or variant barcode can be added to an existing product without taking another picture, and scanning any linked barcode opens the same saved product. Existing single-barcode products migrate automatically, barcode search covers all linked codes, individual barcodes can be managed/removed, and the original product photo/price/category remain unchanged."
+  "releaseNotes": "Smart Life v0.11.79 fixes Price Photos category selection so long category lists can be scrolled and every saved category remains reachable. It also adds optional subcategories under a main Price Photos category, while keeping existing products and categories unchanged."
 }
