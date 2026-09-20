@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.86",
-  "versionCode": 12177,
+  "versionName": "0.11.88",
+  "versionCode": 12179,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.86 tightens Price Book product spacing, keeps the top category-management folder action, and anchors each product three-dot menu to the lower-right edge of its own product image instead of the middle area. Home weather now refreshes automatically every two hours and also refreshes on app resume when the saved reading is two hours old or older. Existing products, prices, categories, subcategories, barcodes, guides, notes and local data are preserved."
+  "releaseNotes": "Smart Life v0.11.88 refines Price Book Guide Video: Add Guide now offers Paste Link for a copied video URL or Choose from Inbox / Library for previously shared links. Guide appears only when linked and is shown directly below the product photo above the product name. The three-dot product actions menu now sits beside the product name instead of over the photo. Library guide titles decode stored HTML numeric entities so Arabic displays normally. Existing products, prices, photos, categories, barcodes and saved guides are preserved."
 }
