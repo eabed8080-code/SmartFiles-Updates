@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.85",
-  "versionCode": 10176,
+  "versionName": "0.11.86",
+  "versionCode": 12177,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.85 keeps all v0.11.84 Home Tools and Price Book improvements and fixes update detection by restoring the Android versionCode sequence to 10176, so devices on v0.11.83 (10175) correctly see the update. Existing products, prices, categories, subcategories, barcodes, guides, notes and local data are preserved."
+  "releaseNotes": "Smart Life v0.11.86 tightens Price Book product spacing, keeps the top category-management folder action, and anchors each product three-dot menu to the lower-right edge of its own product image instead of the middle area. Home weather now refreshes automatically every two hours and also refreshes on app resume when the saved reading is two hours old or older. Existing products, prices, categories, subcategories, barcodes, guides, notes and local data are preserved."
 }
