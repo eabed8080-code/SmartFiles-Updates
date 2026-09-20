@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.89",
-  "versionCode": 12180,
+  "versionName": "0.11.90",
+  "versionCode": 12181,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.89 removes Home weather, temperature and Home location requests completely while keeping the greeting, date and live Bahrain time. Internal pages gain a Home action that returns directly to the root without changing existing Back/X behavior. Price Book product images are about 12% larger and remain uncropped, while v0.11.88 Guide/Child, Paste Link, product actions and existing local data are preserved."
+  "releaseNotes": "Smart Life v0.11.90 restores Price Book product photos to their natural original presentation without the white studio screen, while keeping the larger uncropped image size and all existing Guide/Child, Paste Link and product actions. Home removes the greeting, date and Bahrain time information block and moves Quick Actions upward, while keeping the Home title, description and existing actions unchanged."
 }
