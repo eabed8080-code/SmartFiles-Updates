@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.84",
-  "versionCode": 8176,
+  "versionName": "0.11.85",
+  "versionCode": 10176,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.84 replaces the Home Save Link quick action with direct Tools access. Price Book now has tighter product-row spacing, lower and consistently aligned product action menus, a clearer folder-style category-management action in the header, and no extra + Category chip in the category list. Existing products, prices, categories, subcategories, barcodes, guides and local data are preserved."
+  "releaseNotes": "Smart Life v0.11.85 keeps all v0.11.84 Home Tools and Price Book improvements and fixes update detection by restoring the Android versionCode sequence to 10176, so devices on v0.11.83 (10175) correctly see the update. Existing products, prices, categories, subcategories, barcodes, guides, notes and local data are preserved."
 }
