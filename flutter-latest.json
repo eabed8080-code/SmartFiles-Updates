@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.88",
-  "versionCode": 12179,
+  "versionName": "0.11.89",
+  "versionCode": 12180,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.88 refines Price Book Guide Video: Add Guide now offers Paste Link for a copied video URL or Choose from Inbox / Library for previously shared links. Guide appears only when linked and is shown directly below the product photo above the product name. The three-dot product actions menu now sits beside the product name instead of over the photo. Library guide titles decode stored HTML numeric entities so Arabic displays normally. Existing products, prices, photos, categories, barcodes and saved guides are preserved."
+  "releaseNotes": "Smart Life v0.11.89 removes Home weather, temperature and Home location requests completely while keeping the greeting, date and live Bahrain time. Internal pages gain a Home action that returns directly to the root without changing existing Back/X behavior. Price Book product images are about 12% larger and remain uncropped, while v0.11.88 Guide/Child, Paste Link, product actions and existing local data are preserved."
 }
