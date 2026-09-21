@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.93",
-  "versionCode": 12184,
+  "versionName": "0.11.94",
+  "versionCode": 12185,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.93 makes WhatsApp Status media open directly inside Smart Life. A normal tap on a Status photo now opens a full-screen in-app viewer with pinch zoom and pan. A normal tap on a Status video now opens the built-in Smart Life video player with play/pause and scrubbing, so Android no longer shows the Open with chooser during normal use. Open externally remains available only from the 3-dot menu, together with Delete saved copy. The Status scan, Photos/Videos tabs, local persistence, Inbox placement and WhatsApp source-safety behavior remain unchanged."
+  "releaseNotes": "Smart Life v0.11.94 improves WhatsApp Status actions and video previews. The 3-dot menu is now the same for photos and videos: Share, Category and Delete saved copy; Open externally has been removed. Category reuses Smart Life's existing category picker and stores only the assignment, without moving or duplicating the saved Status file. Video Status tiles now show a real frame thumbnail with a play overlay. The thumbnail is generated once and cached locally for fast future loads. Normal taps still open photos and videos directly inside Smart Life."
 }
