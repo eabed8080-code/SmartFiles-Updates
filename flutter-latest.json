@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.94",
-  "versionCode": 12185,
+  "versionName": "0.11.91",
+  "versionCode": 12182,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.94 improves WhatsApp Status actions and video previews. The 3-dot menu is now the same for photos and videos: Share, Category and Delete saved copy; Open externally has been removed. Category reuses Smart Life's existing category picker and stores only the assignment, without moving or duplicating the saved Status file. Video Status tiles now show a real frame thumbnail with a play overlay. The thumbnail is generated once and cached locally for fast future loads. Normal taps still open photos and videos directly inside Smart Life."
+  "releaseNotes": "Smart Life v0.11.91 makes Category file deletion explicitly permanent: a confirmed Delete removes the original file from the device, removes its Category assignment and removes the saved Files Search index entry so the deleted file no longer appears in Search. Files, Notes and Library no longer show the Home icon, and Notes no longer shows the Backup icon; existing navigation and backup data/services remain unchanged."
 }
