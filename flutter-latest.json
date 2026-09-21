@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.91",
-  "versionCode": 12182,
+  "versionName": "0.11.95",
+  "versionCode": 12186,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.91 makes Category file deletion explicitly permanent: a confirmed Delete removes the original file from the device, removes its Category assignment and removes the saved Files Search index entry so the deleted file no longer appears in Search. Files, Notes and Library no longer show the Home icon, and Notes no longer shows the Backup icon; existing navigation and backup data/services remain unchanged."
+  "releaseNotes": "Smart Life v0.11.95 makes Category file deletion explicitly permanent: a confirmed Delete removes the original file from the device, removes its Category assignment and removes the saved Files Search index entry so the deleted file no longer appears in Search. Files, Notes and Library no longer show the Home icon, and Notes no longer shows the Backup icon; existing navigation and backup data/services remain unchanged."
 }
