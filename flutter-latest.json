@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.92",
-  "versionCode": 12183,
+  "versionName": "0.11.93",
+  "versionCode": 12184,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.92 adds WhatsApp Status inside Inbox without adding a new bottom tab. Open Status to see separate Photos and Videos tabs. Smart Life scans only status media that WhatsApp has already cached locally after it was viewed, then keeps a private Smart Life copy so it can remain available after WhatsApp clears its temporary status cache. The page refreshes when opened, when the app resumes, or when Refresh is tapped. Deleting a saved Status removes only Smart Life's copy and never changes WhatsApp. Regular Inbox sharing and the existing WhatsApp downloaded-files Refresh remain unchanged. Contact names are intentionally not inferred because WhatsApp status cache files do not reliably expose the sender identity."
+  "releaseNotes": "Smart Life v0.11.93 makes WhatsApp Status media open directly inside Smart Life. A normal tap on a Status photo now opens a full-screen in-app viewer with pinch zoom and pan. A normal tap on a Status video now opens the built-in Smart Life video player with play/pause and scrubbing, so Android no longer shows the Open with chooser during normal use. Open externally remains available only from the 3-dot menu, together with Delete saved copy. The Status scan, Photos/Videos tabs, local persistence, Inbox placement and WhatsApp source-safety behavior remain unchanged."
 }
