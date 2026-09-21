@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.90",
-  "versionCode": 12181,
+  "versionName": "0.11.91",
+  "versionCode": 12182,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.90 restores Price Book product photos to their natural original presentation without the white studio screen, while keeping the larger uncropped image size and all existing Guide/Child, Paste Link and product actions. Home removes the greeting, date and Bahrain time information block and moves Quick Actions upward, while keeping the Home title, description and existing actions unchanged."
+  "releaseNotes": "Smart Life v0.11.91 moves Price Book into its own persistent bottom tab immediately before Settings. The old Settings Tools entry for Price Book and Barcode Scanner is removed; barcode scanning remains directly inside Price Book search. Price Book now uses circular product thumbnails and places a larger colorful category-management folder button beside the search field, while preserving products, prices, categories, subcategories, barcodes, guides and local data."
 }
