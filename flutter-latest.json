@@ -1,6 +1,6 @@
 {
-  "versionName": "0.12.0",
-  "versionCode": 12191,
+  "versionName": "0.12.1",
+  "versionCode": 12192,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.12.0 adds live remaining-file counts under the circular Files > Search filters. All, Doc, Photo and Video now show their complete remaining Search totals, excluding files already assigned to a Category and without being limited by the visible result window or filename query. The counts update immediately after single or multi-delete and after Add to Category, so the remaining amount is always visible. The existing circular filter design, document/photo/video selection, permanent delete, multi-select and Category behavior remain unchanged."
+  "releaseNotes": "Smart Life v0.12.1 improves Files > Search for large libraries and photo viewing. The old 25-result cap is removed: All, Documents, Photos/Images and Videos now expose every matching indexed result in 15-item pages with Previous and Next controls. Changing the filter, filename query or reloading the file index returns to page 1, while multi-select can continue across pages. Tapping a photo outside selection mode now opens it directly inside Smart Life with pinch-to-zoom instead of Android Open with. Search result photo/video thumbnails and document previews are slightly larger, while live filter counts, Category exclusion, multi-select, Add to Category and permanent Delete remain unchanged."
 }
