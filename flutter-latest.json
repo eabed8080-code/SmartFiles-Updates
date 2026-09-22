@@ -1,6 +1,6 @@
 {
-  "versionName": "0.12.2",
-  "versionCode": 12193,
+  "versionName": "0.12.3",
+  "versionCode": 12194,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.12.2 adds a dedicated Work Hours note type inside Notes. Each day has Date, Start, End, Break, Status and an automatic Total, with Add Day and a Period Total summary. Normal notes remain unchanged, Voice stays available, and the visible Sketch/Edit Sketch action is removed while old sketch data remains preserved."
+  "releaseNotes": "Smart Life v0.12.3 makes Work Hours faster to enter. Start, End and Total now stay on one compact row, Break is removed, and Start/End are typed directly with the keyboard (for example 9:00 AM) instead of opening the clock picker. Total hours continue to calculate automatically."
 }
