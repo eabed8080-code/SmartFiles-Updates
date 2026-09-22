@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.96",
-  "versionCode": 12187,
+  "versionName": "0.11.97",
+  "versionCode": 12188,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.96 restores multi-select in Files > Search. Tap Select (or long-press a result), choose two or more search results, then use Add to Category once to assign the whole selection to the same category. The selection path is shared by all Search result types, so it works for Documents (PDF, Word, Excel and PowerPoint), Photos/Images and Videos. The existing one-file folder-plus action remains available outside selection mode, and file opening, thumbnails, filters and indexing remain unchanged."
+  "releaseNotes": "Smart Life v0.11.97 fixes two Files organization issues. Files that already have a Category assignment are now excluded from Files > Search immediately and after reload, across Documents, Photos/Images and Videos; removing or moving a Category assignment refreshes Search automatically. Category cards also keep long names on one readable line and scale them down when needed, preventing awkward mid-word wrapping while preserving the current two-column card design. Files Search multi-select, batch Add to Category, permanent Category delete, thumbnails, indexing and all existing data remain unchanged."
 }
