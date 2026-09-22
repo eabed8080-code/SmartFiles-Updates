@@ -1,5 +1,13 @@
 [
   {
+    "versionName": "0.11.99",
+    "versionCode": 12190,
+    "sourceCommit": "9a877efcf7d8fc3551e3647d38690e222bd86eed",
+    "tag": "v0.11.99",
+    "publishedAt": "2026-09-22T01:51:29Z",
+    "stable": true
+  },
+  {
     "versionName": "0.11.98",
     "versionCode": 12189,
     "sourceCommit": "b11284b19f1c367bb3c575d9e8fd1df7751d8f88",

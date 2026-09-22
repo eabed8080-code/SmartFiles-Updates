@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.98",
-  "versionCode": 12189,
+  "versionName": "0.11.99",
+  "versionCode": 12190,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.98 redesigns Files > Category > My Categories using the approved circular icon layout. Categories are shown in a clean three-column grid with a large pastel circle, a colored category icon, the category name below it, and the file count underneath. Long names can use two centered lines at a normal readable size instead of shrinking the whole title. Manage, category navigation, counts, Search behavior, multi-select, Add to Category, permanent delete, Scan New Document and all stored data remain unchanged."
+  "releaseNotes": "Smart Life v0.11.99 adds permanent Delete to Files > Search multi-select. Select one file or multiple files and use Delete; a confirmation appears before the files are physically removed from phone storage. After deletion the saved file index and any category assignment are cleaned so deleted items do not return after Reload. The path-based selection/delete flow is shared by Documents, Photos/Images and Videos, while Add to Category and the circular My Categories design remain unchanged."
 }
