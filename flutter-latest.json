@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.99",
-  "versionCode": 12190,
+  "versionName": "0.12.0",
+  "versionCode": 12191,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.11.99 adds permanent Delete to Files > Search multi-select. Select one file or multiple files and use Delete; a confirmation appears before the files are physically removed from phone storage. After deletion the saved file index and any category assignment are cleaned so deleted items do not return after Reload. The path-based selection/delete flow is shared by Documents, Photos/Images and Videos, while Add to Category and the circular My Categories design remain unchanged."
+  "releaseNotes": "Smart Life v0.12.0 adds live remaining-file counts under the circular Files > Search filters. All, Doc, Photo and Video now show their complete remaining Search totals, excluding files already assigned to a Category and without being limited by the visible result window or filename query. The counts update immediately after single or multi-delete and after Add to Category, so the remaining amount is always visible. The existing circular filter design, document/photo/video selection, permanent delete, multi-select and Category behavior remain unchanged."
 }
