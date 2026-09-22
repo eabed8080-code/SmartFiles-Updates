@@ -1,6 +1,6 @@
 {
-  "versionName": "0.12.1",
-  "versionCode": 12192,
+  "versionName": "0.12.2",
+  "versionCode": 12193,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.12.1 improves Files > Search for large libraries and photo viewing. The old 25-result cap is removed: All, Documents, Photos/Images and Videos now expose every matching indexed result in 15-item pages with Previous and Next controls. Changing the filter, filename query or reloading the file index returns to page 1, while multi-select can continue across pages. Tapping a photo outside selection mode now opens it directly inside Smart Life with pinch-to-zoom instead of Android Open with. Search result photo/video thumbnails and document previews are slightly larger, while live filter counts, Category exclusion, multi-select, Add to Category and permanent Delete remain unchanged."
+  "releaseNotes": "Smart Life v0.12.2 adds a dedicated Work Hours note type inside Notes. Each day has Date, Start, End, Break, Status and an automatic Total, with Add Day and a Period Total summary. Normal notes remain unchanged, Voice stays available, and the visible Sketch/Edit Sketch action is removed while old sketch data remains preserved."
 }
