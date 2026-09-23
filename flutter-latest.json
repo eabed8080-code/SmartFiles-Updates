@@ -1,6 +1,6 @@
 {
-  "versionName": "0.11.89",
-  "versionCode": 14180,
+  "versionName": "0.12.3",
+  "versionCode": 12194,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Library now has Saved, Inbox and WhatsApp tabs. WhatsApp downloaded files are separated from normal shared Inbox items. Inbox adds an on-demand Analyze action for English images/screenshots and PDFs using the existing local OCR bridge only when requested. Analyze looks for subscription, expiry, renewal, warranty, contract, due-date and end-date wording, confirms a detected date, and can schedule a local Android reminder 1, 7 or 30 days before the date."
+  "releaseNotes": "Restores the latest Smart Life UI/function baseline and keeps all recent Home, Price Book, Notes, Files and Status work. Library now uses Saved, Inbox and WhatsApp tabs. WhatsApp content is separated into its own tab. Inbox adds on-demand English Analyze for supported images/PDFs, detects important expiry/renewal/warranty/subscription/contract/due dates, asks for confirmation, and can schedule a local reminder."
 }
