@@ -1,6 +1,6 @@
 {
-  "versionName": "0.12.3",
-  "versionCode": 12194,
+  "versionName": "0.11.89",
+  "versionCode": 14180,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.12.3 makes Work Hours faster to enter. Start, End and Total now stay on one compact row, Break is removed, and Start/End are typed directly with the keyboard (for example 9:00 AM) instead of opening the clock picker. Total hours continue to calculate automatically."
+  "releaseNotes": "Library now has Saved, Inbox and WhatsApp tabs. WhatsApp downloaded files are separated from normal shared Inbox items. Inbox adds an on-demand Analyze action for English images/screenshots and PDFs using the existing local OCR bridge only when requested. Analyze looks for subscription, expiry, renewal, warranty, contract, due-date and end-date wording, confirms a detected date, and can schedule a local Android reminder 1, 7 or 30 days before the date."
 }
