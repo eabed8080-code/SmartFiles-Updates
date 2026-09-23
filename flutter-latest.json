@@ -1,6 +1,6 @@
 {
   "versionName": "0.12.3",
-  "versionCode": 12194,
+  "versionCode": 16181,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
   "releaseNotes": "Restores the latest Smart Life UI/function baseline and keeps all recent Home, Price Book, Notes, Files and Status work. Library now uses Saved, Inbox and WhatsApp tabs. WhatsApp content is separated into its own tab. Inbox adds on-demand English Analyze for supported images/PDFs, detects important expiry/renewal/warranty/subscription/contract/due dates, asks for confirmation, and can schedule a local reminder."
 }
