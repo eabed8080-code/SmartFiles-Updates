@@ -1,6 +1,6 @@
 {
-  "versionName": "0.12.4",
-  "versionCode": 16182,
+  "versionName": "0.12.5",
+  "versionCode": 16183,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.12.4 improves Library > WhatsApp without changing the original WhatsApp files. The WhatsApp tab label now stays on one line. WhatsApp files can be filtered with All, Pictures, Video and Document, newest first. Pictures show real thumbnails and open directly inside Smart Life with zoom. Videos use native Android frame thumbnails and play directly inside Smart Life. Existing Category organization, Inbox separation, OCR/reminders, Notes, Files and Price Book features are preserved."
+  "releaseNotes": "Smart Life v0.12.5 (14183)\n- Notes Backup is manual-only; all automatic local backup behavior is removed.\n- Backup is restored as a colored Notes header icon with Email, Local Backup, and Restore actions.\n- Text notes and structured Work Hours note data remain part of the JSON backup/restore payload."
 }
