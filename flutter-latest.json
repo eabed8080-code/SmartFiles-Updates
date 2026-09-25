@@ -1,6 +1,6 @@
 {
-  "versionName": "0.12.7",
-  "versionCode": 16185,
+  "versionName": "0.12.8",
+  "versionCode": 16186,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.12.7 (14185)\n- Work Hours day status now has only Worked and Off; Vacation is removed from the menu.\n- Existing saved Vacation entries are safely treated as Off when loaded.\n- Tapping Start or End opens numeric hour/minute entry directly with AM/PM; the analog clock dial is removed.\n- Smart Life v0.12.6 one-tap Gmail Notes backup, Arabic RTL PDF, JSON restore copy, and local-first behavior are preserved."
+  "releaseNotes": "Smart Life v0.12.8 (14186)\n- Work Hours now shows Start, End, and Total in one compact row.\n- Break is removed from the Work Hours design while old saved break data remains preserved for historical totals.\n- Voice controls are shown only for Normal notes and are hidden from Work Hours.\n- Worked/Off only, Vacation migration, and numeric AM/PM time entry from v0.12.7 are preserved.\n- One-tap Gmail Notes backup, Arabic RTL PDF, JSON restore copy, and local-first behavior remain preserved."
 }
