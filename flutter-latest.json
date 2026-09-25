@@ -1,6 +1,6 @@
 {
-  "versionName": "0.12.6",
-  "versionCode": 16184,
+  "versionName": "0.12.7",
+  "versionCode": 16185,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.12.6 (14184)\n- Notes Backup remains manual-only and is now one tap from the Notes header.\n- First backup connects/authorizes Google; later backups send directly to the same Gmail with no Share sheet or Send step.\n- Each Gmail backup contains a readable Arabic RTL PDF plus the JSON restore file.\n- The PDF uses Noto Naskh Arabic and right-to-left layout for Arabic notes.\n- Existing notes, structured Work Hours data, restore behavior, and local-first storage are preserved."
+  "releaseNotes": "Smart Life v0.12.7 (14185)\n- Work Hours day status now has only Worked and Off; Vacation is removed from the menu.\n- Existing saved Vacation entries are safely treated as Off when loaded.\n- Tapping Start or End opens numeric hour/minute entry directly with AM/PM; the analog clock dial is removed.\n- Smart Life v0.12.6 one-tap Gmail Notes backup, Arabic RTL PDF, JSON restore copy, and local-first behavior are preserved."
 }
