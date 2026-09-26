@@ -1,6 +1,6 @@
 {
-  "versionName": "0.12.8",
-  "versionCode": 16186,
+  "versionName": "0.12.9",
+  "versionCode": 16187,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.12.8 (14186)\n- Work Hours now shows Start, End, and Total in one compact row.\n- Break is removed from the Work Hours design while old saved break data remains preserved for historical totals.\n- Voice controls are shown only for Normal notes and are hidden from Work Hours.\n- Worked/Off only, Vacation migration, and numeric AM/PM time entry from v0.12.7 are preserved.\n- One-tap Gmail Notes backup, Arabic RTL PDF, JSON restore copy, and local-first behavior remain preserved."
+  "releaseNotes": "Smart Life v0.12.9 (14187)\n- Notes keeps one-tap Gmail Backup with Arabic RTL PDF and JSON restore copy.\n- Restore Backup remains available.\n- Synchronize has been removed.\n- Work Hours and existing Notes data remain preserved."
 }
