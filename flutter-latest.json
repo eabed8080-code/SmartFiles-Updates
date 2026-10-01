@@ -1,6 +1,6 @@
 {
-  "versionName": "0.12.9",
-  "versionCode": 16187,
+  "versionName": "0.12.10",
+  "versionCode": 16188,
   "apkUrl": "https://raw.githubusercontent.com/eabed8080-code/SmartFiles-Updates/main/Smart-Life-Flutter-Test.apk",
-  "releaseNotes": "Smart Life v0.12.9 (14187)\n- Notes keeps one-tap Gmail Backup with Arabic RTL PDF and JSON restore copy.\n- Restore Backup remains available.\n- Synchronize has been removed.\n- Work Hours and existing Notes data remain preserved."
+  "releaseNotes": "Smart Life v0.12.10 (14188)\n- Adds a clear Save Work button inside Notes > Work Hours.\n- Save Work uses the existing Notes save flow, preserving the Work name, days, Start/End, Break, Status and calculated totals.\n- Saving returns to Notes just like a normal note.\n- Existing Notes Backup + Restore behavior remains unchanged."
 }
